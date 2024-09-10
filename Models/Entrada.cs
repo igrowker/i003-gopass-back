@@ -8,5 +8,7 @@
 
         //Navigation Property
 
+        public Usuario Usuario { get; set; }
+
     }
 }

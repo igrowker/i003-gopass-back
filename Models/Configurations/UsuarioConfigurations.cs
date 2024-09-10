@@ -8,7 +8,6 @@ namespace template_csharp_dotnet.Models.Configurations
         protected override void ConfigurateConstraints(EntityTypeBuilder<Usuario> builder)
         {
             builder.HasKey(u => u.Id);
-
         }
 
         protected override void ConfigurateProperties(EntityTypeBuilder<Usuario> builder)

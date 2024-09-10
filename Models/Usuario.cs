@@ -7,6 +7,10 @@ namespace template_csharp_dotnet.Models
         public string Nombre { get; set; }
         public string DNI { get; set; }
         public string NumeroTelefono { get; set; }
-        public bool Verificado { get; set; }   
+        public bool Verificado { get; set; }
+
+        //Navigation Properties
+
+        public Entrada Entrada { get; set; }
     }
 }
