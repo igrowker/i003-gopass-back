@@ -1,38 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\",
+  "WorkspaceRootPath": "D:\\GoPass\\i003-gopass-back\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\carlo\\documentos\\programacion\\i003-gopass-back\\models\\configurations\\entitytypebaseconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\configurations\\entitytypebaseconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\carlo\\documentos\\programacion\\i003-gopass-back\\models\\configurations\\usuarioconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\models\\configurations\\usuarioconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\configurations\\usuarioconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\carlo\\documentos\\programacion\\i003-gopass-back\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\carlo\\documentos\\programacion\\i003-gopass-back\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\carlo\\documentos\\programacion\\i003-gopass-back\\models\\reventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\reventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\carlo\\documentos\\programacion\\i003-gopass-back\\models\\entrada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\entrada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\carlo\\documentos\\programacion\\i003-gopass-back\\models\\basemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\basemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\carlo\\documentos\\programacion\\i003-gopass-back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\models\\configurations\\entitytypebaseconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\configurations\\entitytypebaseconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,109 +26,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EntityTypeBaseConfiguration.cs",
-              "DocumentMoniker": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\Configurations\\EntityTypeBaseConfiguration.cs",
-              "RelativeDocumentMoniker": "Models\\Configurations\\EntityTypeBaseConfiguration.cs",
-              "ToolTip": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\Configurations\\EntityTypeBaseConfiguration.cs",
-              "RelativeToolTip": "Models\\Configurations\\EntityTypeBaseConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T17:45:10.831Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UsuarioConfigurations.cs",
-              "DocumentMoniker": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\Configurations\\UsuarioConfigurations.cs",
-              "RelativeDocumentMoniker": "Models\\Configurations\\UsuarioConfigurations.cs",
-              "ToolTip": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\Configurations\\UsuarioConfigurations.cs",
-              "RelativeToolTip": "Models\\Configurations\\UsuarioConfigurations.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T17:44:00.359Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Reventa.cs",
-              "DocumentMoniker": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\Reventa.cs",
-              "RelativeDocumentMoniker": "Models\\Reventa.cs",
-              "ToolTip": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\Reventa.cs",
-              "RelativeToolTip": "Models\\Reventa.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T17:29:17.728Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Usuario.cs",
-              "DocumentMoniker": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\Usuario.cs",
+              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "Models\\Usuario.cs",
-              "ToolTip": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\Usuario.cs",
+              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Models\\Usuario.cs",
               "RelativeToolTip": "Models\\Usuario.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAFAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T17:27:37.974Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "BaseModel.cs",
-              "DocumentMoniker": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\BaseModel.cs",
-              "RelativeDocumentMoniker": "Models\\BaseModel.cs",
-              "ToolTip": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\BaseModel.cs",
-              "RelativeToolTip": "Models\\BaseModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T17:26:03.473Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Entrada.cs",
-              "DocumentMoniker": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\Entrada.cs",
-              "RelativeDocumentMoniker": "Models\\Entrada.cs",
-              "ToolTip": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Models\\Entrada.cs",
-              "RelativeToolTip": "Models\\Entrada.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T17:16:36.416Z"
+              "WhenOpened": "2024-09-10T19:20:47.831Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Data\\ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "Data\\ApplicationDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABiAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T17:05:46.07Z"
+              "WhenOpened": "2024-09-10T19:27:56.093Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAArAAAA",
+              "DocumentIndex": 3,
+              "Title": "EntityTypeBaseConfiguration.cs",
+              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\EntityTypeBaseConfiguration.cs",
+              "RelativeDocumentMoniker": "Models\\Configurations\\EntityTypeBaseConfiguration.cs",
+              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\EntityTypeBaseConfiguration.cs",
+              "RelativeToolTip": "Models\\Configurations\\EntityTypeBaseConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T16:15:58.457Z"
+              "WhenOpened": "2024-09-10T19:18:45.656Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UsuarioConfigurations.cs",
+              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\UsuarioConfigurations.cs",
+              "RelativeDocumentMoniker": "Models\\Configurations\\UsuarioConfigurations.cs",
+              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\UsuarioConfigurations.cs",
+              "RelativeToolTip": "Models\\Configurations\\UsuarioConfigurations.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-10T19:17:41.749Z",
+              "EditorCaption": ""
             }
           ]
         }
