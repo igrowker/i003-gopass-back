@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using template_csharp_dotnet.Models;
 
 namespace template_csharp_dotnet.Data
 {
@@ -9,6 +10,13 @@ namespace template_csharp_dotnet.Data
             
         }
 
+        public DbSet<Entrada> Entradas { get; set; }
+        public DbSet<Usuario> Usuarios{ get; set; }
+        public DbSet<Reventa> Reventas { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
