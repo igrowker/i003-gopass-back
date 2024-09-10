@@ -16,6 +16,8 @@ namespace template_csharp_dotnet.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Usuario>().Property(u => u.Nombre).IsRequired().HasMaxLength(100);
+
             base.OnModelCreating(modelBuilder);
         }
     }

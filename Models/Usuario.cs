@@ -1,4 +1,6 @@
-﻿namespace template_csharp_dotnet.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace template_csharp_dotnet.Models
 {
     public class Usuario : BaseModel
     {
