@@ -16,7 +16,6 @@ namespace template_csharp_dotnet.Models.Configurations
             builder.Property(u => u.NumeroTelefono).IsRequired().HasMaxLength(10);
             builder.Property(u => u.DNI).IsRequired().HasMaxLength(8);
             builder.Property(u => u.Verificado).IsRequired();
-
         }
 
         protected override void ConfigurateTableName(EntityTypeBuilder<Usuario> builder)

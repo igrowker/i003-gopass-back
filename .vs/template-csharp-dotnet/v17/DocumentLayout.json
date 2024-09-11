@@ -46,8 +46,7 @@
               "RelativeToolTip": "Models\\Entrada.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:50:05.809Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T19:50:05.809Z"
             },
             {
               "$type": "Document",
@@ -72,8 +71,7 @@
               "RelativeToolTip": "Models\\Usuario.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:20:47.831Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T19:20:47.831Z"
             },
             {
               "$type": "Document",
@@ -97,8 +95,7 @@
               "RelativeToolTip": "Models\\Configurations\\EntityTypeBaseConfiguration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:18:45.656Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T19:18:45.656Z"
             },
             {
               "$type": "Document",
@@ -110,8 +107,7 @@
               "RelativeToolTip": "Models\\Configurations\\UsuarioConfigurations.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:17:41.749Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T19:17:41.749Z"
             }
           ]
         }

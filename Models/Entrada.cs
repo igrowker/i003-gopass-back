@@ -9,6 +9,7 @@
         //Navigation Property
 
         public Usuario Usuario { get; set; }
+        public Reventa Reventa { get; set; }
 
     }
 }
