@@ -18,7 +18,7 @@ namespace template_csharp_dotnet.Models.Configurations
             builder.Property(r => r.EntradaId).IsRequired();
             builder.Property(r => r.VendedorId).IsRequired();
             builder.Property(r => r.CompradorId).IsRequired();
-            builder.Property(r => r.FechaReventa).IsRequired(); //agregar funcion de fecha
+            builder.Property(r => r.FechaReventa).IsRequired().HasColumnType("datetime").HasPrecision(0);
             builder.Property(r => r.Precio).IsRequired().HasPrecision(18,2);
         }
 

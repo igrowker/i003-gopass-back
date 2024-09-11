@@ -3,28 +3,8 @@
   "WorkspaceRootPath": "D:\\GoPass\\i003-gopass-back\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\models\\configurations\\entradaconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\configurations\\entradaconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\models\\configurations\\entitytypebaseconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\configurations\\entitytypebaseconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\models\\entrada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\entrada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\models\\configurations\\usuarioconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\configurations\\usuarioconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\models\\configurations\\reventaconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\configurations\\reventaconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -37,77 +17,25 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Entrada.cs",
-              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Models\\Entrada.cs",
-              "RelativeDocumentMoniker": "Models\\Entrada.cs",
-              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Models\\Entrada.cs",
-              "RelativeToolTip": "Models\\Entrada.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:50:05.809Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "EntradaConfigurations.cs",
-              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\EntradaConfigurations.cs",
-              "RelativeDocumentMoniker": "Models\\Configurations\\EntradaConfigurations.cs",
-              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\EntradaConfigurations.cs",
-              "RelativeToolTip": "Models\\Configurations\\EntradaConfigurations.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABsAAAAAAAAAA==",
+              "Title": "ReventaConfigurations.cs",
+              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\ReventaConfigurations.cs",
+              "RelativeDocumentMoniker": "Models\\Configurations\\ReventaConfigurations.cs",
+              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\ReventaConfigurations.cs",
+              "RelativeToolTip": "Models\\Configurations\\ReventaConfigurations.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:42:48.674Z",
+              "WhenOpened": "2024-09-11T19:58:07.747Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Models\\Usuario.cs",
-              "RelativeDocumentMoniker": "Models\\Usuario.cs",
-              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Models\\Usuario.cs",
-              "RelativeToolTip": "Models\\Usuario.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:20:47.831Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
-              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:27:56.093Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EntityTypeBaseConfiguration.cs",
-              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\EntityTypeBaseConfiguration.cs",
-              "RelativeDocumentMoniker": "Models\\Configurations\\EntityTypeBaseConfiguration.cs",
-              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\EntityTypeBaseConfiguration.cs",
-              "RelativeToolTip": "Models\\Configurations\\EntityTypeBaseConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:18:45.656Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UsuarioConfigurations.cs",
-              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\UsuarioConfigurations.cs",
-              "RelativeDocumentMoniker": "Models\\Configurations\\UsuarioConfigurations.cs",
-              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\UsuarioConfigurations.cs",
-              "RelativeToolTip": "Models\\Configurations\\UsuarioConfigurations.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T19:17:41.749Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }
