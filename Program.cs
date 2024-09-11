@@ -33,5 +33,5 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 #endregion Middlewares Area
-Console.WriteLine("Hola");
+
 app.Run();
