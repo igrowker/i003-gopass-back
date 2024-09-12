@@ -12,10 +12,10 @@ namespace template_csharp_dotnet.Models.Configurations
 
         protected override void ConfigurateProperties(EntityTypeBuilder<Usuario> builder)
         {
-            builder.Property(u => u.Nombre).IsRequired().HasMaxLength(200);
-            builder.Property(u => u.NumeroTelefono).IsRequired().HasMaxLength(10);
-            builder.Property(u => u.DNI).IsRequired().HasMaxLength(8);
-            builder.Property(u => u.Verificado).IsRequired();
+            builder.Property(u => u.Nombre).IsRequired().HasMaxLength(200).HasColumnType("varchar");
+            builder.Property(u => u.NumeroTelefono).IsRequired().HasMaxLength(10).HasColumnType("varchar");
+            builder.Property(u => u.DNI).IsRequired().HasMaxLength(8).HasColumnType("varchar");
+            builder.Property(u => u.Verificado).IsRequired().HasColumnType("bit");
         }
 
         protected override void ConfigurateTableName(EntityTypeBuilder<Usuario> builder)

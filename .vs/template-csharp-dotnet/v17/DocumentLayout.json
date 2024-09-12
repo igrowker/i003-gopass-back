@@ -1,10 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\GoPass\\i003-gopass-back\\",
+  "WorkspaceRootPath": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|d:\\gopass\\i003-gopass-back\\models\\configurations\\reventaconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:models\\configurations\\reventaconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\carlo\\documentos\\programacion\\i003-gopass-back\\repositories\\classes\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:repositories\\classes\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\carlo\\documentos\\programacion\\i003-gopass-back\\services\\ticketmasterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:services\\ticketmasterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,28 +18,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ReventaConfigurations.cs",
-              "DocumentMoniker": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\ReventaConfigurations.cs",
-              "RelativeDocumentMoniker": "Models\\Configurations\\ReventaConfigurations.cs",
-              "ToolTip": "D:\\GoPass\\i003-gopass-back\\Models\\Configurations\\ReventaConfigurations.cs",
-              "RelativeToolTip": "Models\\Configurations\\ReventaConfigurations.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Repositories\\Classes\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Classes\\GenericRepository.cs",
+              "ToolTip": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Repositories\\Classes\\GenericRepository.cs",
+              "RelativeToolTip": "Repositories\\Classes\\GenericRepository.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAYwD0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-11T19:58:07.747Z",
+              "WhenOpened": "2024-09-12T01:13:39.602Z",
               "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TicketMasterService.cs",
+              "DocumentMoniker": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Services\\TicketMasterService.cs",
+              "RelativeDocumentMoniker": "Services\\TicketMasterService.cs",
+              "ToolTip": "C:\\Users\\carlo\\Documentos\\Programacion\\i003-gopass-back\\Services\\TicketMasterService.cs",
+              "RelativeToolTip": "Services\\TicketMasterService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T01:06:47.434Z",
+              "EditorCaption": ""
             }
           ]
         }

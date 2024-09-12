@@ -14,7 +14,7 @@ namespace template_csharp_dotnet.Models.Configurations
         protected override void ConfigurateProperties(EntityTypeBuilder<Entrada> builder)
         {
             builder.Property(e => e.CodigoQR).IsRequired().HasMaxLength(7089); //caracteres segun QR numerico a consultar
-            builder.Property(e => e.Verificada).IsRequired();
+            builder.Property(e => e.Verificada).IsRequired().HasColumnType("bit");
 
         }
 

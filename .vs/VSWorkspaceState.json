@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Properties"
+    "\\Models",
+    "\\Models\\Configurations"
   ],
-  "SelectedNode": "\\.gitignore",
+  "SelectedNode": "\\Models\\Configurations\\ReventaConfigurations.cs",
   "PreviewInSolutionExplorer": false
 }
