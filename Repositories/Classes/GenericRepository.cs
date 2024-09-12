@@ -32,17 +32,13 @@ namespace template_csharp_dotnet.Repositories.Classes
             await _dbContext.SaveChangesAsync();
             return model;
         }
-        public async Task<T> Update(int id, T model)
+        public async Task<T> Update(T model)
         {
-            var recordToUpdate = await GetById(id);
-
-            recordToUpdate = model;
-
-            _dbSet.Update(recordToUpdate);
+            _dbSet.Update(model);
 
             await _dbContext.SaveChangesAsync();
 
-            return recordToUpdate;
+            return model;
         }
 
         public async Task<T> Delete(int id)

@@ -7,7 +7,7 @@ namespace template_csharp_dotnet.Repositories.Interfaces
         Task<List<T>> GetAll();
         Task<T> GetById(int id);
         Task<T> Create(T model);
-        Task<T> Update(int id, T model);
+        Task<T> Update(T model);
         Task<T> Delete(int id);
     }
 }
