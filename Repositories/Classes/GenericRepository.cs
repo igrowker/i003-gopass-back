@@ -1,62 +1,47 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json; // Para deserializar respuestas JSON (necesitarás agregar este paquete)
-using System.Net.Http.Headers;
+﻿using Microsoft.EntityFrameworkCore;
+using template_csharp_dotnet.Data;
+using template_csharp_dotnet.Models;
+using template_csharp_dotnet.Repositories.Interfaces;
 
-public class TicketmasterService
+namespace template_csharp_dotnet.Repositories.Classes
 {
-    private readonly HttpClient _httpClient;
-    private readonly string _apiKey;
-
-    public TicketmasterService(HttpClient httpClient, string apiKey)
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseModel
     {
-        _httpClient = httpClient;
-        _apiKey = apiKey;
-    }
-
-    public async Task<TicketResponse> VerificarEntrada(string ticketId)
-    {
-        try
+        protected DbSet<T> _dbSet;
+        protected DbContext _dbContext;
+        public GenericRepository(ApplicationDbContext dbContext)
         {
-            var requestUri = BuildRequestUri(ticketId);
-            var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var response = await _httpClient.SendAsync(request);
-            response.EnsureSuccessStatusCode(); // Lanzará una excepción si la respuesta no es exitosa (4xx, 5xx)
-
-            var ticketDataJson = await response.Content.ReadAsStringAsync();
-
-            // Deserializar la respuesta a un objeto
-            var ticketResponse = JsonConvert.DeserializeObject<TicketResponse>(ticketDataJson);
-            return ticketResponse;
+            _dbSet = dbContext.Set<T>();
+            _dbContext = dbContext;
         }
-        catch (HttpRequestException httpRequestException)
+        public async Task<List<T>> GetAll()
         {
-            // Loggear el error o manejarlo como se necesite
-            Console.WriteLine($"Error en la solicitud HTTP: {httpRequestException.Message}");
-            return null; // Puedes devolver un objeto nulo o un mensaje de error personalizado.
+            return await _dbSet.ToListAsync();
         }
-        catch (Exception ex)
+
+        public async Task<T> GetById(int id)
         {
-            // Manejar otras excepciones inesperadas
-            Console.WriteLine($"Error inesperado: {ex.Message}");
-            return null;
+            var recordDb = await _dbSet.FindAsync(id);
+            if (recordDb is null) throw new Exception($"No se encontro el ID: {id}");
+            return recordDb;
         }
-    }
 
-    private string BuildRequestUri(string ticketId)
-    {
-        return $"https://app.ticketmaster.com/verification/v1/tickets/{ticketId}?apikey={_apiKey}";
-    }
-}
+        public async Task<T> Create(T model)
+        {
+            _dbSet.Add(model);
+            await _dbContext.SaveChangesAsync();
+            return model;
+        }
+        public Task<T> Update(T model)
+        {
+            throw new NotImplementedException(); //COMPLETAR
+        }
 
-// Clase para deserializar la respuesta de Ticketmaster
-public class TicketResponse
-{
-    public string TicketId { get; set; }
-    public bool IsValid { get; set; }
-    public string EventName { get; set; }
-    public DateTime EventDate { get; set; }
+        public Task<T> Delete(int id)
+        {
+            throw new NotImplementedException(); //COMPLETAR
+        }
+
+
+    }
 }
