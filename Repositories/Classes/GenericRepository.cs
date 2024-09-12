@@ -32,14 +32,28 @@ namespace template_csharp_dotnet.Repositories.Classes
             await _dbContext.SaveChangesAsync();
             return model;
         }
-        public Task<T> Update(T model)
+        public async Task<T> Update(int id, T model)
         {
-            throw new NotImplementedException(); //COMPLETAR
+            var recordToUpdate = await GetById(id);
+
+            recordToUpdate = model;
+
+            _dbSet.Update(recordToUpdate);
+
+            await _dbContext.SaveChangesAsync();
+
+            return recordToUpdate;
         }
 
-        public Task<T> Delete(int id)
+        public async Task<T> Delete(int id)
         {
-            throw new NotImplementedException(); //COMPLETAR
+            var recordToDelete = await GetById(id);
+
+            if (recordToDelete is null) throw new Exception("El registro no se encontro");
+
+            await _dbSet.Where(x => x.Id == id).ExecuteDeleteAsync();
+
+            return recordToDelete;
         }
 
 
