@@ -12,33 +12,33 @@ namespace template_csharp_dotnet.Services.Classes
         {
             _usuarioRepository = usuarioRepository;
         }
-        public async Task<List<Usuario>> GetAllUsers()
+        public async Task<List<Usuario>> GetAllUsersAsync()
         {
             var users = await _usuarioRepository.GetAll();
 
             return users;
         }
-        public async Task<Usuario> GetUserById(int id)
+        public async Task<Usuario> GetUserByIdAsync(int id)
         {
             var user = await _usuarioRepository.GetById(id);
 
             return user;
         }
 
-        public async Task<Usuario> CreateUser(Usuario usuario)
+        public async Task<Usuario> CreateUserAsync(Usuario usuario)
         {
             var userToCreate = await _usuarioRepository.Create(usuario);
 
             return userToCreate;
         }
-        public Task<Usuario> UpdateUser(Usuario usuario)
+        public Task<Usuario> UpdateUserAsync(Usuario usuario)
         {
             var userToUpdate = _usuarioRepository.Update(usuario);
 
             return userToUpdate;
         }
 
-        public Task<Usuario> DeleteUser(int id)
+        public Task<Usuario> DeleteUserAsync(int id)
         {
             var deletedUser = _usuarioRepository.Delete(id);
 

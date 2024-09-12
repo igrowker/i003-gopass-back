@@ -23,7 +23,7 @@ namespace template_csharp_dotnet.Controllers
         {
             try
             {
-                var users = await _usuarioService.GetAllUsers();
+                var users = await _usuarioService.GetAllUsersAsync();
 
                 return Ok(users);
             }
@@ -42,9 +42,33 @@ namespace template_csharp_dotnet.Controllers
             try
             {
                 var userToCreate = usuarioRequestDto.ToModel();
-                await _usuarioService.CreateUser(userToCreate);
+                await _usuarioService.CreateUserAsync(userToCreate);
 
                 return Ok(userToCreate.ToResponseDto());
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+        }
+
+        [HttpPut("Update-User")] 
+        public async Task<IActionResult> UpdateUser(int id, UsuarioRequestDto usuarioRequestDto)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            try
+            {
+                var userDb = await _usuarioService.GetUserByIdAsync(id);
+
+                var userToUpdate = usuarioRequestDto.ToModel();
+
+                userDb = userToUpdate;
+
+                await _usuarioService.UpdateUserAsync(userDb);
+
+                return Ok(userDb.ToResponseDto());
             }
             catch (Exception)
             {

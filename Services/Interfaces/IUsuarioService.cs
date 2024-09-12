@@ -4,10 +4,10 @@ namespace template_csharp_dotnet.Services.Interfaces
 {
     public interface IUsuarioService
     {
-        Task<List<Usuario>> GetAllUsers();
-        Task<Usuario> GetUserById(int id);
-        Task<Usuario> CreateUser(Usuario usuario);
-        Task<Usuario> UpdateUser(Usuario usuario);
-        Task<Usuario> DeleteUser(int id);
+        Task<List<Usuario>> GetAllUsersAsync();
+        Task<Usuario> GetUserByIdAsync(int id);
+        Task<Usuario> CreateUserAsync(Usuario usuario);
+        Task<Usuario> UpdateUserAsync(Usuario usuario);
+        Task<Usuario> DeleteUserAsync(int id);
     }
 }
