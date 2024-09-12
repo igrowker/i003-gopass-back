@@ -53,7 +53,7 @@ namespace template_csharp_dotnet.Controllers
             }
         }
 
-        [HttpPut("Update-User")] 
+        [HttpPut("Update-User/{id:int}")] 
         public async Task<IActionResult> UpdateUser(int id, UsuarioRequestDto usuarioRequestDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -62,13 +62,14 @@ namespace template_csharp_dotnet.Controllers
             {
                 var userDb = await _usuarioService.GetUserByIdAsync(id);
 
-                var userToUpdate = usuarioRequestDto.ToModel();
+                userDb = usuarioRequestDto.ToUpdate(userDb);
 
-                userDb = userToUpdate;
+                //userDb = userToUpdate;
 
-                await _usuarioService.UpdateUserAsync(userDb);
 
-                return Ok(userDb.ToResponseDto());
+                var propertyUpdated = await _usuarioService.UpdateUserAsync(userDb);
+
+                return Ok(propertyUpdated.ToResponseDto());
             }
             catch (Exception)
             {

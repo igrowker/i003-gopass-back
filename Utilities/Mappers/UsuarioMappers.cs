@@ -18,6 +18,16 @@ namespace template_csharp_dotnet.Utilities.Mappers
             };
         }
 
+        public static Usuario ToUpdate(this UsuarioRequestDto usuarioRequestDto, Usuario usuario)
+        {
+            usuario.DNI = usuarioRequestDto.DNI;
+            usuario.Nombre = usuarioRequestDto.Nombre;
+            usuario.NumeroTelefono = usuarioRequestDto.NumeroTelefono;
+            usuario.Verificado = usuarioRequestDto.Verificado;
+
+            return usuario;
+        }
+
         public static UsuarioResponseDto ToResponseDto(this Usuario usuario)
         {
             return new UsuarioResponseDto
