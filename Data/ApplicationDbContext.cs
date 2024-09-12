@@ -19,7 +19,6 @@ namespace template_csharp_dotnet.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
         }
     }
 }

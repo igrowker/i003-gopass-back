@@ -32,8 +32,10 @@ namespace template_csharp_dotnet.Repositories.Classes
             await _dbContext.SaveChangesAsync();
             return model;
         }
-        public async Task<T> Update(T model)
+        public async Task<T> Update(int id, T model)
         {
+            model.Id = id;
+
             _dbSet.Update(model);
 
             await _dbContext.SaveChangesAsync();
@@ -51,7 +53,6 @@ namespace template_csharp_dotnet.Repositories.Classes
 
             return recordToDelete;
         }
-
 
     }
 }

@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\ezefe\\onedrive\\desktop\\contenedor\\proyectos\\igrowker\\gopass\\i003-gopass-back\\utilities\\mappers\\usuariomappers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:utilities\\mappers\\usuariomappers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\ezefe\\onedrive\\desktop\\contenedor\\proyectos\\igrowker\\gopass\\i003-gopass-back\\repositories\\classes\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:repositories\\classes\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\ezefe\\onedrive\\desktop\\contenedor\\proyectos\\igrowker\\gopass\\i003-gopass-back\\services\\interfaces\\iusuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:services\\interfaces\\iusuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\ezefe\\onedrive\\desktop\\contenedor\\proyectos\\igrowker\\gopass\\i003-gopass-back\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\ezefe\\onedrive\\desktop\\contenedor\\proyectos\\igrowker\\gopass\\i003-gopass-back\\services\\classes\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,12 +19,12 @@
       "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:repositories\\interfaces\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\ezefe\\onedrive\\desktop\\contenedor\\proyectos\\igrowker\\gopass\\i003-gopass-back\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\ezefe\\onedrive\\desktop\\contenedor\\proyectos\\igrowker\\gopass\\i003-gopass-back\\utilities\\mappers\\usuariomappers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:utilities\\mappers\\usuariomappers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\ezefe\\onedrive\\desktop\\contenedor\\proyectos\\igrowker\\gopass\\i003-gopass-back\\repositories\\classes\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:repositories\\classes\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|c:\\users\\ezefe\\onedrive\\desktop\\contenedor\\proyectos\\igrowker\\gopass\\i003-gopass-back\\services\\interfaces\\iusuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|template-csharp-dotnet.csproj|solutionrelative:services\\interfaces\\iusuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,11 +34,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "UsuarioMappers.cs",
               "DocumentMoniker": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\Utilities\\Mappers\\UsuarioMappers.cs",
               "RelativeDocumentMoniker": "Utilities\\Mappers\\UsuarioMappers.cs",
@@ -51,7 +51,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "IUsuarioService.cs",
               "DocumentMoniker": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\Services\\Interfaces\\IUsuarioService.cs",
               "RelativeDocumentMoniker": "Services\\Interfaces\\IUsuarioService.cs",
@@ -70,7 +70,7 @@
               "RelativeDocumentMoniker": "Services\\Classes\\UsuarioService.cs",
               "ToolTip": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\Services\\Classes\\UsuarioService.cs",
               "RelativeToolTip": "Services\\Classes\\UsuarioService.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAowCMAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwCMAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-12T19:14:53.82Z",
               "EditorCaption": ""
@@ -83,33 +83,33 @@
               "RelativeDocumentMoniker": "Repositories\\Interfaces\\IGenericRepository.cs",
               "ToolTip": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\Repositories\\Interfaces\\IGenericRepository.cs",
               "RelativeToolTip": "Repositories\\Interfaces\\IGenericRepository.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAA7wAkAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-12T19:14:48.368Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "GenericRepository.cs",
               "DocumentMoniker": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\Repositories\\Classes\\GenericRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Classes\\GenericRepository.cs",
               "ToolTip": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\Repositories\\Classes\\GenericRepository.cs",
               "RelativeToolTip": "Repositories\\Classes\\GenericRepository.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAA1wCkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAA1wCQAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-12T19:11:18.172Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "UsuarioController.cs",
               "DocumentMoniker": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\Controllers\\UsuarioController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsuarioController.cs",
               "ToolTip": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\Controllers\\UsuarioController.cs",
               "RelativeToolTip": "Controllers\\UsuarioController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAwwEUAAABRAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAApwEUAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-12T19:10:35.281Z",
               "EditorCaption": ""

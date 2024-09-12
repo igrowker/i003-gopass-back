@@ -31,9 +31,9 @@ namespace template_csharp_dotnet.Services.Classes
 
             return userToCreate;
         }
-        public Task<Usuario> UpdateUserAsync(Usuario usuario)
+        public Task<Usuario> UpdateUserAsync(int id, Usuario usuario)
         {
-            var userToUpdate = _usuarioRepository.Update(usuario);
+            var userToUpdate = _usuarioRepository.Update(id, usuario);
 
             return userToUpdate;
         }

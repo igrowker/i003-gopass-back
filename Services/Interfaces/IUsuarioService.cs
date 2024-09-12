@@ -7,7 +7,7 @@ namespace template_csharp_dotnet.Services.Interfaces
         Task<List<Usuario>> GetAllUsersAsync();
         Task<Usuario> GetUserByIdAsync(int id);
         Task<Usuario> CreateUserAsync(Usuario usuario);
-        Task<Usuario> UpdateUserAsync(Usuario usuario);
+        Task<Usuario> UpdateUserAsync(int id,Usuario usuario);
         Task<Usuario> DeleteUserAsync(int id);
     }
 }

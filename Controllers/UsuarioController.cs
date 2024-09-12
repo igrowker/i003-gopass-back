@@ -60,16 +60,12 @@ namespace template_csharp_dotnet.Controllers
 
             try
             {
-                var userDb = await _usuarioService.GetUserByIdAsync(id);
+                var userToUpdate = usuarioRequestDto.ToModel();
+                //userToUpdate.Id = id;
 
-                userDb = usuarioRequestDto.ToUpdate(userDb);
+                var userUpdated = await _usuarioService.UpdateUserAsync(id, userToUpdate);
 
-                //userDb = userToUpdate;
-
-
-                var propertyUpdated = await _usuarioService.UpdateUserAsync(userDb);
-
-                return Ok(propertyUpdated.ToResponseDto());
+                return Ok(userUpdated.ToResponseDto());
             }
             catch (Exception)
             {
