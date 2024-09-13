@@ -14,7 +14,7 @@ namespace template_csharp_dotnet.Services.Classes
         }
         public async Task<List<Usuario>> GetAllUsersAsync()
         {
-            var users = await _usuarioRepository.GetAll();
+            var users = await _usuarioRepository.GetAllUsersWithRelations();
 
             return users;
         }
@@ -31,16 +31,16 @@ namespace template_csharp_dotnet.Services.Classes
 
             return userToCreate;
         }
-        public Task<Usuario> UpdateUserAsync(int id, Usuario usuario)
+        public async Task<Usuario> UpdateUserAsync(int id, Usuario usuario)
         {
-            var userToUpdate = _usuarioRepository.Update(id, usuario);
+            var userToUpdate = await _usuarioRepository.Update(id, usuario);
 
             return userToUpdate;
         }
 
-        public Task<Usuario> DeleteUserAsync(int id)
+        public async Task<Usuario> DeleteUserAsync(int id)
         {
-            var deletedUser = _usuarioRepository.Delete(id);
+            var deletedUser = await _usuarioRepository.DeleteUserWithRelations(id);
 
             return deletedUser;
         }

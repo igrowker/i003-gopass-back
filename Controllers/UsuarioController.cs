@@ -61,7 +61,6 @@ namespace template_csharp_dotnet.Controllers
             try
             {
                 var userToUpdate = usuarioRequestDto.ToModel();
-                //userToUpdate.Id = id;
 
                 var userUpdated = await _usuarioService.UpdateUserAsync(id, userToUpdate);
 
@@ -74,5 +73,20 @@ namespace template_csharp_dotnet.Controllers
             }
         }
 
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            try
+            {
+                var userToDelete = await _usuarioService.DeleteUserAsync(id);
+
+                return Ok(userToDelete);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
+        }
     }
 }
