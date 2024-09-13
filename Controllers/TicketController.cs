@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using template_csharp_dotnet.Data;
+using template_csharp_dotnet.DTOs.Request;
 using template_csharp_dotnet.Models;
 
 namespace template_csharp_dotnet.Controllers
@@ -17,16 +18,15 @@ namespace template_csharp_dotnet.Controllers
         }
         [Authorize]
         [HttpPost("publicar")]
-        public async Task<IActionResult> PublicarEntrada([FromBody] Entrada entrada)
+        public async Task<IActionResult> PublicarEntrada([FromBody] EntradaRequestDto entradaRequestDto)
         {
             //Validacion Entrada
-            if (string.IsNullOrEmpty(entrada.CodigoQR) || entrada.Verificada == false)
+            if (string.IsNullOrEmpty(entradaRequestDto.CodigoQR) || entradaRequestDto.Verificada == false)
             {
                 return BadRequest("Entrada Invalida");
             }
             //Publicacion Entrada 
-            _context.Entradas.Add(entrada);
-             await _context.SaveChangesAsync();
+
             return Ok("Entrada Publicada!");
         }
         [Authorize]
