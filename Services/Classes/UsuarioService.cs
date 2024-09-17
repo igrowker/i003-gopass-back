@@ -30,5 +30,10 @@ namespace template_csharp_dotnet.Services.Classes
 
             return deletedUser;
         }
+
+        public async Task<Usuario> Authenticate(string email, string password)
+        {
+            return await _usuarioRepository.AuthenticateUser(email, password);
+        }
     }
 }

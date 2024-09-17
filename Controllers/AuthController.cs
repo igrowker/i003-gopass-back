@@ -64,7 +64,9 @@ namespace template_csharp_dotnet.Controllers
         {
             var userToLogin = loginRequestDto.FromLoginToModel();
 
-            var logUser = _usuarioService. 
+            var logUser = _usuarioService.Authenticate(userToLogin.Email, userToLogin.Password);
+
+            return Ok(logUser);
         }
 
         //private string GenerateJwtToken(ApplicationUser usuario)

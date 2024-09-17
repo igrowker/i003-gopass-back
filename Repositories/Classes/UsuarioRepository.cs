@@ -39,5 +39,21 @@ namespace template_csharp_dotnet.Repositories.Classes
 
             return recordToDelete;
         }
+
+        public async Task<Usuario> AuthenticateUser(string email, string password)
+        {
+            var userToAuthenticate = await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (userToAuthenticate is null) throw new Exception("Ha habido un error, verifique los campos e intentelo nuevamente");
+
+            var storedPassword = await _dbSet.FirstOrDefaultAsync(u => u.Password == password);
+
+            if (storedPassword is null) throw new Exception("La contraseña no coincide");
+
+
+
+            
+            return userToAuthenticate;
+        }
     }
 }
