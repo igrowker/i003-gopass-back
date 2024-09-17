@@ -7,7 +7,7 @@ namespace template_csharp_dotnet.Services.Interfaces
 
         Task<List<Usuario>> GetAllUsersWithRelationsAsync();
         Task<Usuario> DeleteUserWithRelationsAsync(int id);
-        Task<Usuario> GetUserByEmail(string email);
+        Task<Usuario> GetUserByEmailAsync(string email);
         Task<Usuario> Authenticate(string email, string password);
     }
 }

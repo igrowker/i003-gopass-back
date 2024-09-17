@@ -19,7 +19,7 @@ namespace template_csharp_dotnet.Services.Classes
             return users;
         }
 
-        public async Task<Usuario> GetUserByEmail(string email)
+        public async Task<Usuario> GetUserByEmailAsync(string email)
         {
             return await _usuarioRepository.GetUserByEmail(email);
         }

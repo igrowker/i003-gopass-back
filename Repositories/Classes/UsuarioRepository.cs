@@ -49,9 +49,6 @@ namespace template_csharp_dotnet.Repositories.Classes
             var storedPassword = await _dbSet.FirstOrDefaultAsync(u => u.Password == password);
 
             if (storedPassword is null) throw new Exception("La contraseña no coincide");
-
-
-
             
             return userToAuthenticate;
         }

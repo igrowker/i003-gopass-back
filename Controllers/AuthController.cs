@@ -46,7 +46,7 @@ namespace template_csharp_dotnet.Controllers
             {
                 var userToRegister = registerRequestDto.FromRegisterToModel();
 
-                var userInDb = await  _usuarioService.GetUserByEmail(userToRegister.Email); 
+                var userInDb = await  _usuarioService.GetUserByEmailAsync(userToRegister.Email); 
 
                 var registeredUser = await _usuarioService.Create(userToRegister);
 
@@ -64,7 +64,7 @@ namespace template_csharp_dotnet.Controllers
         {
             var userToLogin = loginRequestDto.FromLoginToModel();
 
-            var logUser = _usuarioService.Authenticate(userToLogin.Email, userToLogin.Password);
+            var logUser = await _usuarioService.Authenticate(userToLogin.Email, userToLogin.Password);
 
             return Ok(logUser);
         }
