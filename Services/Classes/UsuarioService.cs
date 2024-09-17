@@ -4,15 +4,15 @@ using template_csharp_dotnet.Services.Interfaces;
 
 namespace template_csharp_dotnet.Services.Classes
 {
-    public class UsuarioService : IUsuarioService
+    public class UsuarioService : GenericService<Usuario>, IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository)  
+        public UsuarioService(IUsuarioRepository usuarioRepository) : base(usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
         }
-        public async Task<List<Usuario>> GetAllUsersAsync()
+        public async Task<List<Usuario>> GetAllUsersWithRelationsAsync()
         {
             var users = await _usuarioRepository.GetAllUsersWithRelations();
 
@@ -38,7 +38,7 @@ namespace template_csharp_dotnet.Services.Classes
             return userToUpdate;
         }
 
-        public async Task<Usuario> DeleteUserAsync(int id)
+        public async Task<Usuario> DeleteUserWithRelationsAsync(int id)
         {
             var deletedUser = await _usuarioRepository.DeleteUserWithRelations(id);
 
