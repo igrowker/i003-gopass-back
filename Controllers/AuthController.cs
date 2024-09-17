@@ -44,7 +44,7 @@ namespace template_csharp_dotnet.Controllers
 
             try
             {
-                var userToRegister = registerRequestDto.ToModel();
+                var userToRegister = registerRequestDto.FromRegisterToModel();
 
                 var userInDb = await  _usuarioService.GetUserByEmail(userToRegister.Email); 
 
@@ -57,6 +57,14 @@ namespace template_csharp_dotnet.Controllers
 
                 return BadRequest();
             }
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
+        {
+            var userToLogin = loginRequestDto.FromLoginToModel();
+
+            var logUser = _usuarioService. 
         }
 
         //private string GenerateJwtToken(ApplicationUser usuario)

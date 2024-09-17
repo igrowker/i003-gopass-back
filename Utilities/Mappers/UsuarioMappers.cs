@@ -7,7 +7,7 @@ namespace template_csharp_dotnet.Utilities.Mappers
 {
     public static class UsuarioMappers
     {
-        public static Usuario ToModel(this RegisterRequestDto registerRequestDto)
+        public static Usuario FromRegisterToModel(this RegisterRequestDto registerRequestDto)
         {
             return new Usuario
             {
@@ -19,6 +19,16 @@ namespace template_csharp_dotnet.Utilities.Mappers
                 Verificado = registerRequestDto.Verificado
             };
         }
+
+        public static Usuario FromLoginToModel(this LoginRequestDto loginRequestDto)
+        {
+            return new Usuario
+            {
+                Email = loginRequestDto.Email,
+                Password = loginRequestDto.Password
+            };
+        }
+
 
         public static UsuarioResponseDto ToResponseDto(this Usuario usuario)
         {
