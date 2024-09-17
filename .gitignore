@@ -1,4 +1,5 @@
 bin/
 obj/
-.vscode/
 *.swp
+vs/
+.vs/*
