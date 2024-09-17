@@ -1,4 +1,4 @@
-﻿namespace template_csharp_dotnet.DTOs.Response
+﻿namespace template_csharp_dotnet.DTOs.Response.AuthResponseDTOs
 {
     public class UsuarioResponseDto
     {

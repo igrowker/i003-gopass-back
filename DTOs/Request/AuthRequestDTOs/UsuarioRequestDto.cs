@@ -1,4 +1,4 @@
-﻿namespace template_csharp_dotnet.DTOs.Request
+﻿namespace template_csharp_dotnet.DTOs.Request.AuthRequestDTOs
 {
     public class UsuarioRequestDto
     {

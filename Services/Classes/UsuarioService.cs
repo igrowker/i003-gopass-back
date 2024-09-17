@@ -18,24 +18,10 @@ namespace template_csharp_dotnet.Services.Classes
 
             return users;
         }
-        public async Task<Usuario> GetUserByIdAsync(int id)
+
+        public async Task<Usuario> GetUserByEmail(string email)
         {
-            var user = await _usuarioRepository.GetById(id);
-
-            return user;
-        }
-
-        public async Task<Usuario> CreateUserAsync(Usuario usuario)
-        {
-            var userToCreate = await _usuarioRepository.Create(usuario);
-
-            return userToCreate;
-        }
-        public async Task<Usuario> UpdateUserAsync(int id, Usuario usuario)
-        {
-            var userToUpdate = await _usuarioRepository.Update(id, usuario);
-
-            return userToUpdate;
+            return await _usuarioRepository.GetUserByEmail(email);
         }
 
         public async Task<Usuario> DeleteUserWithRelationsAsync(int id)

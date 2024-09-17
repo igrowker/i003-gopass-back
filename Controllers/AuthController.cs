@@ -1,60 +1,84 @@
-﻿using Microsoft.AspNetCore.Identity.Data;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using template_csharp_dotnet.Data;
-
+using template_csharp_dotnet.DTOs.Request.AuthRequestDTOs;
+using template_csharp_dotnet.Services.Interfaces;
+using template_csharp_dotnet.Utilities.Mappers;
 
 namespace template_csharp_dotnet.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUsuarioService _usuarioService;
 
-        public AuthController(ApplicationDbContext context)
+        public AuthController(IUsuarioService usuarioService)
         {
-            _context = context;
+            _usuarioService = usuarioService;
         }
 
-        public IActionResult Login([FromBody] LoginRequest login)
+        //public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+
+        //    try
+        //    {
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        return BadRequest();
+        //    }
+        //}
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
         {
-            var usuario = _context.Usuarios.FirstOrDefault(u => u.DNI == login.DNI && u.Password == login.Password);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (usuario == null) return Unauthorized();
-
-            var token = GenerateJwtToken(usuario);
-
-            return Ok(new { Token = token });
-        }
-
-        private string GenerateJwtToken(ApplicationUser usuario)
-        {
-            var claims = new[]
+            try
             {
-                new Claim(JwtRegisteredClaimNames.Sub, usuario.DNI),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim("usuarioId", usuario.Id.ToString())
-            };
+                var userToRegister = registerRequestDto.ToModel();
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("LLAVE"));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var userInDb = await  _usuarioService.GetUserByEmail(userToRegister.Email); 
 
-            var token = new JwtSecurityToken(
-                issuer: "localhost",
-                audience: "localhost",
-                claims: claims,
-                expires:  DateTime.Now.AddMinutes(30),
-                signingCredentials: creds);
+                var registeredUser = await _usuarioService.Create(userToRegister);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                return Ok(registeredUser);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
         }
-    }
 
-    public class LoginRequest
-    {
-        public string DNI { get; set; }
-        public string Password { get; set; }
+        //private string GenerateJwtToken(ApplicationUser usuario)
+        //{
+        //    var claims = new[]
+        //    {
+        //        new Claim(JwtRegisteredClaimNames.Sub, usuario.DNI),
+        //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        //        new Claim("usuarioId", usuario.Id.ToString())
+        //    };
+
+        //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("LLAVE"));
+        //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        //    var token = new JwtSecurityToken(
+        //        issuer: "localhost",
+        //        audience: "localhost",
+        //        claims: claims,
+        //        expires: DateTime.Now.AddMinutes(30),
+        //        signingCredentials: creds);
+
+        //    return new JwtSecurityTokenHandler().WriteToken(token);
+        //}
     }
 }

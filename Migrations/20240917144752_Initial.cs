@@ -17,6 +17,8 @@ namespace template_csharp_dotnet.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Nombre = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
                     DNI = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false),
                     NumeroTelefono = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),

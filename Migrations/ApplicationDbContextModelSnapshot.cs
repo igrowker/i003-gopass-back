@@ -97,6 +97,11 @@ namespace template_csharp_dotnet.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("varchar");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -106,6 +111,11 @@ namespace template_csharp_dotnet.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("varchar");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<bool>("Verificado")
                         .HasColumnType("bit");

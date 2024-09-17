@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using template_csharp_dotnet.DTOs.Request;
+using template_csharp_dotnet.DTOs.Request.AuthRequestDTOs;
 using template_csharp_dotnet.Models;
 using template_csharp_dotnet.Services.Interfaces;
 using template_csharp_dotnet.Utilities.Mappers;
@@ -11,82 +11,82 @@ namespace template_csharp_dotnet.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly IUsuarioService _usuarioService;
+        //private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(IUsuarioService usuarioService)
-        {
-            _usuarioService = usuarioService;
-        }
+        //public UsuarioController(IUsuarioService usuarioService)
+        //{
+        //    _usuarioService = usuarioService;
+        //}
 
-        [HttpGet("Get-Users")]
-        public async Task<IActionResult> GetUsers()
-        {
-            try
-            {
-                var users = await _usuarioService.GetAllUsersAsync();
+        //[HttpGet("Get-Users")]
+        //public async Task<IActionResult> GetUsers()
+        //{
+        //    try
+        //    {
+        //        var users = await _usuarioService.GetAllUsersWithRelationsAsync();
 
-                return Ok(users);
-            }
-            catch (Exception)
-            {
+        //        return Ok(users);
+        //    }
+        //    catch (Exception)
+        //    {
 
-                return BadRequest();
-            }
-        }
+        //        return BadRequest();
+        //    }
+        //}
 
-        [HttpPost("Create-User")]
-        public async Task<IActionResult> CreateUser(UsuarioRequestDto usuarioRequestDto)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+        //[HttpPost("Create-User")]
+        //public async Task<IActionResult> CreateUser(UsuarioRequestDto usuarioRequestDto)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            try
-            {
-                var userToCreate = usuarioRequestDto.ToModel();
-                await _usuarioService.CreateUserAsync(userToCreate);
+        //    try
+        //    {
+        //        var userToCreate = usuarioRequestDto.ToModel();
+        //        await _usuarioService.Create(userToCreate);
 
-                return Ok(userToCreate.ToResponseDto());
-            }
-            catch (Exception)
-            {
+        //        return Ok(userToCreate.ToResponseDto());
+        //    }
+        //    catch (Exception)
+        //    {
 
-                return BadRequest();
-            }
-        }
+        //        return BadRequest();
+        //    }
+        //}
 
-        [HttpPut("Update-User/{id:int}")] 
-        public async Task<IActionResult> UpdateUser(int id, UsuarioRequestDto usuarioRequestDto)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+        //[HttpPut("Update-User/{id:int}")] 
+        //public async Task<IActionResult> UpdateUser(int id, UsuarioRequestDto usuarioRequestDto)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            try
-            {
-                var userToUpdate = usuarioRequestDto.ToModel();
+        //    try
+        //    {
+        //        var userToUpdate = usuarioRequestDto.ToModel();
 
-                var userUpdated = await _usuarioService.UpdateUserAsync(id, userToUpdate);
+        //        var userUpdated = await _usuarioService.Update(id, userToUpdate);
 
-                return Ok(userUpdated.ToResponseDto());
-            }
-            catch (Exception)
-            {
+        //        return Ok(userUpdated.ToResponseDto());
+        //    }
+        //    catch (Exception)
+        //    {
 
-                return BadRequest();
-            }
-        }
+        //        return BadRequest();
+        //    }
+        //}
 
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            try
-            {
-                var userToDelete = await _usuarioService.DeleteUserAsync(id);
+        //[HttpDelete("{id:int}")]
+        //public async Task<IActionResult> DeleteUser(int id)
+        //{
+        //    try
+        //    {
+        //        var userToDelete = await _usuarioService.DeleteUserWithRelationsAsync(id);
 
-                return Ok(userToDelete);
-            }
-            catch (Exception)
-            {
+        //        return Ok(userToDelete);
+        //    }
+        //    catch (Exception)
+        //    {
 
-                return NotFound();
-            }
-        }
+        //        return NotFound();
+        //    }
+        //}
     }
 }

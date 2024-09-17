@@ -7,5 +7,6 @@ namespace template_csharp_dotnet.Repositories.Interfaces
     {
         Task<Usuario> DeleteUserWithRelations(int id);
         Task<List<Usuario>> GetAllUsersWithRelations();
+        Task<Usuario> GetUserByEmail(string email);
     }
 }

@@ -17,6 +17,18 @@ namespace template_csharp_dotnet.Repositories.Classes
             return await _dbSet.Include(x => x.Reventa).ThenInclude(x => x.Entrada).ToListAsync();
         }
 
+        public async Task<Usuario> GetUserByEmail(string email)
+        {
+            var emailExists = await _dbSet.FirstOrDefaultAsync(x => x.Email == email);
+
+            //if (emailExists is not null)
+            //{
+            //    throw new Exception($"El email: {email} ya se encuentra registrado");
+            //}
+
+            return emailExists!;
+        }
+
         public async Task<Usuario> DeleteUserWithRelations(int id)
         {
             var recordToDelete = await GetById(id);
