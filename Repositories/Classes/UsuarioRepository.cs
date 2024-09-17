@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using template_csharp_dotnet.Data;
 using template_csharp_dotnet.Models;
 using template_csharp_dotnet.Repositories.Interfaces;
@@ -7,9 +8,11 @@ namespace template_csharp_dotnet.Repositories.Classes
 {
     public class UsuarioRepository : GenericRepository<Usuario>, IUsuarioRepository
     {
+        private readonly IPasswordHasher<Usuario> _passwordHasher;
+
         public UsuarioRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
-            
+            _passwordHasher = new PasswordHasher<Usuario>();
         }
 
         public async Task<List<Usuario>> GetAllUsersWithRelations()
@@ -46,11 +49,26 @@ namespace template_csharp_dotnet.Repositories.Classes
 
             if (userToAuthenticate is null) throw new Exception("Ha habido un error, verifique los campos e intentelo nuevamente");
 
-            var storedPassword = await _dbSet.FirstOrDefaultAsync(u => u.Password == password);
+            var result = _passwordHasher.VerifyHashedPassword(userToAuthenticate, userToAuthenticate.Password, password);
 
-            if (storedPassword is null) throw new Exception("La contraseña no coincide");
-            
+            if (result == PasswordVerificationResult.Failed)
+            {
+                throw new Exception("Contraseña incorrecta.");
+            }
+
             return userToAuthenticate;
+        }
+
+        public PasswordVerificationResult VerifyPassword(Usuario usuario, string providedPassword)
+        {
+            return _passwordHasher.VerifyHashedPassword(usuario, usuario.Password, providedPassword);
+        }
+
+        public string HashPassword(Usuario usuario, string providedPassword)
+        {
+            var passwordHashed = _passwordHasher.HashPassword(usuario, providedPassword);
+
+            return passwordHashed;
         }
     }
 }

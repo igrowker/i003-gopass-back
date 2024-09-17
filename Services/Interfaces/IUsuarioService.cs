@@ -1,4 +1,5 @@
-﻿using template_csharp_dotnet.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using template_csharp_dotnet.Models;
 
 namespace template_csharp_dotnet.Services.Interfaces
 {
@@ -8,6 +9,9 @@ namespace template_csharp_dotnet.Services.Interfaces
         Task<List<Usuario>> GetAllUsersWithRelationsAsync();
         Task<Usuario> DeleteUserWithRelationsAsync(int id);
         Task<Usuario> GetUserByEmailAsync(string email);
-        Task<Usuario> Authenticate(string email, string password);
+        Task<Usuario> AuthenticateAsync(string email, string password);
+        string HasPassword(Usuario usuario, string password);
+        PasswordVerificationResult VerifyUserPassword(Usuario usuario, string providedPassword);
+        Task<Usuario> RegisterUserAsync(Usuario usuario);
     }
 }

@@ -12,7 +12,7 @@ using template_csharp_dotnet.Data;
 namespace template_csharp_dotnet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240917144752_Initial")]
+    [Migration("20240917172259_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -117,8 +117,10 @@ namespace template_csharp_dotnet.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Verificado")
                         .HasColumnType("bit");
@@ -166,11 +168,9 @@ namespace template_csharp_dotnet.Migrations
 
             modelBuilder.Entity("template_csharp_dotnet.Models.Usuario", b =>
                 {
-                    b.Navigation("Entrada")
-                        .IsRequired();
+                    b.Navigation("Entrada");
 
-                    b.Navigation("Reventa")
-                        .IsRequired();
+                    b.Navigation("Reventa");
                 });
 #pragma warning restore 612, 618
         }

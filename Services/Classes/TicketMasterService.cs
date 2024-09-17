@@ -30,7 +30,7 @@ public class TicketmasterService
 
             // Deserializar la respuesta a un objeto
             var ticketResponse = JsonConvert.DeserializeObject<TicketResponse>(ticketDataJson);
-            return ticketResponse;
+            return ticketResponse!;
         }
         catch (HttpRequestException httpRequestException)
         {

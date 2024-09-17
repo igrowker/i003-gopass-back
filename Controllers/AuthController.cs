@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -22,21 +23,6 @@ namespace template_csharp_dotnet.Controllers
             _usuarioService = usuarioService;
         }
 
-        //public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
-        //{
-        //    if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        //    try
-        //    {
-
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        return BadRequest();
-        //    }
-        //}
-
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
         {
@@ -48,7 +34,9 @@ namespace template_csharp_dotnet.Controllers
 
                 var userInDb = await  _usuarioService.GetUserByEmailAsync(userToRegister.Email); 
 
-                var registeredUser = await _usuarioService.Create(userToRegister);
+                _usuarioService.HasPassword(userToRegister, userToRegister.Password);
+
+                var registeredUser = await _usuarioService.RegisterUserAsync(userToRegister);
 
                 return Ok(registeredUser);
             }
@@ -64,31 +52,15 @@ namespace template_csharp_dotnet.Controllers
         {
             var userToLogin = loginRequestDto.FromLoginToModel();
 
-            var logUser = await _usuarioService.Authenticate(userToLogin.Email, userToLogin.Password);
+
+            var logUser = await _usuarioService.AuthenticateAsync(userToLogin.Email, userToLogin.Password);
+            var verifiedPassword = _usuarioService.VerifyUserPassword(userToLogin, userToLogin.Password);
+
+            if (verifiedPassword is PasswordVerificationResult.Failed) return Unauthorized("Las credenciales no son validas.");
 
             return Ok(logUser);
         }
 
-        //private string GenerateJwtToken(ApplicationUser usuario)
-        //{
-        //    var claims = new[]
-        //    {
-        //        new Claim(JwtRegisteredClaimNames.Sub, usuario.DNI),
-        //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        //        new Claim("usuarioId", usuario.Id.ToString())
-        //    };
-
-        //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("LLAVE"));
-        //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        //    var token = new JwtSecurityToken(
-        //        issuer: "localhost",
-        //        audience: "localhost",
-        //        claims: claims,
-        //        expires: DateTime.Now.AddMinutes(30),
-        //        signingCredentials: creds);
-
-        //    return new JwtSecurityTokenHandler().WriteToken(token);
-        //}
+        
     }
 }

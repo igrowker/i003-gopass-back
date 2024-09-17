@@ -29,6 +29,14 @@ namespace template_csharp_dotnet.Utilities.Mappers
             };
         }
 
+        public static LoginResponseDto FromModelToLoginResponse(this Usuario usuario)
+        {
+            return new LoginResponseDto
+            {
+                Email = usuario.Email,
+                Token = usuario.Token!
+            };
+        }
 
         public static UsuarioResponseDto ToResponseDto(this Usuario usuario)
         {
