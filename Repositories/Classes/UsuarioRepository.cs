@@ -59,16 +59,13 @@ namespace template_csharp_dotnet.Repositories.Classes
             return userToAuthenticate;
         }
 
-        //public PasswordVerificationResult VerifyPassword(Usuario usuario, string providedPassword)
-        //{
-        //    return _passwordHasher.VerifyHashedPassword(usuario, usuario.Password, providedPassword);
-        //}
+        public async Task<Usuario> VerifyUserByDniAndPhoneNumber(string dni, string phoneNumber)
+        {
+            var userCredentialsInDb = await _dbSet.FirstOrDefaultAsync(u => u.DNI == dni || u.NumeroTelefono == phoneNumber);
 
-        //public string HashPassword(Usuario usuario, string providedPassword)
-        //{
-        //    var passwordHashed = _passwordHasher.HashPassword(usuario, providedPassword);
+            //if (userCreds is not null) throw new Exception();
 
-        //    return passwordHashed;
-        //}
+            return userCredentialsInDb!;
+        }
     }
 }

@@ -43,7 +43,12 @@ namespace template_csharp_dotnet.Controllers
                 // Osea en se debe manejar o se esta manejando por asi decirlo UsuarioService.cs
                 // Lo que se deberia eliminar es _usuarioService.HasPassword(userToRegister, userToRegister.Password);
 
+                var userCredentials = await _usuarioService.VerifyUserCredentials(userToRegister.DNI, userToRegister.NumeroTelefono);
+
+                if (userCredentials is not null) return BadRequest("Las credenciales ingresadas ya se encuentran registradas:" + userCredentials);
+
                 var registeredUser = await _usuarioService.RegisterUserAsync(userToRegister);
+
 
                 return Ok(registeredUser);
             }
