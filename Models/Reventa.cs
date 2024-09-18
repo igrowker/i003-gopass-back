@@ -9,8 +9,7 @@
         public decimal Precio { get; set; } 
 
         //Navigation Properties
-        public Usuario Vendedor { get; set; }
-        public Usuario Comprador { get; set; }
+        public Usuario Usuario { get; set; }
         public Entrada Entrada { get; set; }
     }
 }

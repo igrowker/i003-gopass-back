@@ -1,20 +1,41 @@
 ﻿using Microsoft.JSInterop.Infrastructure;
-using template_csharp_dotnet.DTOs.Request;
-using template_csharp_dotnet.DTOs.Response;
+using template_csharp_dotnet.DTOs.Request.AuthRequestDTOs;
+using template_csharp_dotnet.DTOs.Response.AuthResponseDTOs;
 using template_csharp_dotnet.Models;
 
 namespace template_csharp_dotnet.Utilities.Mappers
 {
     public static class UsuarioMappers
     {
-        public static Usuario ToModel(this UsuarioRequestDto usuarioRequestDto)
+        public static Usuario FromRegisterToModel(this RegisterRequestDto registerRequestDto)
         {
             return new Usuario
             {
-                DNI = usuarioRequestDto.DNI,
-                Nombre = usuarioRequestDto.Nombre,
-                NumeroTelefono = usuarioRequestDto.NumeroTelefono,
-                Verificado = usuarioRequestDto.Verificado
+                Email = registerRequestDto.Email,
+                Password = registerRequestDto.Password,
+                DNI = registerRequestDto.DNI,
+                Nombre = registerRequestDto.Nombre,
+                NumeroTelefono = registerRequestDto.NumeroTelefono,
+                Verificado = registerRequestDto.Verificado
+            };
+        }
+
+        public static Usuario FromLoginToModel(this LoginRequestDto loginRequestDto)
+        {
+            return new Usuario
+            {
+                Email = loginRequestDto.Email,
+                Password = loginRequestDto.Password
+            };
+        }
+
+        public static LoginResponseDto FromModelToLoginResponse(this Usuario usuario)
+        {
+            return new LoginResponseDto
+            {
+                Email = usuario.Email,
+                Nombre = usuario.Nombre,
+                Token = usuario.Token!
             };
         }
 

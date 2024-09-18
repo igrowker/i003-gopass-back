@@ -9,8 +9,8 @@ namespace template_csharp_dotnet.Models.Configurations
         {
             builder.HasKey(r => r.Id);
             builder.HasOne(e => e.Entrada).WithOne(r => r.Reventa).HasForeignKey<Reventa>(e => e.EntradaId);
-            builder.HasOne(e => e.Comprador).WithOne(r => r.Reventa).HasForeignKey<Reventa>(e => e.CompradorId);
-            builder.HasOne(e => e.Vendedor).WithOne(r => r.Reventa).HasForeignKey<Reventa>(e => e.VendedorId);
+            builder.HasOne(e => e.Usuario).WithOne(r => r.Reventa).HasForeignKey<Reventa>(e => e.CompradorId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.Usuario).WithOne(r => r.Reventa).HasForeignKey<Reventa>(e => e.VendedorId).OnDelete(DeleteBehavior.Restrict);
         }
 
         protected override void ConfigurateProperties(EntityTypeBuilder<Reventa> builder)
@@ -18,7 +18,7 @@ namespace template_csharp_dotnet.Models.Configurations
             builder.Property(r => r.EntradaId).IsRequired();
             builder.Property(r => r.VendedorId).IsRequired();
             builder.Property(r => r.CompradorId).IsRequired();
-            builder.Property(r => r.FechaReventa).IsRequired().HasColumnType("datetime").HasPrecision(0);
+            builder.Property(r => r.FechaReventa).IsRequired();
             builder.Property(r => r.Precio).IsRequired().HasPrecision(18,2);
         }
 

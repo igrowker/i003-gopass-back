@@ -16,6 +16,9 @@ namespace template_csharp_dotnet.Models.Configurations
             builder.Property(u => u.NumeroTelefono).IsRequired().HasMaxLength(10).HasColumnType("varchar");
             builder.Property(u => u.DNI).IsRequired().HasMaxLength(8).HasColumnType("varchar");
             builder.Property(u => u.Verificado).IsRequired().HasColumnType("bit");
+            builder.Property(u => u.Email).IsRequired().HasMaxLength(50);
+            builder.Property(u => u.Password).IsRequired();
+            //builder.Property(u => u.Token);
         }
 
         protected override void ConfigurateTableName(EntityTypeBuilder<Usuario> builder)
