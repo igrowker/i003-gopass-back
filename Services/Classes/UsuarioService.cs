@@ -9,11 +9,12 @@ namespace template_csharp_dotnet.Services.Classes
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly ITokenService _tokenService;
-        
+        private readonly IPasswordHasher<Usuario> _passwordHasher;
         public UsuarioService(IUsuarioRepository usuarioRepository, ITokenService tokenService) : base(usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
             _tokenService = tokenService;
+            _passwordHasher = new PasswordHasher<Usuario>();    
         }
         public async Task<List<Usuario>> GetAllUsersWithRelationsAsync()
         {
@@ -36,7 +37,7 @@ namespace template_csharp_dotnet.Services.Classes
 
         public async Task<Usuario> RegisterUserAsync(Usuario usuario)
         {
-            usuario.Password = _usuarioRepository.HashPassword(usuario, usuario.Password);
+            usuario.Password = _passwordHasher.HashPassword(usuario, usuario.Password);
 
             var userToken = _tokenService.CreateToken(usuario);
             usuario.Token = userToken;
@@ -46,6 +47,12 @@ namespace template_csharp_dotnet.Services.Classes
 
         public async Task<Usuario> AuthenticateAsync(string email, string password)
         {
+            var userInDb = await _usuarioRepository.GetUserByEmail(email);
+
+            var passwordVerification = _passwordHasher.VerifyHashedPassword(userInDb, userInDb.Password, password);
+
+            if (passwordVerification == PasswordVerificationResult.Failed) throw new Exception();
+
             var user = await _usuarioRepository.AuthenticateUser(email, password);
 
             var token = _tokenService.CreateToken(user);
@@ -54,17 +61,9 @@ namespace template_csharp_dotnet.Services.Classes
             return user;
         }
 
-        public string HasPassword(Usuario usuario, string password)
-        {
-            var hashedPassword = _usuarioRepository.HashPassword(usuario, password);
-            usuario.Password = hashedPassword;
-
-            return hashedPassword;
-        }
-
-        public PasswordVerificationResult VerifyUserPassword(Usuario usuario, string providedPassword)
-        {
-            return _usuarioRepository.VerifyPassword(usuario, usuario.Password);
-        }
+        //public PasswordVerificationResult VerifyUserPassword(Usuario usuario, string providedPassword)
+        //{
+        //    return _passwordHasher.VerifyHashedPassword(usuario, usuario.Password, providedPassword);
+        //}
     }
 }

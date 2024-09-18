@@ -11,82 +11,72 @@ namespace template_csharp_dotnet.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        //private readonly IUsuarioService _usuarioService;
+        private readonly IUsuarioService _usuarioService;
+        private readonly ILogger<UsuarioController> _logger;
 
-        //public UsuarioController(IUsuarioService usuarioService)
-        //{
-        //    _usuarioService = usuarioService;
-        //}
+        public UsuarioController(IUsuarioService usuarioService, ILogger<UsuarioController> logger)
+        {
+            _usuarioService = usuarioService;
+            _logger = logger;
+        }
 
-        //[HttpGet("Get-Users")]
-        //public async Task<IActionResult> GetUsers()
-        //{
-        //    try
-        //    {
-        //        var users = await _usuarioService.GetAllUsersWithRelationsAsync();
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        //        return Ok(users);
-        //    }
-        //    catch (Exception)
-        //    {
+            try
+            {
+                var userToRegister = registerRequestDto.FromRegisterToModel();
 
-        //        return BadRequest();
-        //    }
-        //}
 
-        //[HttpPost("Create-User")]
-        //public async Task<IActionResult> CreateUser(UsuarioRequestDto usuarioRequestDto)
-        //{
-        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+                var userInDb = await _usuarioService.GetUserByEmailAsync(userToRegister.Email);
 
-        //    try
-        //    {
-        //        var userToCreate = usuarioRequestDto.ToModel();
-        //        await _usuarioService.Create(userToCreate);
 
-        //        return Ok(userToCreate.ToResponseDto());
-        //    }
-        //    catch (Exception)
-        //    {
+                if (userInDb != null)
+                {
+                    // Eliminar esta lógica si la verificación de usuario ya existe se maneja en el repositorio o servicio **
+                    // return Conflict("El usuario ya está registrado.");
+                }
 
-        //        return BadRequest();
-        //    }
-        //}
+                // Se deberia eliminar esta lógica ya que el hashing de la contraseña debe hacerse en el servicio de usuario y no aquí 
+                // Osea en se debe manejar o se esta manejando por asi decirlo UsuarioService.cs
+                // Lo que se deberia eliminar es _usuarioService.HasPassword(userToRegister, userToRegister.Password);
 
-        //[HttpPut("Update-User/{id:int}")] 
-        //public async Task<IActionResult> UpdateUser(int id, UsuarioRequestDto usuarioRequestDto)
-        //{
-        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+                var registeredUser = await _usuarioService.RegisterUserAsync(userToRegister);
 
-        //    try
-        //    {
-        //        var userToUpdate = usuarioRequestDto.ToModel();
+                return Ok(registeredUser);
+            }
+            catch (Exception ex)
+            {
+                // Registrar la excepción
+                _logger.LogError(ex, "Error al registrar el usuario.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al registrar el usuario.");
+            }
+        }
 
-        //        var userUpdated = await _usuarioService.Update(id, userToUpdate);
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
+        {
+            var userToLogin = loginRequestDto.FromLoginToModel();
 
-        //        return Ok(userUpdated.ToResponseDto());
-        //    }
-        //    catch (Exception)
-        //    {
+            try
+            {
+                // ** Eliminar esta lógica, ya que AuthenticateAsync ya maneja la autenticación y el manejo de errores de contraseña **
+                // var verifiedPassword = _usuarioService.VerifyUserPassword(userToLogin, userToLogin.Password);
 
-        //        return BadRequest();
-        //    }
-        //}
+                // ** Eliminar la verificación redundante de contraseña **
+                // if (verifiedPassword is PasswordVerificationResult.Failed) return Unauthorized("Las credenciales no son validas.");
 
-        //[HttpDelete("{id:int}")]
-        //public async Task<IActionResult> DeleteUser(int id)
-        //{
-        //    try
-        //    {
-        //        var userToDelete = await _usuarioService.DeleteUserWithRelationsAsync(id);
+                var logUser = await _usuarioService.AuthenticateAsync(userToLogin.Email, userToLogin.Password);
 
-        //        return Ok(userToDelete);
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        return NotFound();
-        //    }
-        //}
+                return Ok(logUser.FromModelToLoginResponse());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al autenticar el usuario.");
+                return Unauthorized("Las credenciales no son válidas.");
+            }
+        }
     }
 }

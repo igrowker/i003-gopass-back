@@ -8,11 +8,11 @@ namespace template_csharp_dotnet.Repositories.Classes
 {
     public class UsuarioRepository : GenericRepository<Usuario>, IUsuarioRepository
     {
-        private readonly IPasswordHasher<Usuario> _passwordHasher;
+        //private readonly IPasswordHasher<Usuario> _passwordHasher;
 
         public UsuarioRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
-            _passwordHasher = new PasswordHasher<Usuario>();
+            //_passwordHasher = new PasswordHasher<Usuario>();
         }
 
         public async Task<List<Usuario>> GetAllUsersWithRelations()
@@ -49,26 +49,26 @@ namespace template_csharp_dotnet.Repositories.Classes
 
             if (userToAuthenticate is null) throw new Exception("Ha habido un error, verifique los campos e intentelo nuevamente");
 
-            var result = _passwordHasher.VerifyHashedPassword(userToAuthenticate, userToAuthenticate.Password, password);
+            
 
-            if (result == PasswordVerificationResult.Failed)
-            {
-                throw new Exception("Contraseña incorrecta.");
-            }
+            //if (result == PasswordVerificationResult.Failed)
+            //{
+            //    throw new Exception("Contraseña incorrecta.");
+            //}
 
             return userToAuthenticate;
         }
 
-        public PasswordVerificationResult VerifyPassword(Usuario usuario, string providedPassword)
-        {
-            return _passwordHasher.VerifyHashedPassword(usuario, usuario.Password, providedPassword);
-        }
+        //public PasswordVerificationResult VerifyPassword(Usuario usuario, string providedPassword)
+        //{
+        //    return _passwordHasher.VerifyHashedPassword(usuario, usuario.Password, providedPassword);
+        //}
 
-        public string HashPassword(Usuario usuario, string providedPassword)
-        {
-            var passwordHashed = _passwordHasher.HashPassword(usuario, providedPassword);
+        //public string HashPassword(Usuario usuario, string providedPassword)
+        //{
+        //    var passwordHashed = _passwordHasher.HashPassword(usuario, providedPassword);
 
-            return passwordHashed;
-        }
+        //    return passwordHashed;
+        //}
     }
 }

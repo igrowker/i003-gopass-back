@@ -10,8 +10,7 @@ namespace template_csharp_dotnet.Services.Interfaces
         Task<Usuario> DeleteUserWithRelationsAsync(int id);
         Task<Usuario> GetUserByEmailAsync(string email);
         Task<Usuario> AuthenticateAsync(string email, string password);
-        string HasPassword(Usuario usuario, string password);
-        PasswordVerificationResult VerifyUserPassword(Usuario usuario, string providedPassword);
+        //PasswordVerificationResult VerifyUserPassword(Usuario usuario, string providedPassword);
         Task<Usuario> RegisterUserAsync(Usuario usuario);
     }
 }

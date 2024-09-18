@@ -34,6 +34,7 @@ namespace template_csharp_dotnet.Utilities.Mappers
             return new LoginResponseDto
             {
                 Email = usuario.Email,
+                Nombre = usuario.Nombre,
                 Token = usuario.Token!
             };
         }
