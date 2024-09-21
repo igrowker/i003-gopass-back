@@ -1,6 +1,6 @@
 ﻿using template_csharp_dotnet.Models;
 
-namespace template_csharp_dotnet.DTOs.Request
+namespace template_csharp_dotnet.DTOs.Request.ReventaRequestDTOs
 {
     public class EntradaRequestDto
     {

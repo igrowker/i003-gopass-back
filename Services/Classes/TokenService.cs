@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -23,15 +24,40 @@ namespace template_csharp_dotnet.Services.Classes
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
+                new Claim(JwtRegisteredClaimNames.Name, usuario.Nombre),
+                new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
             };
 
             var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
-            var securityToken = new JwtSecurityToken(signingCredentials: credentials, claims: claims, expires: DateTime.UtcNow.AddDays(5), audience: null, issuer: null);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(5),
+                SigningCredentials = credentials,
+                Issuer = _configuration["JWT:Issuer"],
+                Audience = _configuration["JWT:Audience"]
+            };
 
-            var tokenHandler = new JwtSecurityTokenHandler().WriteToken(securityToken);
+            var tokenHandler = new JwtSecurityTokenHandler();
 
-            return tokenHandler;
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            //var securityToken = new JwtSecurityToken(signingCredentials: credentials, claims: claims, expires: DateTime.UtcNow.AddDays(5), audience: null, issuer: null);
+
+
+            return tokenHandler.WriteToken(token);
+        }
+
+        public string DecodeToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var decodedToken = tokenHandler.ReadJwtToken(token);
+
+            var userId = decodedToken.Claims.First(claim => claim.Type == "sub").Value;
+
+            return userId;
         }
     }
 }

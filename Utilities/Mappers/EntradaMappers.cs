@@ -1,4 +1,4 @@
-﻿using template_csharp_dotnet.DTOs.Request;
+﻿using template_csharp_dotnet.DTOs.Request.ReventaRequestDTOs;
 using template_csharp_dotnet.DTOs.Response;
 using template_csharp_dotnet.Models;
 

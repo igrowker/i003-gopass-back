@@ -1,4 +1,4 @@
-﻿using template_csharp_dotnet.DTOs.Request;
+﻿using template_csharp_dotnet.DTOs.Request.ReventaRequestDTOs;
 using template_csharp_dotnet.DTOs.Response;
 using template_csharp_dotnet.Models;
 
@@ -6,7 +6,7 @@ namespace template_csharp_dotnet.Utilities.Mappers
 {
     public static class ReventaMappers
     {
-        public static Reventa ToModel(this ReventaRequestDto reventaRequestDto)
+        public static Reventa FromReventaRequestToModel(this ReventaRequestDto reventaRequestDto)
         {
             return new Reventa
             {
@@ -15,6 +15,19 @@ namespace template_csharp_dotnet.Utilities.Mappers
                 EntradaId = reventaRequestDto.EntradaId,    
                 Precio = reventaRequestDto.Precio,
                 VendedorId = reventaRequestDto.VendedorId,
+            };
+        }
+
+        public static Reventa FromPublishReventaRequestToModel(this PublishReventaRequestDto publishReventaRequestDto)
+        {
+            return new Reventa
+            {
+                FechaReventa = publishReventaRequestDto.FechaReventa,
+                EntradaId = publishReventaRequestDto.EntradaId,
+                Precio = publishReventaRequestDto.Precio,
+                //Entrada = {
+                //    UsuarioId = vendedorId
+                //}
             };
         }
 
