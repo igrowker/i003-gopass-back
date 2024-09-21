@@ -8,7 +8,8 @@ namespace template_csharp_dotnet.Models.Configurations
         protected override void ConfigurateConstraints(EntityTypeBuilder<Entrada> builder)
         {
             builder.HasKey(e => e.Id);
-            builder.HasOne(u => u.Usuario).WithOne(e => e.Entrada).HasForeignKey<Entrada>(u => u.UsuarioId);
+            builder.HasOne(e => e.Reventa).WithOne(e => e.Entrada).HasForeignKey<Reventa>(u => u.EntradaId);
+            builder.HasOne(u => u.Usuario).WithMany(e => e.Entrada).HasForeignKey(u => u.UsuarioId);
         }
 
         protected override void ConfigurateProperties(EntityTypeBuilder<Entrada> builder)

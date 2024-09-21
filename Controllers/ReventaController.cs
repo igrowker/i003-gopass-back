@@ -15,11 +15,13 @@ namespace template_csharp_dotnet.Controllers
     {
         private readonly IReventaService _reventaService;
         private readonly IUsuarioService _usuarioService;
+        private readonly IEntradaService _entradaService;
 
-        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService)
+        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService, IEntradaService entradaService)
         {
             _reventaService = reventaService;
             _usuarioService = usuarioService;
+            _entradaService = entradaService;
         }
 
         [Authorize]
@@ -27,16 +29,14 @@ namespace template_csharp_dotnet.Controllers
         public async Task<IActionResult> PublishResaleTicket(PublishReventaRequestDto publishReventaRequestDto)
         {
             var authorizationHeader = Request.Headers["Authorization"].ToString();
+            var userId = _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
 
             var reventaToPublish = publishReventaRequestDto.FromPublishReventaRequestToModel();
 
-            var userId = _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
-
-
-            //reventaToPublish.Entrada.UsuarioId = userId.Id;
+            //var entradaId = _entradaService.GetTicketByQR(reventaToPublish.Entrada.CodigoQR);
 
             reventaToPublish.VendedorId = int.Parse(userId);
-            //reventaToPublish.EntradaId = entrada.Id;
+            //reventaToPublish.EntradaId = 
 
             var publishedReventa = await _reventaService.PublishTicketAsync(reventaToPublish, reventaToPublish.VendedorId);
 

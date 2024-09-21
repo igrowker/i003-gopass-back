@@ -38,5 +38,20 @@ namespace template_csharp_dotnet.Controllers
 
             return Ok(publishedTicket);
         }
+        //public async Task<IActionResult> PublishTicket(EntradaRequestDto entradaRequestDto)
+        //{
+        //    //var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+        //    //var userId = _usuarioService.GetUserIdByTokenAsync(authHeader);
+
+        //    //int parsedUserId = int.Parse(userId);
+
+        //    var ticketToPublish = entradaRequestDto.FromEntradaRequestToModel();
+
+        //    //ticketToPublish.UsuarioId = parsedUserId;
+
+        //    var publishedTicket = await _entradaService.Create(ticketToPublish);
+
+        //    return Ok(publishedTicket);
+        //}
     }
 }

@@ -15,10 +15,6 @@ namespace template_csharp_dotnet.Migrations
                 name: "Usuarios",
                 columns: table => new
                 {
-
-                    // Puntos a tener en cuenta al momento de crear un usuario los valores son reducidos 
-                    // De tal manera que una persona de X pais debe cumplir con estos criterios sin embargo
-                    // Donde un DNI exceda los 8 caracteres, o el Telf sea mayor a 10 dara un error 404 en DB.
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -87,8 +83,7 @@ namespace template_csharp_dotnet.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Entradas_UsuarioId",
                 table: "Entradas",
-                column: "UsuarioId",
-                unique: true);
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reventas_EntradaId",
@@ -99,8 +94,7 @@ namespace template_csharp_dotnet.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Reventas_VendedorId",
                 table: "Reventas",
-                column: "VendedorId",
-                unique: true);
+                column: "VendedorId");
         }
 
         /// <inheritdoc />
