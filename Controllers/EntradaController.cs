@@ -13,17 +13,26 @@ namespace template_csharp_dotnet.Controllers
     public class EntradaController : ControllerBase
     {
         private readonly IEntradaService _entradaService;
+        private readonly IUsuarioService _usuarioService;
 
-        public EntradaController(IEntradaService entradaService)
+        public EntradaController(IEntradaService entradaService, IUsuarioService usuarioService)
         {
             _entradaService = entradaService;
+            _usuarioService = usuarioService;
         }
 
         [Authorize]
         [HttpPost("publicar-entrada")]
-        public async Task<IActionResult> PublishTicket(EntradaRequestDto entradaRequestDto)
+        public async Task<IActionResult> PublishTicket(PublishEntradaRequestDto publishEntradaRequestDto)
         {
-            var ticketToPublish = entradaRequestDto.ToModel();
+            var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+            var userId = _usuarioService.GetUserIdByTokenAsync(authHeader);
+
+            int parsedUserId = int.Parse(userId);
+
+            var ticketToPublish = publishEntradaRequestDto.FromPublishEntradaRequestToModel();
+
+            ticketToPublish.UsuarioId = parsedUserId;
 
             var publishedTicket = await _entradaService.Create(ticketToPublish);
 

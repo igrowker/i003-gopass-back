@@ -6,7 +6,7 @@ namespace template_csharp_dotnet.Utilities.Mappers
 {
     public static class EntradaMappers
     {
-        public static Entrada ToModel(this EntradaRequestDto entradaRequestDto)
+        public static Entrada FromEntradaRequestToModel(this EntradaRequestDto entradaRequestDto)
         {
             return new Entrada
             {
@@ -16,7 +16,16 @@ namespace template_csharp_dotnet.Utilities.Mappers
             };
         }
 
-        public static EntradaResponseDto ToResponseDto(this Entrada entrada)
+        public static Entrada FromPublishEntradaRequestToModel(this PublishEntradaRequestDto publishEntradaRequestDto)
+        {
+            return new Entrada
+            {
+                CodigoQR = publishEntradaRequestDto.CodigoQR,
+                Verificada = publishEntradaRequestDto.Verificada
+            };
+        }
+
+        public static EntradaResponseDto FromEntradaRequestToResponseDto(this Entrada entrada)
         {
             return new EntradaResponseDto
             {

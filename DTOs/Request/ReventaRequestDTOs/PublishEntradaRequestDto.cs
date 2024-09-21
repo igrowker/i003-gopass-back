@@ -2,6 +2,8 @@
 {
     public class PublishEntradaRequestDto
     {
-        public int MyProperty { get; set; }
+        public string CodigoQR { get; set; }
+        public bool Verificada { get; set; }
+        //public int UsuarioId { get; set; }
     }
 }
