@@ -5,6 +5,6 @@ namespace template_csharp_dotnet.Services.Interfaces
     public interface ITokenService
     {
         string CreateToken(Usuario usuario);
-        string DecodeToken(string token);
+        Task<string> DecodeToken(string token);
     }
 }

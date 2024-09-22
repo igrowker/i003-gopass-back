@@ -25,7 +25,15 @@ namespace template_csharp_dotnet.Utilities.Mappers
             };
         }
 
-        public static EntradaResponseDto FromEntradaRequestToResponseDto(this Entrada entrada)
+        public static Reventa FromBuyEntradaRequestToModel(this BuyEntradaRequestDto buyEntradaRequestDto)
+        {
+            return new Reventa
+            {
+                EntradaId = buyEntradaRequestDto.EntradaId
+            };
+        }
+
+        public static EntradaResponseDto FromPublishEntradaRequestToResponseDto(this Entrada entrada)
         {
             return new EntradaResponseDto
             {

@@ -34,6 +34,13 @@ namespace template_csharp_dotnet.Repositories.Classes
         }
         public async Task<T> Update(int id, T model)
         {
+            var trackedEntity = await _dbSet.FindAsync(id);
+            if (trackedEntity != null)
+            {
+                // Desacopla la entidad existente si está siendo rastreada
+                _dbContext.Entry(trackedEntity).State = EntityState.Detached;
+            }
+
             model.Id = id;
 
             _dbSet.Update(model);

@@ -18,6 +18,10 @@ namespace template_csharp_dotnet.Services.Classes
             return await _reventaRepository.Publish(reventa, sellerId);
         }
 
+        public async Task<Reventa> GetResaleByEntradaIdAsync(int entradaId)
+        {
+            return await _reventaRepository.GetResaleByEntradaId(entradaId);
+        }
 
     }
 }

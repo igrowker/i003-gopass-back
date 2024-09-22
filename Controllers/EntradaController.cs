@@ -26,7 +26,7 @@ namespace template_csharp_dotnet.Controllers
         public async Task<IActionResult> PublishTicket(PublishEntradaRequestDto publishEntradaRequestDto)
         {
             var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
-            var userId = _usuarioService.GetUserIdByTokenAsync(authHeader);
+            var userId = await _usuarioService.GetUserIdByTokenAsync(authHeader);
 
             int parsedUserId = int.Parse(userId);
 
@@ -36,7 +36,7 @@ namespace template_csharp_dotnet.Controllers
 
             var publishedTicket = await _entradaService.Create(ticketToPublish);
 
-            return Ok(publishedTicket);
+            return Ok(publishedTicket.FromPublishEntradaRequestToResponseDto());
         }
         //public async Task<IActionResult> PublishTicket(EntradaRequestDto entradaRequestDto)
         //{

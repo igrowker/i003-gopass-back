@@ -49,7 +49,7 @@ namespace template_csharp_dotnet.Services.Classes
             return tokenHandler.WriteToken(token);
         }
 
-        public string DecodeToken(string token)
+        public async Task<string> DecodeToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 

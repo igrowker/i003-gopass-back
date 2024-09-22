@@ -68,13 +68,13 @@ namespace template_csharp_dotnet.Services.Classes
             return userCredentialsToValidate!;
         }
 
-        public string GetUserIdByTokenAsync(string token)
+        public async Task<string> GetUserIdByTokenAsync(string token)
         {
             var cleanToken = token.StartsWith("Bearer ") ? token.Substring("Bearer ".Length) : null;
 
             if (cleanToken is null) throw new Exception("Token nulo");
 
-            var decodedToken = _tokenService.DecodeToken(cleanToken!);
+            var decodedToken = await _tokenService.DecodeToken(cleanToken!);
 
             return decodedToken;
         }
