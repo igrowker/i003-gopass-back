@@ -27,7 +27,6 @@ namespace template_csharp_dotnet.Controllers
         {
             var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
             var userId = await _usuarioService.GetUserIdByTokenAsync(authHeader);
-
             int parsedUserId = int.Parse(userId);
 
             var ticketToPublish = publishEntradaRequestDto.FromPublishEntradaRequestToModel();

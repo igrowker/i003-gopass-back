@@ -29,16 +29,12 @@ namespace template_csharp_dotnet.Controllers
         public async Task<IActionResult> PublishResaleTicket(PublishReventaRequestDto publishReventaRequestDto)
         {
             var authorizationHeader = Request.Headers["Authorization"].ToString();
-            var userId = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
+            var userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
+            var userId = int.Parse(userIdObtainedString);
 
             var reventaToPublish = publishReventaRequestDto.FromPublishReventaRequestToModel();
 
-            //var entradaId = _entradaService.GetTicketByQR(reventaToPublish.Entrada.CodigoQR);
-
-            reventaToPublish.VendedorId = int.Parse(userId);
-            //reventaToPublish.EntradaId = 
-
-            var publishedReventa = await _reventaService.PublishTicketAsync(reventaToPublish, reventaToPublish.VendedorId);
+            var publishedReventa = await _reventaService.PublishTicketAsync(reventaToPublish, userId);
 
             return Ok(publishedReventa);
         }
@@ -55,7 +51,6 @@ namespace template_csharp_dotnet.Controllers
 
             var resaleDb = await _reventaService.GetResaleByEntradaIdAsync(publishedReventa.EntradaId);
 
-
             if(userId == resaleDb.VendedorId)
             {
                 return BadRequest("No podes comprar tu propia entrada flaco que haces estas re loco");
@@ -67,7 +62,6 @@ namespace template_csharp_dotnet.Controllers
             publishedReventa.CompradorId = userId;
 
             var publishReventaBuyer = await _reventaService.Update(resaleDb.Id, publishedReventa);
-
 
             return Ok(publishReventaBuyer);
         }

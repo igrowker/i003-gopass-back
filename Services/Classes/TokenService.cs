@@ -43,9 +43,6 @@ namespace template_csharp_dotnet.Services.Classes
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            //var securityToken = new JwtSecurityToken(signingCredentials: credentials, claims: claims, expires: DateTime.UtcNow.AddDays(5), audience: null, issuer: null);
-
-
             return tokenHandler.WriteToken(token);
         }
 

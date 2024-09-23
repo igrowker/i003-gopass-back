@@ -17,7 +17,7 @@ namespace template_csharp_dotnet.Repositories.Classes
 
         public async Task<List<Usuario>> GetAllUsersWithRelations()
         {
-            return await _dbSet.Include(x => x.Reventa).ThenInclude(x => x.Entrada).ToListAsync();
+            return await _dbSet.Include(x => x.Reventa!).ThenInclude(x => x.Entrada).ToListAsync();
         }
 
         public async Task<Usuario> GetUserByEmail(string email)
@@ -38,7 +38,7 @@ namespace template_csharp_dotnet.Repositories.Classes
 
             if (recordToDelete is null) throw new Exception("El registro no se encontro");
 
-            await _dbSet.Where(x => x.Id == id).Include(x => x.Entrada).ThenInclude(x => x.Reventa).ExecuteDeleteAsync();
+            await _dbSet.Where(x => x.Id == id).Include(x => x.Entrada!).ThenInclude(x => x.Reventa).ExecuteDeleteAsync();
 
             return recordToDelete;
         }
@@ -49,23 +49,14 @@ namespace template_csharp_dotnet.Repositories.Classes
 
             if (userToAuthenticate is null) throw new Exception("Ha habido un error, verifique los campos e intentelo nuevamente");
 
-            
-
-            //if (result == PasswordVerificationResult.Failed)
-            //{
-            //    throw new Exception("Contraseña incorrecta.");
-            //}
-
             return userToAuthenticate;
         }
 
-        public async Task<Usuario> VerifyUserByDniAndPhoneNumber(string dni, string phoneNumber)
+        public async Task<bool> VerifyUserCredentials(string dni, string phoneNumber, string email)
         {
-            var userCredentialsInDb = await _dbSet.FirstOrDefaultAsync(u => u.DNI == dni || u.NumeroTelefono == phoneNumber);
+            var userCredentialsExist = await _dbSet.AnyAsync(u => u.DNI == dni || u.NumeroTelefono == phoneNumber || u.Email == email);
 
-            //if (userCreds is not null) throw new Exception();
-
-            return userCredentialsInDb!;
+            return userCredentialsExist;
         }
     }
 }

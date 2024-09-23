@@ -29,24 +29,10 @@ namespace template_csharp_dotnet.Controllers
             {
                 var userToRegister = registerRequestDto.FromRegisterToModel();
 
+                var userCredentialsExist = await _usuarioService.VerifyUserCredentialsAsync(userToRegister.DNI, userToRegister.NumeroTelefono, userToRegister.Email);
 
-                var userInDb = await _usuarioService.GetUserByEmailAsync(userToRegister.Email);
-
-
-                if (userInDb != null)
-                {
-                    // Eliminar esta lógica si la verificación de usuario ya existe se maneja en el repositorio o servicio **
-                    // return Conflict("El usuario ya está registrado.");
-                }
-
-                // Se deberia eliminar esta lógica ya que el hashing de la contraseña debe hacerse en el servicio de usuario y no aquí 
-                // Osea en se debe manejar o se esta manejando por asi decirlo UsuarioService.cs
-                // Lo que se deberia eliminar es _usuarioService.HasPassword(userToRegister, userToRegister.Password);
-
-                var userCredentials = await _usuarioService.VerifyUserCredentials(userToRegister.DNI, userToRegister.NumeroTelefono);
-
-                if (userCredentials is not null) return BadRequest("Las credenciales ingresadas ya se encuentran registradas:" + userCredentials);
-
+                if (userCredentialsExist) return BadRequest("Las credenciales indicadas ya existen");
+                
                 var registeredUser = await _usuarioService.RegisterUserAsync(userToRegister);
 
 
@@ -54,7 +40,6 @@ namespace template_csharp_dotnet.Controllers
             }
             catch (Exception ex)
             {
-                // Registrar la excepción
                 _logger.LogError(ex, "Error al registrar el usuario.");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error al registrar el usuario.");
             }
@@ -67,12 +52,6 @@ namespace template_csharp_dotnet.Controllers
 
             try
             {
-                // ** Eliminar esta lógica, ya que AuthenticateAsync ya maneja la autenticación y el manejo de errores de contraseña **
-                // var verifiedPassword = _usuarioService.VerifyUserPassword(userToLogin, userToLogin.Password);
-
-                // ** Eliminar la verificación redundante de contraseña **
-                // if (verifiedPassword is PasswordVerificationResult.Failed) return Unauthorized("Las credenciales no son validas.");
-
                 var logUser = await _usuarioService.AuthenticateAsync(userToLogin.Email, userToLogin.Password);
 
                 return Ok(logUser.FromModelToLoginResponse());

@@ -15,6 +15,7 @@ namespace template_csharp_dotnet.Repositories.Classes
 
         public async Task<Reventa> Publish(Reventa reventa, int vendedorId)
         {
+            reventa.VendedorId = vendedorId;
             _dbContext.Add(reventa);
             //reventa.Entrada.UsuarioId = vendedorId; 
 
