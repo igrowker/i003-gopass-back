@@ -82,13 +82,18 @@ builder.Services.AddAuthorization();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddFluentValidationAutoValidation();
 
-builder.Services.AddCors(options =>
+var allowedOrigin = builder.Configuration.GetValue<string>("allowedOrigins")!;
+
+builder.Services.AddCors(opciones =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    opciones.AddDefaultPolicy(configuracion =>
     {
-        policy.AllowAnyOrigin()       
-              .AllowAnyMethod()       
-              .AllowAnyHeader();      
+        configuracion.WithOrigins(allowedOrigin).AllowAnyHeader().AllowAnyMethod();
+    });
+
+    opciones.AddPolicy("free", configuracion =>
+    {
+        configuracion.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
 
@@ -113,13 +118,13 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+app.UseCors();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseHttpsRedirection();
 app.MapControllers();
-
-app.UseCors("AllowAll");
 
 #endregion Middlewares Area
 

@@ -9,7 +9,6 @@ using template_csharp_dotnet.Validators;
 
 namespace template_csharp_dotnet.Controllers
 {
-    [EnableCors("AllowAll")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase
