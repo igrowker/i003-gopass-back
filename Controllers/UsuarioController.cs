@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using template_csharp_dotnet.DTOs.Request.AuthRequestDTOs;
 using template_csharp_dotnet.Models;
@@ -8,6 +9,7 @@ using template_csharp_dotnet.Validators;
 
 namespace template_csharp_dotnet.Controllers
 {
+    [EnableCors("AllowAll")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase
