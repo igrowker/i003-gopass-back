@@ -51,7 +51,7 @@ namespace template_csharp_dotnet.Services.Classes
 
             var passwordVerification = _passwordHasher.VerifyHashedPassword(userInDb, userInDb.Password, password);
 
-            if (passwordVerification == PasswordVerificationResult.Failed) throw new Exception();
+            if (passwordVerification == PasswordVerificationResult.Failed) throw new Exception("Las credenciales no son correctas");
 
             var user = await _usuarioRepository.AuthenticateUser(email, password);
 

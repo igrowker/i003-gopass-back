@@ -30,14 +30,6 @@ namespace template_csharp_dotnet.Controllers
             {
                 var userToRegister = registerRequestDto.FromRegisterToModel();
 
-                //var validator = new UsuarioValidator(_usuarioService);
-                //var result = validator.Validate(userToRegister);
-
-                //if (!result.IsValid)
-                //{
-                //    return BadRequest(result.Errors);
-                //}
-
                 var registeredUser = await _usuarioService.RegisterUserAsync(userToRegister);
 
                 return Ok(registeredUser);
@@ -52,10 +44,12 @@ namespace template_csharp_dotnet.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
         {
-            var userToLogin = loginRequestDto.FromLoginToModel();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             try
             {
+                var userToLogin = loginRequestDto.FromLoginToModel();
+
                 var logUser = await _usuarioService.AuthenticateAsync(userToLogin.Email, userToLogin.Password);
 
                 return Ok(logUser.FromModelToLoginResponse());
