@@ -19,7 +19,7 @@ namespace template_csharp_dotnet.Models
 
         //Navigation Properties
 
-        public Entrada? Entrada { get; set; }
-        public Reventa? Reventa { get; set; }
+        public List<Entrada>? Entrada { get; set; }
+        public List<Reventa>? Reventa { get; set; }
     }
 }

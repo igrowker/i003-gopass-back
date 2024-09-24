@@ -8,9 +8,10 @@ namespace template_csharp_dotnet.Models.Configurations
         protected override void ConfigurateConstraints(EntityTypeBuilder<Reventa> builder)
         {
             builder.HasKey(r => r.Id);
+            //builder.HasOne(e => e.Entrada).WithMany(r => r.Reventa).HasForeignKey(e => e.EntradaId);
             builder.HasOne(e => e.Entrada).WithOne(r => r.Reventa).HasForeignKey<Reventa>(e => e.EntradaId);
-            builder.HasOne(e => e.Usuario).WithOne(r => r.Reventa).HasForeignKey<Reventa>(e => e.CompradorId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(e => e.Usuario).WithOne(r => r.Reventa).HasForeignKey<Reventa>(e => e.VendedorId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(e => e.Usuario).WithMany(r => r.Reventa).HasForeignKey(e => e.CompradorId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.Usuario).WithMany(r => r.Reventa).HasForeignKey(e => e.VendedorId).OnDelete(DeleteBehavior.Restrict);
         }
 
         protected override void ConfigurateProperties(EntityTypeBuilder<Reventa> builder)

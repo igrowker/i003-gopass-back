@@ -12,28 +12,28 @@ namespace template_csharp_dotnet.Services.Classes
         {
             _genericRepository = genericRepository;
         }
-        public Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync()
         {
-            return _genericRepository.GetAll();
+            return await _genericRepository.GetAll();
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            return _genericRepository.GetById(id);
+            return await _genericRepository.GetById(id);
         }
 
-        public Task<T> Create(T model)
+        public async Task<T> Create(T model)
         {
-            return _genericRepository.Create(model);
+            return await _genericRepository.Create(model);
         }
-        public Task<T> Update(int id, T model)
+        public async Task<T> Update(int id, T model)
         {
-            return _genericRepository.Update(id, model);
+            return await _genericRepository.Update(id, model);
         }
 
-        public Task<T> Delete(int id)
+        public async Task<T> Delete(int id)
         {
-            return _genericRepository.Delete(id);
+            return await _genericRepository.Delete(id);
         }
 
 

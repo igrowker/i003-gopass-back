@@ -8,8 +8,8 @@
 
         //Navigation Property
 
-        public Usuario Usuario { get; set; }
-        public Reventa Reventa { get; set; }
+        public Usuario? Usuario { get; set; }
+        public Reventa? Reventa { get; set; }
 
     }
 }

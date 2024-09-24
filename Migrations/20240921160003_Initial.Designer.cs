@@ -12,7 +12,7 @@ using template_csharp_dotnet.Data;
 namespace template_csharp_dotnet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240917172259_Initial")]
+    [Migration("20240921160003_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -46,8 +46,7 @@ namespace template_csharp_dotnet.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId")
-                        .IsUnique();
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Entradas", (string)null);
                 });
@@ -81,8 +80,7 @@ namespace template_csharp_dotnet.Migrations
                     b.HasIndex("EntradaId")
                         .IsUnique();
 
-                    b.HasIndex("VendedorId")
-                        .IsUnique();
+                    b.HasIndex("VendedorId");
 
                     b.ToTable("Reventas", (string)null);
                 });
@@ -133,8 +131,8 @@ namespace template_csharp_dotnet.Migrations
             modelBuilder.Entity("template_csharp_dotnet.Models.Entrada", b =>
                 {
                     b.HasOne("template_csharp_dotnet.Models.Usuario", "Usuario")
-                        .WithOne("Entrada")
-                        .HasForeignKey("template_csharp_dotnet.Models.Entrada", "UsuarioId")
+                        .WithMany("Entrada")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -150,8 +148,8 @@ namespace template_csharp_dotnet.Migrations
                         .IsRequired();
 
                     b.HasOne("template_csharp_dotnet.Models.Usuario", "Usuario")
-                        .WithOne("Reventa")
-                        .HasForeignKey("template_csharp_dotnet.Models.Reventa", "VendedorId")
+                        .WithMany("Reventa")
+                        .HasForeignKey("VendedorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -162,8 +160,7 @@ namespace template_csharp_dotnet.Migrations
 
             modelBuilder.Entity("template_csharp_dotnet.Models.Entrada", b =>
                 {
-                    b.Navigation("Reventa")
-                        .IsRequired();
+                    b.Navigation("Reventa");
                 });
 
             modelBuilder.Entity("template_csharp_dotnet.Models.Usuario", b =>
