@@ -8,11 +8,8 @@ namespace template_csharp_dotnet.Repositories.Classes
 {
     public class UsuarioRepository : GenericRepository<Usuario>, IUsuarioRepository
     {
-        //private readonly IPasswordHasher<Usuario> _passwordHasher;
-
         public UsuarioRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
-            //_passwordHasher = new PasswordHasher<Usuario>();
         }
 
         public async Task<List<Usuario>> GetAllUsersWithRelations()
@@ -52,11 +49,25 @@ namespace template_csharp_dotnet.Repositories.Classes
             return userToAuthenticate;
         }
 
-        public async Task<bool> VerifyUserCredentials(string dni, string phoneNumber, string email)
+        public async Task<bool> VerifyEmailExists(string email)
         {
-            var userCredentialsExist = await _dbSet.AnyAsync(u => u.DNI == dni || u.NumeroTelefono == phoneNumber || u.Email == email);
+            var userCredentialsExist = await _dbSet.AnyAsync(u => u.Email == email);
 
             return userCredentialsExist;
+        }
+
+        public async Task<bool> VerifyDniExists(string dni)
+        {
+            var userDniExist = await _dbSet.AnyAsync(u => u.DNI == dni);
+
+            return userDniExist;
+        }
+
+        public async Task<bool> VerifyPhoneNumberExists(string phoneNumber)
+        {
+            var userPhoneNumberExist = await _dbSet.AnyAsync(u => u.NumeroTelefono == phoneNumber);
+
+            return userPhoneNumberExist;
         }
     }
 }

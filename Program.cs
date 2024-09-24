@@ -1,7 +1,9 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Text;
 using template_csharp_dotnet.Data;
 using template_csharp_dotnet.Repositories.Classes;
@@ -75,10 +77,16 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
+//builder.Services.AddFluentValidationAutoValidation();
+//builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services.AddFluentValidationAutoValidation();
+
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IReventaService, ReventaService>();
 builder.Services.AddScoped<IEntradaService, EntradaService>();
+
 
 builder.Services.AddScoped<IReventaRepository, ReventaRepository>();
 builder.Services.AddScoped<IEntradaRepository, EntradaRepository>();

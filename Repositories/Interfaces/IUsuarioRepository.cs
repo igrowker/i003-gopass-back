@@ -10,6 +10,8 @@ namespace template_csharp_dotnet.Repositories.Interfaces
         Task<List<Usuario>> GetAllUsersWithRelations();
         Task<Usuario> GetUserByEmail(string email);
         Task<Usuario> AuthenticateUser(string email, string password);
-        Task<bool> VerifyUserCredentials(string dni, string phoneNumber, string email);
+        Task<bool> VerifyPhoneNumberExists(string phoneNumber);
+        Task<bool> VerifyDniExists(string dni);
+        Task<bool> VerifyEmailExists(string email);
     }
 }

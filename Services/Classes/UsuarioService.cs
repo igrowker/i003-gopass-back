@@ -61,11 +61,24 @@ namespace template_csharp_dotnet.Services.Classes
             return user;
         }
 
-        public async Task<bool> VerifyUserCredentialsAsync(string dni, string phoneNumber, string email)
+        public async Task<bool> VerifyEmailExistsAsync(string email)
         {
-            var userCredentialsToValidate = await _usuarioRepository.VerifyUserCredentials(dni, phoneNumber, email);
+            var userEmail = await _usuarioRepository.VerifyEmailExists(email);
 
-            return userCredentialsToValidate!;
+            return userEmail!;
+        }
+
+        public async Task<bool> VerifyDniExistsAsync(string dni)
+        {
+            var userDni = await _usuarioRepository.VerifyDniExists(dni);
+
+            return userDni;
+        }
+        public async Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber)
+        {
+            var userPhoneNumber = await _usuarioRepository.VerifyPhoneNumberExists(phoneNumber);
+
+            return userPhoneNumber;
         }
 
         public async Task<string> GetUserIdByTokenAsync(string token)

@@ -4,6 +4,7 @@ using template_csharp_dotnet.DTOs.Request.AuthRequestDTOs;
 using template_csharp_dotnet.Models;
 using template_csharp_dotnet.Services.Interfaces;
 using template_csharp_dotnet.Utilities.Mappers;
+using template_csharp_dotnet.Validators;
 
 namespace template_csharp_dotnet.Controllers
 {
@@ -29,12 +30,15 @@ namespace template_csharp_dotnet.Controllers
             {
                 var userToRegister = registerRequestDto.FromRegisterToModel();
 
-                var userCredentialsExist = await _usuarioService.VerifyUserCredentialsAsync(userToRegister.DNI, userToRegister.NumeroTelefono, userToRegister.Email);
+                //var validator = new UsuarioValidator(_usuarioService);
+                //var result = validator.Validate(userToRegister);
 
-                if (userCredentialsExist) return BadRequest("Las credenciales indicadas ya existen");
-                
+                //if (!result.IsValid)
+                //{
+                //    return BadRequest(result.Errors);
+                //}
+
                 var registeredUser = await _usuarioService.RegisterUserAsync(userToRegister);
-
 
                 return Ok(registeredUser);
             }
