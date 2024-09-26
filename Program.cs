@@ -86,6 +86,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IReventaService, ReventaService>();
 builder.Services.AddScoped<IEntradaService, EntradaService>();
+builder.Services.AddScoped<ITicketMasterService, TicketSimulatorService>();
 
 
 builder.Services.AddScoped<IReventaRepository, ReventaRepository>();
