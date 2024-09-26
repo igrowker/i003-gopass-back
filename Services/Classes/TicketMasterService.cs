@@ -1,62 +1,43 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json; // Para deserializar respuestas JSON (necesitarás agregar este paquete)
+﻿using Newtonsoft.Json; // Para deserializar respuestas JSON (necesitarás agregar este paquete)
 using System.Net.Http.Headers;
+using template_csharp_dotnet.Constants;
+using template_csharp_dotnet.DTOs.Response;
+using template_csharp_dotnet.Services.Interfaces;
 
+[Obsolete("Microservicio TicketMaster a consumir quedo deprecado")]
 public class TicketmasterService
 {
+    const string APILBL = "apikey";
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
+    private readonly string _url = "https://app.ticketmaster.com/verification/v1/tickets";
 
-    public TicketmasterService(HttpClient httpClient, string apiKey)
+    public TicketmasterService(HttpClient httpClient, IConfiguration config)
     {
         _httpClient = httpClient;
-        _apiKey = apiKey;
+        _apiKey = config[$"{Config.APIKEYS}:{Config.TICKETMASTERKEY}"];
     }
 
-    public async Task<TicketResponse> VerificarEntrada(string ticketId)
+    public async Task<TicketResponseDto> VerificarEntrada(string ticketId)
     {
-        try
-        {
-            var requestUri = BuildRequestUri(ticketId);
-            var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //DN: Quito try-catch ya que debe capturarlo en controller
 
-            var response = await _httpClient.SendAsync(request);
-            response.EnsureSuccessStatusCode(); // Lanzará una excepción si la respuesta no es exitosa (4xx, 5xx)
+        var requestUri = BuildRequestUri(ticketId);
+        var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var ticketDataJson = await response.Content.ReadAsStringAsync();
+        var response = await _httpClient.SendAsync(request);
+        response.EnsureSuccessStatusCode(); // Lanzará una excepción si la respuesta no es exitosa (4xx, 5xx)
 
-            // Deserializar la respuesta a un objeto
-            var ticketResponse = JsonConvert.DeserializeObject<TicketResponse>(ticketDataJson);
-            return ticketResponse!;
-        }
-        catch (HttpRequestException httpRequestException)
-        {
-            // Loggear el error o manejarlo como se necesite
-            Console.WriteLine($"Error en la solicitud HTTP: {httpRequestException.Message}");
-            return null; // Puedes devolver un objeto nulo o un mensaje de error personalizado.
-        }
-        catch (Exception ex)
-        {
-            // Manejar otras excepciones inesperadas
-            Console.WriteLine($"Error inesperado: {ex.Message}");
-            return null;
-        }
+        var ticketDataJson = await response.Content.ReadAsStringAsync();
+
+        // Deserializar la respuesta a un objeto
+        var ticketResponse = JsonConvert.DeserializeObject<TicketResponseDto>(ticketDataJson);
+        return ticketResponse;
     }
 
     private string BuildRequestUri(string ticketId)
     {
-        return $"https://app.ticketmaster.com/verification/v1/tickets/{ticketId}?apikey={_apiKey}";
+        return $"{_url}/{ticketId}?{APILBL}={_apiKey}";
     }
-}
-
-// Clase para deserializar la respuesta de Ticketmaster
-public class TicketResponse
-{
-    public string TicketId { get; set; }
-    public bool IsValid { get; set; }
-    public string EventName { get; set; }
-    public DateTime EventDate { get; set; }
 }
