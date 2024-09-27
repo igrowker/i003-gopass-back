@@ -12,11 +12,7 @@ namespace template_csharp_dotnet.Utilities.Mappers
             return new Usuario
             {
                 Email = registerRequestDto.Email,
-                Password = registerRequestDto.Password,
-                DNI = registerRequestDto.DNI,
-                Nombre = registerRequestDto.Nombre,
-                NumeroTelefono = registerRequestDto.NumeroTelefono,
-                Verificado = registerRequestDto.Verificado
+                Password = registerRequestDto.Password
             };
         }
 
@@ -34,20 +30,27 @@ namespace template_csharp_dotnet.Utilities.Mappers
             return new LoginResponseDto
             {
                 Email = usuario.Email,
-                Nombre = usuario.Nombre,
                 Token = usuario.Token!
             };
         }
 
-        public static UsuarioResponseDto ToResponseDto(this Usuario usuario)
+        public static Usuario FromModifyUsuarioRequestToModel(this ModifyUsuarioRequestDto modifyUsuarioRequestDto, Usuario existingData)
         {
-            return new UsuarioResponseDto
-            {
-                DNI = usuario.DNI,
-                Nombre = usuario.Nombre,
-                NumeroTelefono = usuario.NumeroTelefono,
-                Verificado = usuario.Verificado
-            };
+            existingData.Nombre = modifyUsuarioRequestDto.Nombre;
+            existingData.DNI = modifyUsuarioRequestDto.DNI;
+            existingData.NumeroTelefono = modifyUsuarioRequestDto.NumeroTelefono;
+            return existingData;
         }
+
+        //public static UsuarioResponseDto ToResponseDto(this Usuario usuario)
+        //{
+        //    return new UsuarioResponseDto
+        //    {
+        //        DNI = usuario.DNI,
+        //        Nombre = usuario.Nombre,
+        //        NumeroTelefono = usuario.NumeroTelefono,
+        //        Verificado = usuario.Verificado
+        //    };
+        //}
     }
 }

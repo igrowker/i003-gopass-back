@@ -25,9 +25,6 @@ namespace template_csharp_dotnet.Utilities.Mappers
                 FechaReventa = publishReventaRequestDto.FechaReventa,
                 EntradaId = publishReventaRequestDto.EntradaId,
                 Precio = publishReventaRequestDto.Precio,
-                //Entrada = {
-                //    UsuarioId = vendedorId
-                //}
             };
         }
 

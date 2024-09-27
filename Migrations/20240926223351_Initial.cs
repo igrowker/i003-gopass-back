@@ -19,9 +19,9 @@ namespace template_csharp_dotnet.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nombre = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
-                    DNI = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false),
-                    NumeroTelefono = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
+                    Nombre = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
+                    DNI = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: true),
+                    NumeroTelefono = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: true),
                     Verificado = table.Column<bool>(type: "bit", nullable: false),
                     Token = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
