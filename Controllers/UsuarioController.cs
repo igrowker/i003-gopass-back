@@ -62,9 +62,6 @@ namespace template_csharp_dotnet.Controllers
                 return Unauthorized("Las credenciales no son válidas.");
             }
         }
-                //dbUserCredentials.Nombre = credentialsToModify.Nombre;
-                //dbUserCredentials.NumeroTelefono = credentialsToModify.NumeroTelefono;
-                //dbUserCredentials.DNI = credentialsToModify.DNI;
         
         [Authorize]
         [HttpPut("Modify-User-Credentials")]
