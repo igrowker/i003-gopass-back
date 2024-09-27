@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using template_csharp_dotnet.DTOs.Request.AuthRequestDTOs;
 using template_csharp_dotnet.Models;

@@ -82,6 +82,21 @@ builder.Services.AddAuthorization();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddFluentValidationAutoValidation();
 
+var allowedOrigin = builder.Configuration.GetValue<string>("allowedOrigins")!;
+
+builder.Services.AddCors(opciones =>
+{
+    opciones.AddDefaultPolicy(configuracion =>
+    {
+        configuracion.WithOrigins(allowedOrigin).AllowAnyHeader().AllowAnyMethod();
+    });
+
+    opciones.AddPolicy("free", configuracion =>
+    {
+        configuracion.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IReventaService, ReventaService>();
@@ -104,6 +119,8 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+app.UseCors();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
