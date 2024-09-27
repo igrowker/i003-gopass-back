@@ -26,7 +26,7 @@ namespace template_csharp_dotnet.Repositories.Classes
 
         public async Task<Reventa> GetResaleByEntradaId(int entradaId)
         {
-            var resale = await _dbSet.Where(x => x.EntradaId == entradaId).FirstOrDefaultAsync();
+            var resale = await _dbSet.Where(x => x.EntradaId == entradaId).SingleOrDefaultAsync();
 
             if (resale is null) throw new Exception();
 

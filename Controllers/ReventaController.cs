@@ -47,21 +47,16 @@ namespace template_csharp_dotnet.Controllers
             var userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
             var userId = int.Parse(userIdObtainedString);
 
-            var publishedReventa = buyEntradaRequestDto.FromBuyEntradaRequestToModel();
-
-            var resaleDb = await _reventaService.GetResaleByEntradaIdAsync(publishedReventa.EntradaId);
+            var resaleDb = await _reventaService.GetResaleByEntradaIdAsync(buyEntradaRequestDto.EntradaId);
 
             if(userId == resaleDb.VendedorId)
             {
                 return BadRequest("No podes comprar tu propia entrada flaco que haces estas re loco");
             }
 
-            publishedReventa.VendedorId = resaleDb.VendedorId;
-            publishedReventa.Precio = resaleDb.Precio;
-            publishedReventa.FechaReventa = resaleDb.FechaReventa;
-            publishedReventa.CompradorId = userId;
+            resaleDb.CompradorId = userId;
 
-            var publishReventaBuyer = await _reventaService.Update(resaleDb.Id, publishedReventa);
+            var publishReventaBuyer = await _reventaService.Update(resaleDb.Id, resaleDb);
 
             return Ok(publishReventaBuyer);
         }

@@ -91,7 +91,6 @@ namespace template_csharp_dotnet.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DNI")
-                        .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("varchar");
 
@@ -101,12 +100,10 @@ namespace template_csharp_dotnet.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar");
 
                     b.Property<string>("NumeroTelefono")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("varchar");
 

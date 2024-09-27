@@ -24,7 +24,6 @@ namespace template_csharp_dotnet.Services.Classes
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-                new Claim(JwtRegisteredClaimNames.Name, usuario.Nombre),
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
             };
 
