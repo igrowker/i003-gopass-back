@@ -1,4 +1,4 @@
-﻿using template_csharp_dotnet.DTOs.Request;
+﻿using template_csharp_dotnet.DTOs.Request.ReventaRequestDTOs;
 using template_csharp_dotnet.DTOs.Response;
 using template_csharp_dotnet.Models;
 
@@ -6,7 +6,7 @@ namespace template_csharp_dotnet.Utilities.Mappers
 {
     public static class EntradaMappers
     {
-        public static Entrada ToModel(this EntradaRequestDto entradaRequestDto)
+        public static Entrada FromEntradaRequestToModel(this EntradaRequestDto entradaRequestDto)
         {
             return new Entrada
             {
@@ -16,7 +16,24 @@ namespace template_csharp_dotnet.Utilities.Mappers
             };
         }
 
-        public static EntradaResponseDto ToResponseDto(this Entrada entrada)
+        public static Entrada FromPublishEntradaRequestToModel(this PublishEntradaRequestDto publishEntradaRequestDto)
+        {
+            return new Entrada
+            {
+                CodigoQR = publishEntradaRequestDto.CodigoQR,
+                Verificada = publishEntradaRequestDto.Verificada
+            };
+        }
+
+        public static Reventa FromBuyEntradaRequestToModel(this BuyEntradaRequestDto buyEntradaRequestDto)
+        {
+            return new Reventa
+            {
+                EntradaId = buyEntradaRequestDto.EntradaId
+            };
+        }
+
+        public static EntradaResponseDto FromPublishEntradaRequestToResponseDto(this Entrada entrada)
         {
             return new EntradaResponseDto
             {

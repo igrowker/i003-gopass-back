@@ -51,7 +51,7 @@ namespace template_csharp_dotnet.Services.Classes
 
             var passwordVerification = _passwordHasher.VerifyHashedPassword(userInDb, userInDb.Password, password);
 
-            if (passwordVerification == PasswordVerificationResult.Failed) throw new Exception();
+            if (passwordVerification == PasswordVerificationResult.Failed) throw new Exception("Las credenciales no son correctas");
 
             var user = await _usuarioRepository.AuthenticateUser(email, password);
 
@@ -61,11 +61,35 @@ namespace template_csharp_dotnet.Services.Classes
             return user;
         }
 
-        public async Task<Usuario> VerifyUserCredentials(string dni, string phoneNumber)
+        public async Task<bool> VerifyEmailExistsAsync(string email)
         {
-            var userCredentialsToValidate = await _usuarioRepository.VerifyUserByDniAndPhoneNumber(dni, phoneNumber);
+            var userEmail = await _usuarioRepository.VerifyEmailExists(email);
 
-            return userCredentialsToValidate!;
+            return userEmail!;
+        }
+
+        public async Task<bool> VerifyDniExistsAsync(string dni)
+        {
+            var userDni = await _usuarioRepository.VerifyDniExists(dni);
+
+            return userDni;
+        }
+        public async Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber)
+        {
+            var userPhoneNumber = await _usuarioRepository.VerifyPhoneNumberExists(phoneNumber);
+
+            return userPhoneNumber;
+        }
+
+        public async Task<string> GetUserIdByTokenAsync(string token)
+        {
+            var cleanToken = token.StartsWith("Bearer ") ? token.Substring("Bearer ".Length) : null;
+
+            if (cleanToken is null) throw new Exception("Token nulo");
+
+            var decodedToken = await _tokenService.DecodeToken(cleanToken!);
+
+            return decodedToken;
         }
     }
 }
