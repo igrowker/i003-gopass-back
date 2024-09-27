@@ -1,4 +1,6 @@
-﻿using template_csharp_dotnet.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using template_csharp_dotnet.Models;
 using template_csharp_dotnet.Repositories.Interfaces;
 using template_csharp_dotnet.Services.Interfaces;
 
@@ -36,6 +38,6 @@ namespace template_csharp_dotnet.Services.Classes
             return await _genericRepository.Delete(id);
         }
 
-
+        public async Task<T> FindAsync(Expression<Func<T, bool>> predicate) => await _genericRepository.FindAsync(predicate);
     }
 }
