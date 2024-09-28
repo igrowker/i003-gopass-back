@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using GoPass.Application.DTOs.Request.AuthRequestDTOs;
+using GoPass.Application.Services.Interfaces;
+using GoPass.Application.Utilities.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using template_csharp_dotnet.DTOs.Request.AuthRequestDTOs;
-using template_csharp_dotnet.Models;
-using template_csharp_dotnet.Services.Interfaces;
-using template_csharp_dotnet.Utilities.Mappers;
-using template_csharp_dotnet.Validators;
 
-namespace template_csharp_dotnet.Controllers
+namespace GoPass.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

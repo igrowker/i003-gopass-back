@@ -1,15 +1,16 @@
 using FluentValidation;
+using GoPass.Application.Services.Classes;
+using GoPass.Application.Services.Interfaces;
+using GoPass.Infrastructure.Repositories.Classes;
+using GoPass.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Text;
-using template_csharp_dotnet.Data;
-using template_csharp_dotnet.Repositories.Classes;
-using template_csharp_dotnet.Repositories.Interfaces;
-using template_csharp_dotnet.Services.Classes;
-using template_csharp_dotnet.Services.Interfaces;
+using GoPass.Infrastructure;
+using GoPass.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,10 +52,10 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-  options.UseSqlServer(connectionString);
-});
+//builder.Services.AddDatabaseContext(connectionString);
+builder.Services.AddDbContext<ApplicationDbContext>(
+    options => options.UseSqlServer(connectionString)
+);
 
 builder.Services.AddAuthentication(options =>
 {

@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using template_csharp_dotnet.DTOs.Request.ReventaRequestDTOs;
-using template_csharp_dotnet.Services.Classes;
-using template_csharp_dotnet.Services.Interfaces;
-using template_csharp_dotnet.Utilities.Mappers;
+using GoPass.Application.Services.Interfaces;
+using GoPass.Application.DTOs.Request.ReventaRequestDTOs;
+using GoPass.Application.Utilities.Mappers;
 
-namespace template_csharp_dotnet.Controllers
+namespace GoPass.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -37,20 +35,5 @@ namespace template_csharp_dotnet.Controllers
 
             return Ok(publishedTicket.FromPublishEntradaRequestToResponseDto());
         }
-        //public async Task<IActionResult> PublishTicket(EntradaRequestDto entradaRequestDto)
-        //{
-        //    //var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
-        //    //var userId = _usuarioService.GetUserIdByTokenAsync(authHeader);
-
-        //    //int parsedUserId = int.Parse(userId);
-
-        //    var ticketToPublish = entradaRequestDto.FromEntradaRequestToModel();
-
-        //    //ticketToPublish.UsuarioId = parsedUserId;
-
-        //    var publishedTicket = await _entradaService.Create(ticketToPublish);
-
-        //    return Ok(publishedTicket);
-        //}
     }
 }

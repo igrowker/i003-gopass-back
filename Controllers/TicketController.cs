@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using template_csharp_dotnet.Constants;
-using template_csharp_dotnet.DTOs.Request.ReventaRequestDTOs;
-using template_csharp_dotnet.DTOs.Response;
-using template_csharp_dotnet.Models;
-using template_csharp_dotnet.Services.Interfaces;
-using template_csharp_dotnet.Utilities.Exceptions;
-using template_csharp_dotnet.Utilities.Mappers;
+using GoPass.Application.Utilities.Exceptions;
+using GoPass.Application.Constants;
+using GoPass.Domain.Models;
+using GoPass.Application.Utilities.Mappers;
+using GoPass.Application.Services.Interfaces;
+using GoPass.Application.DTOs.Request.ReventaRequestDTOs;
+using GoPass.Application.DTOs.Response;
 
-namespace template_csharp_dotnet.Controllers
+namespace GoPass.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
