@@ -9,8 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Text;
-using GoPass.Infrastructure;
 using GoPass.Infrastructure.Data;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,9 +78,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
-//builder.Services.AddFluentValidationAutoValidation();
-//builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
-builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services.AddValidatorsFromAssembly(Assembly.Load("GoPass.Application"));
 builder.Services.AddFluentValidationAutoValidation();
 
 var allowedOrigin = builder.Configuration.GetValue<string>("allowedOrigins")!;

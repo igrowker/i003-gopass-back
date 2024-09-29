@@ -1,6 +1,4 @@
 ﻿
-using GoPass.Domain.Models;
-
 namespace GoPass.Application.DTOs.Request.AuthRequestDTOs
 {
     public class RegisterRequestDto
