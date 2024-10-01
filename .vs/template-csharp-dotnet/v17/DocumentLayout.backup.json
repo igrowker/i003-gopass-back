@@ -1,0 +1,73 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|GoPass.API.csproj|c:\\users\\gomez\\source\\repos\\i003-gopass-back\\gopass.api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9D8A756-6D27-4C30-8BCF-37762F264EDB}|GoPass.API.csproj|solutionrelative:controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B2A733D-B8EE-4517-98BF-0631B5E6EB2C}|..\\GoPass.Application\\GoPass.Application.csproj|c:\\users\\gomez\\source\\repos\\i003-gopass-back\\gopass.application\\services\\classes\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B2A733D-B8EE-4517-98BF-0631B5E6EB2C}|..\\GoPass.Application\\GoPass.Application.csproj|c:\\users\\gomez\\source\\repos\\i003-gopass-back\\gopass.application\\dtos\\request\\authrequestdtos\\restableceractualizarrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RestablecerActualizarRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Application\\DTOs\\Request\\AuthRequestDTOs\\RestablecerActualizarRequestDto.cs",
+              "RelativeDocumentMoniker": "..\\GoPass.Application\\DTOs\\Request\\AuthRequestDTOs\\RestablecerActualizarRequestDto.cs",
+              "ToolTip": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Application\\DTOs\\Request\\AuthRequestDTOs\\RestablecerActualizarRequestDto.cs",
+              "RelativeToolTip": "..\\GoPass.Application\\DTOs\\Request\\AuthRequestDTOs\\RestablecerActualizarRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T03:28:50.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UsuarioService.cs",
+              "DocumentMoniker": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Application\\Services\\Classes\\UsuarioService.cs",
+              "RelativeDocumentMoniker": "..\\GoPass.Application\\Services\\Classes\\UsuarioService.cs",
+              "ToolTip": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Application\\Services\\Classes\\UsuarioService.cs",
+              "RelativeToolTip": "..\\GoPass.Application\\Services\\Classes\\UsuarioService.cs",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAQwJsAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T02:44:51.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Api\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Api\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAAOwAAAAAAAAAAAAQwBYBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T02:44:09.305Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
