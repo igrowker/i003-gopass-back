@@ -15,10 +15,6 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-// Registro del servicio de plantillas
-builder.Services.AddScoped<ITemplateService, TemplateService>();
-
 #region Services Area
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
