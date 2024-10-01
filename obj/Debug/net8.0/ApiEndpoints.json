@@ -1,0 +1,162 @@
+[
+  {
+    "ContainingType": "GoPass.API.Controllers.EntradaController",
+    "Method": "PublishTicket",
+    "RelativePath": "api/Entrada/publicar-entrada",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "publishEntradaRequestDto",
+        "Type": "GoPass.Application.DTOs.Request.ReventaRequestDTOs.PublishEntradaRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GoPass.API.Controllers.ReventaController",
+    "Method": "BuyTicket",
+    "RelativePath": "api/Reventa/comprar-entrada",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "buyEntradaRequestDto",
+        "Type": "GoPass.Application.DTOs.Request.ReventaRequestDTOs.BuyEntradaRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GoPass.API.Controllers.ReventaController",
+    "Method": "PublishResaleTicket",
+    "RelativePath": "api/Reventa/publicar-entrada-reventa",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "publishReventaRequestDto",
+        "Type": "GoPass.Application.DTOs.Request.ReventaRequestDTOs.PublishReventaRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GoPass.API.Controllers.TicketController",
+    "Method": "VerificarEntrada",
+    "RelativePath": "api/Ticket/verificar-entrada",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestDto",
+        "Type": "GoPass.Application.DTOs.Request.ReventaRequestDTOs.EntradaRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GoPass.API.Controllers.UsuarioController",
+    "Method": "ConfirmarCuenta",
+    "RelativePath": "api/Usuario/confirmar-cuenta",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Authorization",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GoPass.API.Controllers.UsuarioController",
+    "Method": "Login",
+    "RelativePath": "api/Usuario/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginRequestDto",
+        "Type": "GoPass.Application.DTOs.Request.AuthRequestDTOs.LoginRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GoPass.API.Controllers.UsuarioController",
+    "Method": "ModifyUserCredentials",
+    "RelativePath": "api/Usuario/Modify-User-Credentials",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "modifyUsuarioRequestDto",
+        "Type": "GoPass.Application.DTOs.Request.AuthRequestDTOs.ModifyUsuarioRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GoPass.API.Controllers.UsuarioController",
+    "Method": "Register",
+    "RelativePath": "api/Usuario/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerRequestDto",
+        "Type": "GoPass.Application.DTOs.Request.AuthRequestDTOs.RegisterRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GoPass.API.Controllers.UsuarioController",
+    "Method": "RestablecerActualizar",
+    "RelativePath": "api/Usuario/Restablecer-Actualizar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestDto",
+        "Type": "GoPass.Application.DTOs.Request.AuthRequestDTOs.RestablecerActualizarRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GoPass.API.Controllers.UsuarioController",
+    "Method": "SolicitarRestablecimiento",
+    "RelativePath": "api/Usuario/solicitar-restablecimiento",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestDto",
+        "Type": "GoPass.Application.DTOs.Request.AuthRequestDTOs.SolicitarRestablecimientoRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\GoPass.API.props" />
+</Project>
