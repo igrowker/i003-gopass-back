@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using GoPass.Application.Constants;
-using GoPass.Application.DTOs.Response;
+using GoPass.Domain.DTOs.Response;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 

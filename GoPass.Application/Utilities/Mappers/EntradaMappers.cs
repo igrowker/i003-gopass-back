@@ -1,5 +1,5 @@
-﻿using GoPass.Application.DTOs.Request.ReventaRequestDTOs;
-using GoPass.Application.DTOs.Response;
+﻿using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
+using GoPass.Domain.DTOs.Response;
 using GoPass.Domain.Models;
 
 namespace GoPass.Application.Utilities.Mappers

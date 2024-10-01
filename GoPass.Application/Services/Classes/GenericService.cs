@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using GoPass.Application.Services.Interfaces;
+using GoPass.Domain.DTOs.Request.PaginationDTOs;
 using GoPass.Domain.Models;
+using GoPass.Infrastructure.Repositories.Classes;
 using GoPass.Infrastructure.Repositories.Interfaces;
 
 namespace GoPass.Application.Services.Classes
@@ -16,6 +18,12 @@ namespace GoPass.Application.Services.Classes
         public async Task<List<T>> GetAllAsync()
         {
             return await _genericRepository.GetAll();
+        }
+        public async Task<List<T>> GetReventasAsync(PaginationDto paginationDto)
+        {
+            var dbRecords = await _genericRepository.GetAllWithPagination(paginationDto);
+
+            return dbRecords;
         }
 
         public async Task<T> GetByIdAsync(int id)

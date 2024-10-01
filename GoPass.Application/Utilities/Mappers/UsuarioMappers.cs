@@ -1,5 +1,5 @@
-﻿using GoPass.Application.DTOs.Request.AuthRequestDTOs;
-using GoPass.Application.DTOs.Response.AuthResponseDTOs;
+﻿using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
+using GoPass.Domain.DTOs.Response.AuthResponseDTOs;
 using GoPass.Domain.Models;
 
 namespace GoPass.Application.Utilities.Mappers
