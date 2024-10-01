@@ -6,7 +6,8 @@
         public int VendedorId { get; set; }
         public int CompradorId { get; set; }
         public DateTime FechaReventa { get; set; }
-        public decimal Precio { get; set; } 
+        public decimal Precio { get; set; }
+        public string ResaleDetail { get; set; } = default!;
 
         //Navigation Properties
         public Usuario? Usuario { get; set; }
