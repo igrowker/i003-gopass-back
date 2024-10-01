@@ -1,5 +1,5 @@
-﻿using GoPass.Application.DTOs.Request.ReventaRequestDTOs;
-using GoPass.Application.DTOs.Response;
+﻿using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
+using GoPass.Domain.DTOs.Response;
 using GoPass.Domain.Models;
 
 namespace GoPass.Application.Utilities.Mappers
@@ -21,7 +21,12 @@ namespace GoPass.Application.Utilities.Mappers
             return new Entrada
             {
                 CodigoQR = publishEntradaRequestDto.CodigoQR,
-                Verificada = publishEntradaRequestDto.Verificada
+                Verificada = publishEntradaRequestDto.Verificada,
+                GameName = publishEntradaRequestDto.GameName,
+                Description = publishEntradaRequestDto.Description,
+                EventDate = publishEntradaRequestDto.EventDate,
+                Address = publishEntradaRequestDto.Address,
+                Image = publishEntradaRequestDto.Image
             };
         }
 

@@ -5,8 +5,8 @@ using GoPass.Application.Constants;
 using GoPass.Domain.Models;
 using GoPass.Application.Utilities.Mappers;
 using GoPass.Application.Services.Interfaces;
-using GoPass.Application.DTOs.Request.ReventaRequestDTOs;
-using GoPass.Application.DTOs.Response;
+using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
+using GoPass.Domain.DTOs.Response;
 
 namespace GoPass.API.Controllers
 {

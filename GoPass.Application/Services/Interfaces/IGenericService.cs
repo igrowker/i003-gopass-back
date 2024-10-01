@@ -1,4 +1,5 @@
-﻿using GoPass.Domain.Models;
+﻿using GoPass.Domain.DTOs.Request.PaginationDTOs;
+using GoPass.Domain.Models;
 using System.Linq.Expressions;
 
 namespace GoPass.Application.Services.Interfaces
@@ -6,6 +7,7 @@ namespace GoPass.Application.Services.Interfaces
     public interface IGenericService<T> where T : BaseModel
     {
         Task<List<T>> GetAllAsync();
+        Task<List<T>> GetReventasAsync(PaginationDto paginationDto);
         Task<T> GetByIdAsync(int id);
         Task<T> Create(T model);
         Task<T> Update(int id, T model);

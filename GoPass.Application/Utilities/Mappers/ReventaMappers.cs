@@ -1,5 +1,5 @@
-﻿using GoPass.Application.DTOs.Request.ReventaRequestDTOs;
-using GoPass.Application.DTOs.Response;
+﻿using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
+using GoPass.Domain.DTOs.Response;
 using GoPass.Domain.Models;
 
 namespace GoPass.Application.Utilities.Mappers
@@ -22,7 +22,7 @@ namespace GoPass.Application.Utilities.Mappers
         {
             return new Reventa
             {
-                FechaReventa = publishReventaRequestDto.FechaReventa,
+                ResaleDetail = publishReventaRequestDto.ResaleDetail,
                 EntradaId = publishReventaRequestDto.EntradaId,
                 Precio = publishReventaRequestDto.Precio,
             };

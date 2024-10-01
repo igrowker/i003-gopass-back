@@ -15,6 +15,10 @@ namespace GoPass.Infrastructure.Configurations
 
         protected override void ConfigurateProperties(EntityTypeBuilder<Entrada> builder)
         {
+            builder.Property(e => e.GameName).IsRequired().HasMaxLength(80);
+            builder.Property(e => e.Description).IsRequired().HasMaxLength(150);
+            builder.Property(e => e.Address).IsRequired().HasMaxLength(80);
+            builder.Property(e => e.EventDate).IsRequired();
             builder.Property(e => e.CodigoQR).IsRequired().HasMaxLength(7089); //caracteres segun QR numerico a consultar
             builder.Property(e => e.Verificada).IsRequired().HasColumnType("bit");
 

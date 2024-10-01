@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using GoPass.Application.DTOs.Request.AuthRequestDTOs;
 using GoPass.Application.Services.Interfaces;
+using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
 
 namespace GoPass.Application.Validators.Users
 {

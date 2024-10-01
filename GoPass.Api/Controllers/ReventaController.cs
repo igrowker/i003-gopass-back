@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GoPass.Application.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Application.Services.Interfaces;
 using GoPass.Application.Utilities.Mappers;
+using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
+using GoPass.Domain.DTOs.Request.PaginationDTOs;
 
 namespace GoPass.API.Controllers
 {
@@ -19,6 +20,15 @@ namespace GoPass.API.Controllers
             _reventaService = reventaService;
             _usuarioService = usuarioService;
             _entradaService = entradaService;
+        }
+
+        [Authorize]
+        [HttpGet("get-resales")]
+        public async Task<IActionResult> GetResales([FromQuery] PaginationDto paginationDto)
+        {
+            var resales = await _reventaService.GetReventasAsync(paginationDto);
+
+            return Ok(resales);
         }
 
         [Authorize]

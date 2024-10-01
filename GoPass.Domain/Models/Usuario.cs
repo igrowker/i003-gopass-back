@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace GoPass.Domain.Models
 {
@@ -9,10 +10,12 @@ namespace GoPass.Domain.Models
 
         [DataType(DataType.Password)]
         public string Password { get; set; } = default!;
-
         public string? Nombre { get; set; } = default!;
         public string? DNI { get; set; } = default!;
         public string? NumeroTelefono { get; set; } = default!;
+        public string? Image { get; set; }
+        public string? City { get; set; } = default!;
+        public string? Country { get; set; } = default!;
         public bool Verificado { get; set; } = false;
 
         public string? Token { get; set; }

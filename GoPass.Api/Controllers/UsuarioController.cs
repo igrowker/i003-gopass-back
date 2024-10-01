@@ -1,6 +1,6 @@
-﻿using GoPass.Application.DTOs.Request.AuthRequestDTOs;
-using GoPass.Application.Services.Interfaces;
+﻿using GoPass.Application.Services.Interfaces;
 using GoPass.Application.Utilities.Mappers;
+using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +19,7 @@ namespace GoPass.API.Controllers
             _logger = logger;
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -36,11 +36,11 @@ namespace GoPass.API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error al registrar el usuario.");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error al registrar el usuario.");
+                return BadRequest();
             }
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -59,9 +59,21 @@ namespace GoPass.API.Controllers
                 return Unauthorized("Las credenciales no son válidas.");
             }
         }
-        
+
         [Authorize]
-        [HttpPut("Modify-User-Credentials")]
+        [HttpGet("user-credentials")]
+        public async Task<IActionResult> GetUserCredentials()
+        {
+            var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+            var userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authHeader);
+            int userId = int.Parse(userIdObtainedString);
+            var dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
+
+            return Ok(dbExistingUserCredentials);
+        }
+
+        [Authorize]
+        [HttpPut("modify-user-credentials")]
         public async Task<IActionResult> ModifyUserCredentials(ModifyUsuarioRequestDto modifyUsuarioRequestDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);

@@ -22,6 +22,7 @@ namespace GoPass.Infrastructure.Configurations
             builder.Property(r => r.CompradorId).IsRequired();
             builder.Property(r => r.FechaReventa).IsRequired();
             builder.Property(r => r.Precio).IsRequired().HasPrecision(18,2);
+            builder.Property(r => r.ResaleDetail).IsRequired().HasMaxLength(100);
         }
 
         protected override void ConfigurateTableName(EntityTypeBuilder<Reventa> builder)
