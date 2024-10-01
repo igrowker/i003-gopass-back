@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GoPass.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class GoPass : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,6 +23,7 @@ namespace GoPass.Infrastructure.Migrations
                     DNI = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: true),
                     NumeroTelefono = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: true),
                     Verificado = table.Column<bool>(type: "bit", nullable: false),
+                    Restablecer = table.Column<int>(type: "int", nullable: false),
                     Token = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

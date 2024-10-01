@@ -13,8 +13,8 @@ namespace GoPass.Domain.Models
         public string? Nombre { get; set; } = default!;
         public string? DNI { get; set; } = default!;
         public string? NumeroTelefono { get; set; } = default!;
-        public bool Verificado { get; set; } = false;
-
+        public bool Verificado { get; set; }
+        public int Restablecer { get; set; }
         public string? Token { get; set; }
 
         //Navigation Properties
