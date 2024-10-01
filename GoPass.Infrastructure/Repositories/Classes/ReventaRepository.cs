@@ -2,6 +2,8 @@
 using GoPass.Domain.Models;
 using GoPass.Infrastructure.Data;
 using GoPass.Infrastructure.Repositories.Interfaces;
+using GoPass.Domain.DTOs.Request.PaginationDTOs;
+using GoPass.Domain.IQueryableExtensions;
 
 namespace GoPass.Infrastructure.Repositories.Classes
 
@@ -31,6 +33,13 @@ namespace GoPass.Infrastructure.Repositories.Classes
             if (resale is null) throw new Exception();
 
             return resale;
+        }
+
+        public override async Task<List<Reventa>> GetAllWithPagination(PaginationDto paginationDto)
+        {
+            var recordsQueriable = _dbContext.Set<Reventa>().AsQueryable();
+
+            return await recordsQueriable.Paginate(paginationDto).Include(x => x.Entrada).ToListAsync();
         }
     }
 }

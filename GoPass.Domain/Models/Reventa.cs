@@ -5,7 +5,7 @@
         public int EntradaId { get; set; }
         public int VendedorId { get; set; }
         public int CompradorId { get; set; }
-        public DateTime FechaReventa { get; set; }
+        public DateTime FechaReventa { get; set; } = DateTime.Now;
         public decimal Precio { get; set; }
         public string ResaleDetail { get; set; } = default!;
 

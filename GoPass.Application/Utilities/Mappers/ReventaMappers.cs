@@ -22,7 +22,7 @@ namespace GoPass.Application.Utilities.Mappers
         {
             return new Reventa
             {
-                FechaReventa = publishReventaRequestDto.FechaReventa,
+                ResaleDetail = publishReventaRequestDto.ResaleDetail,
                 EntradaId = publishReventaRequestDto.EntradaId,
                 Precio = publishReventaRequestDto.Precio,
             };

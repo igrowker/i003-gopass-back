@@ -22,6 +22,9 @@ namespace GoPass.Infrastructure.Migrations
                     Nombre = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
                     DNI = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: true),
                     NumeroTelefono = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Verificado = table.Column<bool>(type: "bit", nullable: false),
                     Token = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -36,6 +39,11 @@ namespace GoPass.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    GameName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    EventDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CodigoQR = table.Column<string>(type: "nvarchar(max)", maxLength: 7089, nullable: false),
                     Verificada = table.Column<bool>(type: "bit", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
@@ -61,7 +69,8 @@ namespace GoPass.Infrastructure.Migrations
                     VendedorId = table.Column<int>(type: "int", nullable: false),
                     CompradorId = table.Column<int>(type: "int", nullable: false),
                     FechaReventa = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Precio = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
+                    Precio = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    ResaleDetail = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {

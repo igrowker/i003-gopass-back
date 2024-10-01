@@ -14,8 +14,8 @@ namespace GoPass.Domain.Models
         public string? DNI { get; set; } = default!;
         public string? NumeroTelefono { get; set; } = default!;
         public string? Image { get; set; }
-        public string City { get; set; } = default!;
-        public string Country { get; set; } = default!;
+        public string? City { get; set; } = default!;
+        public string? Country { get; set; } = default!;
         public bool Verificado { get; set; } = false;
 
         public string? Token { get; set; }

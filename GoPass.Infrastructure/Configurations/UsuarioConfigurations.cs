@@ -22,9 +22,8 @@ namespace GoPass.Infrastructure.Configurations
             builder.Property(u => u.Verificado).HasColumnType("bit");
             builder.Property(u => u.Email).IsRequired().HasMaxLength(50);
             builder.Property(u => u.Password).IsRequired();
-            builder.Property(u => u.Image).IsRequired();
-            builder.Property(u => u.Country).IsRequired().HasMaxLength(30);
-            builder.Property(u => u.City).IsRequired().HasMaxLength(30);
+            builder.Property(u => u.Country).HasMaxLength(30);
+            builder.Property(u => u.City).HasMaxLength(30);
         }
 
         protected override void ConfigurateTableName(EntityTypeBuilder<Usuario> builder)
