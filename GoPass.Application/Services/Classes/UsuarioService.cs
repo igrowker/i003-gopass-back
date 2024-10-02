@@ -2,6 +2,7 @@
 using GoPass.Domain.Models;
 using GoPass.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using System.Net;
 
 namespace GoPass.Application.Services.Classes
 {
@@ -9,11 +10,13 @@ namespace GoPass.Application.Services.Classes
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly ITokenService _tokenService;
+        private readonly IAesGcmCryptoService _aesGcmCryptoService;
         private readonly IPasswordHasher<Usuario> _passwordHasher;
-        public UsuarioService(IUsuarioRepository usuarioRepository, ITokenService tokenService) : base(usuarioRepository)
+        public UsuarioService(IUsuarioRepository usuarioRepository, ITokenService tokenService, IAesGcmCryptoService aesGcmCryptoService) : base(usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
             _tokenService = tokenService;
+            _aesGcmCryptoService = aesGcmCryptoService;
             _passwordHasher = new PasswordHasher<Usuario>();    
         }
         public async Task<List<Usuario>> GetAllUsersWithRelationsAsync()
@@ -70,13 +73,15 @@ namespace GoPass.Application.Services.Classes
 
         public async Task<bool> VerifyDniExistsAsync(string dni)
         {
-            var userDni = await _usuarioRepository.VerifyDniExists(dni);
+            var encriptedDni = _aesGcmCryptoService.Encrypt(dni);
+            var userDni = await _usuarioRepository.VerifyDniExists(encriptedDni);
 
             return userDni;
         }
         public async Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber)
         {
-            var userPhoneNumber = await _usuarioRepository.VerifyPhoneNumberExists(phoneNumber);
+            var encriptedPhoneNumber = _aesGcmCryptoService.Encrypt(phoneNumber);
+            var userPhoneNumber = await _usuarioRepository.VerifyPhoneNumberExists(encriptedPhoneNumber);
 
             return userPhoneNumber;
         }
