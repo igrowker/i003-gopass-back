@@ -19,7 +19,7 @@ namespace GoPass.Application.Services.Classes
         {
             return await _genericRepository.GetAll();
         }
-        public async Task<List<T>> GetReventasAsync(PaginationDto paginationDto)
+        public async Task<List<T>> GetAllWithPaginationAsync(PaginationDto paginationDto)
         {
             var dbRecords = await _genericRepository.GetAllWithPagination(paginationDto);
 

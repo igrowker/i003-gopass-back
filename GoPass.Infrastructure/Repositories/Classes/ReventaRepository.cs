@@ -19,7 +19,6 @@ namespace GoPass.Infrastructure.Repositories.Classes
         {
             reventa.VendedorId = vendedorId;
             _dbContext.Add(reventa);
-            //reventa.Entrada.UsuarioId = vendedorId; 
 
             await _dbContext.SaveChangesAsync();
 

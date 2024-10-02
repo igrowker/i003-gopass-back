@@ -15,22 +15,33 @@ namespace GoPass.API.Controllers
         private readonly IReventaService _reventaService;
         private readonly IUsuarioService _usuarioService;
         private readonly IEntradaService _entradaService;
+        private readonly IGopassHttpClientService _gopassHttpClientService;
 
-        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService, IEntradaService entradaService)
+        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService, IEntradaService entradaService, IGopassHttpClientService gopassHttpClientService)
         {
             _reventaService = reventaService;
             _usuarioService = usuarioService;
             _entradaService = entradaService;
+            _gopassHttpClientService = gopassHttpClientService;
         }
 
         [Authorize]
         [HttpGet("get-resales")]
         public async Task<IActionResult> GetResales([FromQuery] PaginationDto paginationDto)
         {
-            List<Reventa> resales = await _reventaService.GetReventasAsync(paginationDto);
+            List<Reventa> resales = await _reventaService.GetAllWithPaginationAsync(paginationDto);
 
             return Ok(resales);
         }
+
+        [HttpGet("get-ticket-from-faker")]
+        public async Task<IActionResult> GetTicketFromTicketFaker(string codigoQr)
+        {
+            var verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(codigoQr);
+
+            return Ok(verifiedTicket);
+        }
+
 
         [Authorize]
         [HttpPost("publicar-entrada-reventa")]
@@ -40,7 +51,13 @@ namespace GoPass.API.Controllers
             string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
             int userId = int.Parse(userIdObtainedString);
 
+            Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(publishReventaRequestDto.CodigoQR);
+            PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishRequest();
+
+            Entrada createdTicket = await _entradaService.PublishTicket(existingTicketInFaker, userId);
+
             Reventa reventaToPublish = publishReventaRequestDto.FromPublishReventaRequestToModel();
+            reventaToPublish.EntradaId = createdTicket.Id;
 
             Reventa publishedReventa = await _reventaService.PublishTicketAsync(reventaToPublish, userId);
 

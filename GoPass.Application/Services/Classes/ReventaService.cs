@@ -1,8 +1,9 @@
-﻿using GoPass.Application.Services.Interfaces;
-using GoPass.Domain.DTOs.Request.PaginationDTOs;
-using GoPass.Domain.DTOs.Response;
+﻿using Azure.Core;
+using GoPass.Application.Services.Interfaces;
+using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.Models;
 using GoPass.Infrastructure.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GoPass.Application.Services.Classes
 {
