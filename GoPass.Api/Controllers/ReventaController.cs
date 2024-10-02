@@ -4,6 +4,7 @@ using GoPass.Application.Services.Interfaces;
 using GoPass.Application.Utilities.Mappers;
 using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.DTOs.Request.PaginationDTOs;
+using GoPass.Domain.Models;
 
 namespace GoPass.API.Controllers
 {
@@ -26,7 +27,7 @@ namespace GoPass.API.Controllers
         [HttpGet("get-resales")]
         public async Task<IActionResult> GetResales([FromQuery] PaginationDto paginationDto)
         {
-            var resales = await _reventaService.GetReventasAsync(paginationDto);
+            List<Reventa> resales = await _reventaService.GetReventasAsync(paginationDto);
 
             return Ok(resales);
         }
@@ -35,37 +36,37 @@ namespace GoPass.API.Controllers
         [HttpPost("publicar-entrada-reventa")]
         public async Task<IActionResult> PublishResaleTicket(PublishReventaRequestDto publishReventaRequestDto)
         {
-            var authorizationHeader = Request.Headers["Authorization"].ToString();
-            var userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
-            var userId = int.Parse(userIdObtainedString);
+            string authorizationHeader = Request.Headers["Authorization"].ToString();
+            string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
+            int userId = int.Parse(userIdObtainedString);
 
-            var reventaToPublish = publishReventaRequestDto.FromPublishReventaRequestToModel();
+            Reventa reventaToPublish = publishReventaRequestDto.FromPublishReventaRequestToModel();
 
-            var publishedReventa = await _reventaService.PublishTicketAsync(reventaToPublish, userId);
+            Reventa publishedReventa = await _reventaService.PublishTicketAsync(reventaToPublish, userId);
 
-            return Ok(publishedReventa);
+            return Ok(publishedReventa.FromModelToPublishReventaResponseDto());
         }
 
         [Authorize]
         [HttpPut("comprar-entrada")]
         public async Task<IActionResult> BuyTicket(BuyEntradaRequestDto buyEntradaRequestDto)
         {
-            var authorizationHeader = Request.Headers["Authorization"].ToString();
-            var userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
-            var userId = int.Parse(userIdObtainedString);
+            string authorizationHeader = Request.Headers["Authorization"].ToString();
+            string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
+            int userId = int.Parse(userIdObtainedString);
 
-            var resaleDb = await _reventaService.GetResaleByEntradaIdAsync(buyEntradaRequestDto.EntradaId);
+            Reventa resaleDb = await _reventaService.GetResaleByEntradaIdAsync(buyEntradaRequestDto.EntradaId);
 
             if(userId == resaleDb.VendedorId)
             {
-                return BadRequest("No podes comprar tu propia entrada flaco que haces estas re loco");
+                return BadRequest("Esta intentando comprar su propia entrada, lo cual no tiene sentido");
             }
 
             resaleDb.CompradorId = userId;
 
-            var publishReventaBuyer = await _reventaService.Update(resaleDb.Id, resaleDb);
+            Reventa publishReventaBuyer = await _reventaService.Update(resaleDb.Id, resaleDb);
 
-            return Ok(publishReventaBuyer);
+            return Ok(publishReventaBuyer.FromModelToReventaResponseDto());
         }
     }
 }

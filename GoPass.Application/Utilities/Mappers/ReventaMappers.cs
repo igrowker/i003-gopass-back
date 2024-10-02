@@ -1,5 +1,5 @@
 ﻿using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
-using GoPass.Domain.DTOs.Response;
+using GoPass.Domain.DTOs.Response.ReventaResponseDTOs;
 using GoPass.Domain.Models;
 
 namespace GoPass.Application.Utilities.Mappers
@@ -28,14 +28,25 @@ namespace GoPass.Application.Utilities.Mappers
             };
         }
 
-        public static ReventaResponseDto ToResponseDto(this Reventa reventa)
+        public static PublishReventaRequestDto FromModelToPublishReventaResponseDto(this Reventa reventa)
+        {
+            return new PublishReventaRequestDto
+            {
+                EntradaId = reventa.EntradaId,
+                Precio = reventa.Precio,
+                ResaleDetail = reventa.ResaleDetail
+            };
+        }
+
+        public static ReventaResponseDto FromModelToReventaResponseDto(this Reventa reventa)
         {
             return new ReventaResponseDto
             {
-                CompradorId = reventa.CompradorId,
-                FechaReventa = reventa.FechaReventa,
                 EntradaId = reventa.EntradaId,
                 Precio = reventa.Precio,
+                ResaleDetail = reventa.ResaleDetail,
+                CompradorId = reventa.CompradorId,
+                FechaReventa = reventa.FechaReventa,
                 VendedorId = reventa.VendedorId,
             };
         }
