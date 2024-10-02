@@ -2,7 +2,6 @@
 using GoPass.Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -22,39 +21,41 @@ namespace GoPass.Application.Services.Classes
         }
         public string CreateToken(Usuario usuario)
         {
-            var claims = new List<Claim>
+            var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
-            };
+        new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
+        new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+    };
 
-            var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(5),
-                SigningCredentials = credentials,
-                Issuer = _configuration["JWT:Issuer"],
-                Audience = _configuration["JWT:Audience"]
-            };
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddDays(5),
+                signingCredentials: creds);
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         public async Task<string> DecodeToken(string token)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
+            var handler = new JwtSecurityTokenHandler();
 
-            var decodedToken = tokenHandler.ReadJwtToken(token);
+            if (handler.CanReadToken(token))
+            {
+                var jwtToken = handler.ReadJwtToken(token);
 
-            var userId = decodedToken.Claims.First(claim => claim.Type == "sub").Value;
+                var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
 
-            return userId;
+                return userId;
+            }
+
+            throw new SecurityTokenException("Token no válido");
         }
+
     }
 }

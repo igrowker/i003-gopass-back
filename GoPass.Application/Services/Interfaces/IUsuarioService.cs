@@ -5,8 +5,9 @@ namespace GoPass.Application.Services.Interfaces
 {
     public interface IUsuarioService : IGenericService<Usuario>
     {
-
         Task<List<Usuario>> GetAllUsersWithRelationsAsync();
+        Task<Usuario> UpdateUserAsync(Usuario usuario);
+        Task<string> GenerateResetTokenAsync(string email);
         Task<Usuario> DeleteUserWithRelationsAsync(int id);
         Task<Usuario> GetUserByEmailAsync(string email);
         Task<Usuario> AuthenticateAsync(string email, string password);
@@ -15,5 +16,7 @@ namespace GoPass.Application.Services.Interfaces
         Task<bool> VerifyEmailExistsAsync(string email);
         Task<bool> VerifyDniExistsAsync(string dni);
         Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber);
+        Task<bool> RestablecerActualizarAsync(int restablecer, string nuevaPassword, string token);
+        Task UpdateUserTokenAsync(int userId, string token);
     }
 }

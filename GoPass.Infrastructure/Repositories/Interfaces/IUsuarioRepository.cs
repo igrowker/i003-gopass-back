@@ -5,6 +5,8 @@ namespace GoPass.Infrastructure.Repositories.Interfaces
 {
     public interface IUsuarioRepository : IGenericRepository<Usuario>
     {
+        Task<Usuario> GetUserByToken(string token);
+        Task<Usuario> UpdateAsync(Usuario usuario);
         Task<Usuario> DeleteUserWithRelations(int id);
         Task<List<Usuario>> GetAllUsersWithRelations();
         Task<Usuario> GetUserByEmail(string email);
@@ -12,5 +14,6 @@ namespace GoPass.Infrastructure.Repositories.Interfaces
         Task<bool> VerifyPhoneNumberExists(string phoneNumber);
         Task<bool> VerifyDniExists(string dni);
         Task<bool> VerifyEmailExists(string email);
+        Task<Usuario> FindAsync(int id);
     }
 }

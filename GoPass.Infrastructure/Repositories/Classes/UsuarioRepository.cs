@@ -3,6 +3,7 @@ using GoPass.Infrastructure.Data;
 using GoPass.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace GoPass.Infrastructure.Repositories.Classes
 {
     public class UsuarioRepository : GenericRepository<Usuario>, IUsuarioRepository
@@ -63,5 +64,30 @@ namespace GoPass.Infrastructure.Repositories.Classes
 
             return userPhoneNumberExist;
         }
+
+        public async Task<Usuario> GetUserByToken(string token)
+        {
+            return await _dbSet.FirstOrDefaultAsync(u => u.Token == token);
+        }
+
+        public async Task<Usuario> UpdateAsync(Usuario usuario)
+        {
+            if (usuario == null)
+            {
+                throw new ArgumentNullException(nameof(usuario));
+            }
+
+            _dbSet.Update(usuario);
+            await _dbContext.SaveChangesAsync();
+
+            return usuario;
+        }
+        public async Task<Usuario> FindAsync(int id)
+        {
+            return await _dbSet.FindAsync(id);
+        }
+
+
+
     }
 }
