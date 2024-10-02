@@ -24,13 +24,13 @@ namespace GoPass.API.Controllers
 
         [Authorize]
         [HttpPost(Endpoints.TICKET_VERIFY)]
-        public async Task<IActionResult> VerificarEntrada([FromBody] EntradaRequestDto requestDto)
+        public async Task<IActionResult> VerificarEntrada([FromBody] VerifyEntradaRequestDto verifyEntradaRequestDto)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                Entrada ticket = await _ticketmasterService.VerificarEntrada(requestDto.CodigoQR);
+                Entrada ticket = await _ticketmasterService.VerificarEntrada(verifyEntradaRequestDto.CodigoQR);
 
                 EntradaResponseDto entradaResponse = ticket.FromPublishEntradaRequestToResponseDto();
 
