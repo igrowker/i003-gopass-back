@@ -7,7 +7,7 @@ namespace GoPass.Application.Services.Interfaces
     public interface IGenericService<T> where T : BaseModel
     {
         Task<List<T>> GetAllAsync();
-        Task<List<T>> GetReventasAsync(PaginationDto paginationDto);
+        Task<List<T>> GetAllWithPaginationAsync(PaginationDto paginationDto);
         Task<T> GetByIdAsync(int id);
         Task<T> Create(T model);
         Task<T> Update(int id, T model);

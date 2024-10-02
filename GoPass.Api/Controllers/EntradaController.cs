@@ -4,6 +4,7 @@ using GoPass.Application.Services.Interfaces;
 using GoPass.Application.Utilities.Mappers;
 using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.DTOs.Request.PaginationDTOs;
+using GoPass.Domain.Models;
 
 namespace GoPass.API.Controllers
 {
@@ -22,26 +23,26 @@ namespace GoPass.API.Controllers
 
         [Authorize]
         [HttpGet("get-tickets")]
-        public async Task<IActionResult> GetResales([FromQuery] PaginationDto paginationDto)
+        public async Task<IActionResult> GetTickets([FromQuery] PaginationDto paginationDto)
         {
-            var resales = await _entradaService.GetReventasAsync(paginationDto);
+            List<Entrada> tickets = await _entradaService.GetAllWithPaginationAsync(paginationDto);
 
-            return Ok(resales);
+            return Ok(tickets);
         }
 
         [Authorize]
         [HttpPost("publicar-entrada")]
         public async Task<IActionResult> PublishTicket(PublishEntradaRequestDto publishEntradaRequestDto)
         {
-            var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
-            var userId = await _usuarioService.GetUserIdByTokenAsync(authHeader);
+            string authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+            string userId = await _usuarioService.GetUserIdByTokenAsync(authHeader);
             int parsedUserId = int.Parse(userId);
 
-            var ticketToPublish = publishEntradaRequestDto.FromPublishEntradaRequestToModel();
+            Entrada ticketToPublish = publishEntradaRequestDto.FromPublishEntradaRequestToModel();
 
             ticketToPublish.UsuarioId = parsedUserId;
 
-            var publishedTicket = await _entradaService.Create(ticketToPublish);
+            Entrada publishedTicket = await _entradaService.Create(ticketToPublish);
 
             return Ok(publishedTicket.FromPublishEntradaRequestToResponseDto());
         }

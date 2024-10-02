@@ -1,0 +1,6 @@
+@TicketFaker.API_HostAddress = http://localhost:5149
+
+GET {{TicketFaker.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

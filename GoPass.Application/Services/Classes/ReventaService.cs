@@ -1,6 +1,4 @@
 ﻿using GoPass.Application.Services.Interfaces;
-using GoPass.Domain.DTOs.Request.PaginationDTOs;
-using GoPass.Domain.DTOs.Response;
 using GoPass.Domain.Models;
 using GoPass.Infrastructure.Repositories.Interfaces;
 

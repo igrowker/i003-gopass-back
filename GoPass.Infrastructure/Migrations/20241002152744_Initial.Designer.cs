@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoPass.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241001234704_Initial")]
+    [Migration("20241002152744_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

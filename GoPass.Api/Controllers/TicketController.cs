@@ -15,7 +15,7 @@ namespace GoPass.API.Controllers
     public class TicketController : ControllerBase
     {
         private readonly ITicketMasterService _ticketmasterService;
-        private readonly ILogger<TicketController> _logger;
+        private readonly ILogger<TicketController>? _logger;
 
         public TicketController(ITicketMasterService ticketmasterService)
         {
@@ -42,7 +42,7 @@ namespace GoPass.API.Controllers
                 return Forbid(ex.Message);
             }
             catch (Exception ex)
-            {                
+            {
                 _logger.LogError(ex, Messages.ERR_TICKET_VERIFY);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"{Messages.ERR_TICKET_VERIFY} - {ex.Message}");
             }

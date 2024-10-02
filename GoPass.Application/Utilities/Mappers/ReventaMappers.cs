@@ -23,7 +23,6 @@ namespace GoPass.Application.Utilities.Mappers
             return new Reventa
             {
                 ResaleDetail = publishReventaRequestDto.ResaleDetail,
-                EntradaId = publishReventaRequestDto.EntradaId,
                 Precio = publishReventaRequestDto.Precio,
             };
         }
@@ -32,7 +31,7 @@ namespace GoPass.Application.Utilities.Mappers
         {
             return new PublishReventaRequestDto
             {
-                EntradaId = reventa.EntradaId,
+                //EntradaId = reventa.EntradaId,
                 Precio = reventa.Precio,
                 ResaleDetail = reventa.ResaleDetail
             };
