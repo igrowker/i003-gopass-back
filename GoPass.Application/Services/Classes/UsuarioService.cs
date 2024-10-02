@@ -50,15 +50,15 @@ namespace GoPass.Application.Services.Classes
 
         public async Task<Usuario> AuthenticateAsync(string email, string password)
         {
-            var userInDb = await _usuarioRepository.GetUserByEmail(email);
+            Usuario userInDb = await _usuarioRepository.GetUserByEmail(email);
 
-            var passwordVerification = _passwordHasher.VerifyHashedPassword(userInDb, userInDb.Password, password);
+            PasswordVerificationResult passwordVerification = _passwordHasher.VerifyHashedPassword(userInDb, userInDb.Password, password);
 
             if (passwordVerification == PasswordVerificationResult.Failed) throw new Exception("Las credenciales no son correctas");
 
-            var user = await _usuarioRepository.AuthenticateUser(email, password);
+            Usuario user = await _usuarioRepository.AuthenticateUser(email, password);
 
-            var token = _tokenService.CreateToken(user);
+            string token = _tokenService.CreateToken(user);
             user.Token = token;
 
             return user;
@@ -66,22 +66,22 @@ namespace GoPass.Application.Services.Classes
 
         public async Task<bool> VerifyEmailExistsAsync(string email)
         {
-            var userEmail = await _usuarioRepository.VerifyEmailExists(email);
+            bool userEmail = await _usuarioRepository.VerifyEmailExists(email);
 
             return userEmail!;
         }
 
         public async Task<bool> VerifyDniExistsAsync(string dni)
         {
-            var encriptedDni = _aesGcmCryptoService.Encrypt(dni);
-            var userDni = await _usuarioRepository.VerifyDniExists(encriptedDni);
+            string encriptedDni = _aesGcmCryptoService.Encrypt(dni);
+            bool userDni = await _usuarioRepository.VerifyDniExists(encriptedDni);
 
             return userDni;
         }
         public async Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber)
         {
-            var encriptedPhoneNumber = _aesGcmCryptoService.Encrypt(phoneNumber);
-            var userPhoneNumber = await _usuarioRepository.VerifyPhoneNumberExists(encriptedPhoneNumber);
+            string encriptedPhoneNumber = _aesGcmCryptoService.Encrypt(phoneNumber);
+            bool userPhoneNumber = await _usuarioRepository.VerifyPhoneNumberExists(encriptedPhoneNumber);
 
             return userPhoneNumber;
         }
@@ -92,7 +92,7 @@ namespace GoPass.Application.Services.Classes
 
             if (cleanToken is null) throw new Exception("Token nulo");
 
-            var decodedToken = await _tokenService.DecodeToken(cleanToken!);
+            string decodedToken = await _tokenService.DecodeToken(cleanToken!);
 
             return decodedToken;
         }

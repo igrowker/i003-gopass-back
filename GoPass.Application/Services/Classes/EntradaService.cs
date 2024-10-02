@@ -28,7 +28,7 @@ namespace GoPass.Application.Services.Classes
 
         public async Task<bool> VerifyQrCodeAsync(string qrCode)
         {
-            var ticketQrCode = await _entradaRepository.VerifyQrCodeExists(qrCode);
+            bool ticketQrCode = await _entradaRepository.VerifyQrCodeExists(qrCode);
 
             return ticketQrCode!;
         }

@@ -29,10 +29,10 @@ namespace GoPass.API.Controllers
 
             try
             {
-                var userToRegister = registerRequestDto.FromRegisterToModel();
+                Usuario userToRegister = registerRequestDto.FromRegisterToModel();
 
                 userToRegister.Verificado = false;
-                var registeredUser = await _usuarioService.RegisterUserAsync(userToRegister);
+                Usuario registeredUser = await _usuarioService.RegisterUserAsync(userToRegister);
 
                 return Ok(registeredUser);
             }
@@ -50,9 +50,9 @@ namespace GoPass.API.Controllers
 
             try
             {
-                var userToLogin = loginRequestDto.FromLoginToModel();
+                Usuario userToLogin = loginRequestDto.FromLoginToModel();
 
-                var logUser = await _usuarioService.AuthenticateAsync(userToLogin.Email, userToLogin.Password);
+                Usuario logUser = await _usuarioService.AuthenticateAsync(userToLogin.Email, userToLogin.Password);
 
                 return Ok(logUser.FromModelToLoginResponse());
             }
@@ -67,10 +67,10 @@ namespace GoPass.API.Controllers
         [HttpGet("user-credentials")]
         public async Task<IActionResult> GetUserCredentials()
         {
-            var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
-            var userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authHeader);
+            string authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+            string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authHeader);
             int userId = int.Parse(userIdObtainedString);
-            var dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
+            Usuario dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
 
             dbExistingUserCredentials.DNI = _aesGcmCryptoService.Decrypt(dbExistingUserCredentials.DNI!);
             dbExistingUserCredentials.NumeroTelefono = _aesGcmCryptoService.Decrypt(dbExistingUserCredentials.NumeroTelefono!);
@@ -86,17 +86,17 @@ namespace GoPass.API.Controllers
 
             try
             {
-                var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
-                var userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authHeader);
+                string authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+                string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authHeader);
                 int userId = int.Parse(userIdObtainedString);
-                var dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
+                Usuario dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
 
-                var credentialsToModify = modifyUsuarioRequestDto.FromModifyUsuarioRequestToModel(dbExistingUserCredentials);
+                Usuario credentialsToModify = modifyUsuarioRequestDto.FromModifyUsuarioRequestToModel(dbExistingUserCredentials);
 
                 credentialsToModify.DNI = _aesGcmCryptoService.Encrypt(credentialsToModify.DNI!);
                 credentialsToModify.NumeroTelefono = _aesGcmCryptoService.Encrypt(credentialsToModify.NumeroTelefono!);
 
-                var modifiedCredentials = await _usuarioService.Update(userId, credentialsToModify);
+                Usuario modifiedCredentials = await _usuarioService.Update(userId, credentialsToModify);
 
                 return Ok(modifiedCredentials);
 

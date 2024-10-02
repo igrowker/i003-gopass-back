@@ -37,7 +37,7 @@ namespace GoPass.API.Controllers
         [HttpGet("get-ticket-from-faker")]
         public async Task<IActionResult> GetTicketFromTicketFaker(string codigoQr)
         {
-            var verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(codigoQr);
+            Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(codigoQr);
 
             return Ok(verifiedTicket);
         }
