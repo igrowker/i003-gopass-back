@@ -18,6 +18,35 @@ namespace GoPass.Application.Utilities.Mappers
             };
         }
 
+        public static Entrada FromEntradaRequestToModel(this PublishEntradaRequestDto publishEntradaRequestDto, Entrada verifiedTicket, int userId)
+        {
+            return new Entrada
+            {
+                Address = verifiedTicket.Address,
+                EventDate = verifiedTicket.EventDate,
+                GameName = verifiedTicket.GameName,
+                CodigoQR = verifiedTicket.CodigoQR,
+                Description = verifiedTicket.Description,
+                Image = verifiedTicket.Image,
+                UsuarioId = userId,
+                Verificada = true
+            };
+        }
+
+        public static PublishEntradaRequestDto FromModelToPublishRequest(this Entrada entrada)
+        {
+            return new PublishEntradaRequestDto
+            {
+                Address = entrada.Address,
+                EventDate = entrada.EventDate,
+                GameName = entrada.GameName,
+                CodigoQR = entrada.CodigoQR,
+                Description = entrada.Description,
+                Image = entrada.Image,
+                Verificada = true
+            };
+        }
+
         public static Reventa FromPublishReventaRequestToModel(this PublishReventaRequestDto publishReventaRequestDto)
         {
             return new Reventa

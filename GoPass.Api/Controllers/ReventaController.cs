@@ -42,6 +42,7 @@ namespace GoPass.API.Controllers
             return Ok(verifiedTicket);
         }
 
+
         [Authorize]
         [HttpPost("publicar-entrada-reventa")]
         public async Task<IActionResult> PublishResaleTicket(PublishReventaRequestDto publishReventaRequestDto)
@@ -51,23 +52,12 @@ namespace GoPass.API.Controllers
             int userId = int.Parse(userIdObtainedString);
 
             Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(publishReventaRequestDto.CodigoQR);
+            PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishRequest();
 
-            Entrada entradaToCreate = new()
-            {
-                Address = verifiedTicket.Address,
-                EventDate = verifiedTicket.EventDate,
-                GameName = verifiedTicket.GameName,
-                CodigoQR = verifiedTicket.CodigoQR,
-                Description = verifiedTicket.Description,
-                Image = verifiedTicket.Image,
-                UsuarioId = userId,
-                Verificada = true
-            };
-
-            await _entradaService.Create(entradaToCreate);
+            Entrada createdTicket = await _entradaService.PublishTicket(existingTicketInFaker, userId);
 
             Reventa reventaToPublish = publishReventaRequestDto.FromPublishReventaRequestToModel();
-            reventaToPublish.EntradaId = entradaToCreate.Id;
+            reventaToPublish.EntradaId = createdTicket.Id;
 
             Reventa publishedReventa = await _reventaService.PublishTicketAsync(reventaToPublish, userId);
 
