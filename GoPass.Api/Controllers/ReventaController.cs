@@ -52,7 +52,7 @@ namespace GoPass.API.Controllers
             int userId = int.Parse(userIdObtainedString);
 
             Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(publishReventaRequestDto.CodigoQR);
-            PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishRequest();
+            PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishEntradaRequest();
 
             Entrada createdTicket = await _entradaService.PublishTicket(existingTicketInFaker, userId);
 
