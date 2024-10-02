@@ -1,6 +1,7 @@
 ﻿using GoPass.Application.Services.Interfaces;
 using GoPass.Application.Utilities.Mappers;
 using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
+using GoPass.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,13 @@ namespace GoPass.API.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
+        private readonly IAesGcmCryptoService _aesGcmCryptoService;
         private readonly ILogger<UsuarioController> _logger;
 
-        public UsuarioController(IUsuarioService usuarioService, ILogger<UsuarioController> logger)
+        public UsuarioController(IUsuarioService usuarioService, IAesGcmCryptoService aesGcmCryptoService, ILogger<UsuarioController> logger)
         {
             _usuarioService = usuarioService;
+            _aesGcmCryptoService = aesGcmCryptoService;
             _logger = logger;
         }
 
@@ -69,6 +72,9 @@ namespace GoPass.API.Controllers
             int userId = int.Parse(userIdObtainedString);
             var dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
 
+            dbExistingUserCredentials.DNI = _aesGcmCryptoService.Decrypt(dbExistingUserCredentials.DNI!);
+            dbExistingUserCredentials.NumeroTelefono = _aesGcmCryptoService.Decrypt(dbExistingUserCredentials.NumeroTelefono!);
+
             return Ok(dbExistingUserCredentials);
         }
 
@@ -85,9 +91,10 @@ namespace GoPass.API.Controllers
                 int userId = int.Parse(userIdObtainedString);
                 var dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
 
-
                 var credentialsToModify = modifyUsuarioRequestDto.FromModifyUsuarioRequestToModel(dbExistingUserCredentials);
 
+                credentialsToModify.DNI = _aesGcmCryptoService.Encrypt(credentialsToModify.DNI!);
+                credentialsToModify.NumeroTelefono = _aesGcmCryptoService.Encrypt(credentialsToModify.NumeroTelefono!);
 
                 var modifiedCredentials = await _usuarioService.Update(userId, credentialsToModify);
 

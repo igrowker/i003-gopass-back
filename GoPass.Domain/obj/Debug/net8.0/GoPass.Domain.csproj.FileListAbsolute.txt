@@ -1,14 +1,3 @@
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\bin\Debug\net8.0\GoPass.Domain.deps.json
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\bin\Debug\net8.0\GoPass.Domain.dll
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\bin\Debug\net8.0\GoPass.Domain.pdb
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\obj\Debug\net8.0\GoPass.Domain.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\obj\Debug\net8.0\GoPass.Domain.AssemblyInfoInputs.cache
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\obj\Debug\net8.0\GoPass.Domain.AssemblyInfo.cs
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\obj\Debug\net8.0\GoPass.Domain.csproj.CoreCompileInputs.cache
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\obj\Debug\net8.0\GoPass.Domain.dll
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\obj\Debug\net8.0\refint\GoPass.Domain.dll
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\obj\Debug\net8.0\GoPass.Domain.pdb
-C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\GoPass.Domain\obj\Debug\net8.0\ref\GoPass.Domain.dll
 C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\i003-gopass-back\GoPass.Domain\bin\Debug\net8.0\GoPass.Domain.deps.json
 C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\i003-gopass-back\GoPass.Domain\bin\Debug\net8.0\GoPass.Domain.dll
 C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\i003-gopass-back\GoPass.Domain\bin\Debug\net8.0\GoPass.Domain.pdb

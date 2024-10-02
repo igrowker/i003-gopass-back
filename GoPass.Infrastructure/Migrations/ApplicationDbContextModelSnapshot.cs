@@ -125,7 +125,7 @@ namespace GoPass.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("DNI")
-                        .HasMaxLength(8)
+                        .HasMaxLength(26)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Email")
@@ -141,7 +141,7 @@ namespace GoPass.Infrastructure.Migrations
                         .HasColumnType("varchar");
 
                     b.Property<string>("NumeroTelefono")
-                        .HasMaxLength(10)
+                        .HasMaxLength(26)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Password")

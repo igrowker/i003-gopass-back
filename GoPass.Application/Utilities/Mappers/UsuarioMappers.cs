@@ -1,4 +1,5 @@
-﻿using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
+﻿using GoPass.Application.Services.Interfaces;
+using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
 using GoPass.Domain.DTOs.Response.AuthResponseDTOs;
 using GoPass.Domain.Models;
 
@@ -38,6 +39,9 @@ namespace GoPass.Application.Utilities.Mappers
             existingData.Nombre = modifyUsuarioRequestDto.Nombre;
             existingData.DNI = modifyUsuarioRequestDto.DNI;
             existingData.NumeroTelefono = modifyUsuarioRequestDto.NumeroTelefono;
+            existingData.Image = modifyUsuarioRequestDto.Image;
+            existingData.City = modifyUsuarioRequestDto.City;
+            existingData.Country = modifyUsuarioRequestDto.Country;
             return existingData;
         }
     }
