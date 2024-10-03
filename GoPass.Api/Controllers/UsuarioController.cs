@@ -1,4 +1,5 @@
-﻿using GoPass.Application.Services.Interfaces;
+﻿
+using GoPass.Application.Services.Interfaces;
 using GoPass.Application.Utilities.Mappers;
 using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
 using GoPass.Domain.Models;
