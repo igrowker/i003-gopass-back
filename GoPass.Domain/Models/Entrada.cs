@@ -8,7 +8,7 @@
         public string Address { get; set; } = default!;
         public DateTime EventDate { get; set; } = default!;
         public string CodigoQR { get; set; } = default!;
-        public bool Verificada { get; set; }
+        public bool Verificada { get; set; } = false;
         public int UsuarioId { get; set; }
 
         //Navigation Property

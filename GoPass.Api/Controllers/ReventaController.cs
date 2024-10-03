@@ -54,7 +54,6 @@ namespace GoPass.API.Controllers
             return Ok(verifiedTicket);
         }
 
-
         [Authorize]
         [HttpPost("publicar-entrada-reventa")]
         public async Task<IActionResult> PublishResaleTicket(PublishReventaRequestDto publishReventaRequestDto)
