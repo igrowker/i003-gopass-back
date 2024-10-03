@@ -99,7 +99,7 @@ builder.Services.AddCors(opciones =>
 builder.Services.AddHttpClient<IGopassHttpClientService, GopassHttpClientService>(client =>
 {
     client.BaseAddress = new Uri("https://localhost:7292/api/"); // Cambia esta URL a la de tu API
-    client.Timeout = TimeSpan.FromSeconds(30); // Configura un timeout de 30 segundos
+    //client.Timeout = TimeSpan.FromSeconds(30); // Configura un timeout de 30 segundos
     client.DefaultRequestHeaders.Add("Accept", "application/json"); // Establece los headers necesarios
 });
 
@@ -110,6 +110,8 @@ builder.Services.AddScoped<IReventaService, ReventaService>();
 builder.Services.AddScoped<IEntradaService, EntradaService>();
 builder.Services.AddScoped<ITicketMasterService, TicketSimulatorService>();
 builder.Services.AddScoped<IAesGcmCryptoService, AesGcmCryptoService>();
+
+builder.Services.AddSingleton<ITwilioSmsService, TwilioSmsService>();
 
 
 builder.Services.AddScoped<IReventaRepository, ReventaRepository>();

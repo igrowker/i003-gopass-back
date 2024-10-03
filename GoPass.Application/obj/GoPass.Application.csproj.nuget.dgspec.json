@@ -76,6 +76,14 @@
             "SharpGrip.FluentValidation.AutoValidation.Mvc": {
               "target": "Package",
               "version": "[1.4.0, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            },
+            "Twilio.AspNet.Core": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             }
           },
           "imports": [
