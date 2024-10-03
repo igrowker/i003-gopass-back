@@ -42,6 +42,18 @@ namespace GoPass.API.Controllers
             return Ok(verifiedTicket);
         }
 
+        [HttpGet("validate-ticket-from-faker")]
+        public async Task<IActionResult> ValidateTicketFromTicketFaker(string codigoQr)
+        {
+            Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(codigoQr);
+
+            if (verifiedTicket is null) return BadRequest("No se encontro la entrada a validar.");
+
+            verifiedTicket.Verificada = true;
+
+            return Ok(verifiedTicket);
+        }
+
 
         [Authorize]
         [HttpPost("publicar-entrada-reventa")]

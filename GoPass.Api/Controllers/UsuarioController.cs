@@ -13,12 +13,15 @@ namespace GoPass.API.Controllers
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IAesGcmCryptoService _aesGcmCryptoService;
+        private readonly ITwilioSmsService _twilioSmsService;
         private readonly ILogger<UsuarioController> _logger;
 
-        public UsuarioController(IUsuarioService usuarioService, IAesGcmCryptoService aesGcmCryptoService, ILogger<UsuarioController> logger)
+        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService, IAesGcmCryptoService aesGcmCryptoService,
+            ITwilioSmsService twilioSmsService)
         {
             _usuarioService = usuarioService;
             _aesGcmCryptoService = aesGcmCryptoService;
+            _twilioSmsService = twilioSmsService;
             _logger = logger;
         }
 
@@ -91,7 +94,12 @@ namespace GoPass.API.Controllers
                 int userId = int.Parse(userIdObtainedString);
                 Usuario dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
 
+                //string verificationCode = new Random().Next(1000, 9999).ToString();
+
+                //await _twilioSmsService.SendVerificationCode(modifyUsuarioRequestDto.NumeroTelefono, verificationCode);
+
                 Usuario credentialsToModify = modifyUsuarioRequestDto.FromModifyUsuarioRequestToModel(dbExistingUserCredentials);
+
 
                 credentialsToModify.DNI = _aesGcmCryptoService.Encrypt(credentialsToModify.DNI!);
                 credentialsToModify.NumeroTelefono = _aesGcmCryptoService.Encrypt(credentialsToModify.NumeroTelefono!);
@@ -105,6 +113,19 @@ namespace GoPass.API.Controllers
             {
                 return BadRequest(ex);
             }
+        }
+
+        [HttpPost("verify-phone")]
+        public async Task<IActionResult> VerifyPhoneNumber(string phoneNumber)
+        {
+            var result = await _twilioSmsService.SendVerificationCode(phoneNumber);
+
+            if (result)
+            {
+                return Ok(new { message = "Código de verificación enviado exitosamente." });
+            }
+
+            return BadRequest(new { message = "Error al enviar el código de verificación." });
         }
     }
 }
