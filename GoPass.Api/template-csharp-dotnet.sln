@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoPass.API", "GoPass.API.csproj", "{B9D8A756-6D27-4C30-8BCF-37762F264EDB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoPass.Domain", "..\GoPass.Domain\GoPass.Domain.csproj", "{9BD37351-5619-45C0-AA8C-66F6174F0606}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoPass.Infrastructure", "..\GoPass.Infrastructure\GoPass.Infrastructure.csproj", "{21C3826F-D981-48BC-AC23-870C2D12003B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoPass.Application", "..\GoPass.Application\GoPass.Application.csproj", "{7B2A733D-B8EE-4517-98BF-0631B5E6EB2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketFaker.API", "..\TicketFaker.API\TicketFaker.API.csproj", "{967DE5B4-13B8-44C7-99D5-0E9DF1682442}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9D8A756-6D27-4C30-8BCF-37762F264EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9D8A756-6D27-4C30-8BCF-37762F264EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9D8A756-6D27-4C30-8BCF-37762F264EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9D8A756-6D27-4C30-8BCF-37762F264EDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BD37351-5619-45C0-AA8C-66F6174F0606}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BD37351-5619-45C0-AA8C-66F6174F0606}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BD37351-5619-45C0-AA8C-66F6174F0606}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BD37351-5619-45C0-AA8C-66F6174F0606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21C3826F-D981-48BC-AC23-870C2D12003B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C3826F-D981-48BC-AC23-870C2D12003B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C3826F-D981-48BC-AC23-870C2D12003B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C3826F-D981-48BC-AC23-870C2D12003B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B2A733D-B8EE-4517-98BF-0631B5E6EB2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B2A733D-B8EE-4517-98BF-0631B5E6EB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B2A733D-B8EE-4517-98BF-0631B5E6EB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B2A733D-B8EE-4517-98BF-0631B5E6EB2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967DE5B4-13B8-44C7-99D5-0E9DF1682442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967DE5B4-13B8-44C7-99D5-0E9DF1682442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967DE5B4-13B8-44C7-99D5-0E9DF1682442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967DE5B4-13B8-44C7-99D5-0E9DF1682442}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7DAAD7C-114B-47CF-90A0-505B61A63B4D}
+	EndGlobalSection
+EndGlobal
