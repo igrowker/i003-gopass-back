@@ -37,7 +37,7 @@ namespace GoPass.API.Controllers
         [HttpGet("get-ticket-from-faker")]
         public async Task<IActionResult> GetTicketFromTicketFaker(string codigoQr)
         {
-            var verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(codigoQr);
+            Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(codigoQr);
 
             return Ok(verifiedTicket);
         }
@@ -52,7 +52,7 @@ namespace GoPass.API.Controllers
             int userId = int.Parse(userIdObtainedString);
 
             Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(publishReventaRequestDto.CodigoQR);
-            PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishRequest();
+            PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishEntradaRequest();
 
             Entrada createdTicket = await _entradaService.PublishTicket(existingTicketInFaker, userId);
 

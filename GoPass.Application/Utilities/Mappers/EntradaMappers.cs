@@ -16,6 +16,20 @@ namespace GoPass.Application.Utilities.Mappers
             };
         }
 
+        public static PublishEntradaRequestDto FromModelToPublishEntradaRequest(this Entrada entrada)
+        {
+            return new PublishEntradaRequestDto
+            {
+                Address = entrada.Address,
+                EventDate = entrada.EventDate,
+                GameName = entrada.GameName,
+                CodigoQR = entrada.CodigoQR,
+                Description = entrada.Description,
+                Image = entrada.Image,
+                Verificada = true
+            };
+        }
+
         public static Entrada FromPublishEntradaRequestToModel(this PublishEntradaRequestDto publishEntradaRequestDto)
         {
             return new Entrada
@@ -27,6 +41,21 @@ namespace GoPass.Application.Utilities.Mappers
                 EventDate = publishEntradaRequestDto.EventDate,
                 Address = publishEntradaRequestDto.Address,
                 Image = publishEntradaRequestDto.Image
+            };
+        }
+
+        public static Entrada FromEntradaRequestToModel(this PublishEntradaRequestDto publishEntradaRequestDto, Entrada verifiedTicket, int userId)
+        {
+            return new Entrada
+            {
+                Address = verifiedTicket.Address,
+                EventDate = verifiedTicket.EventDate,
+                GameName = verifiedTicket.GameName,
+                CodigoQR = verifiedTicket.CodigoQR,
+                Description = verifiedTicket.Description,
+                Image = verifiedTicket.Image,
+                UsuarioId = userId,
+                Verificada = true
             };
         }
 

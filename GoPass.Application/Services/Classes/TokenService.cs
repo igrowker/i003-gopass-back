@@ -22,15 +22,15 @@ namespace GoPass.Application.Services.Classes
         }
         public string CreateToken(Usuario usuario)
         {
-            var claims = new List<Claim>
+            List<Claim> claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
             };
 
-            var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+            SigningCredentials credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
-            var tokenDescriptor = new SecurityTokenDescriptor
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(5),
@@ -48,9 +48,9 @@ namespace GoPass.Application.Services.Classes
 
         public async Task<string> DecodeToken(string token)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
-            var decodedToken = tokenHandler.ReadJwtToken(token);
+            JwtSecurityToken decodedToken = tokenHandler.ReadJwtToken(token);
 
             var userId = decodedToken.Claims.First(claim => claim.Type == "sub").Value;
 
