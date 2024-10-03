@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GoPass.Application.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Twilio.Types;
+using Twilio.TwiML.Messaging;
 
 
 namespace GoPass.Application.Services.Classes
@@ -41,10 +42,9 @@ namespace GoPass.Application.Services.Classes
                 //var accountSid = _configuration["Twilio:AccountSID"];
                 //var authToken = _configuration["Twilio:AuthToken"];
                 //var serviceSid = _configuration["Twilio:ServiceSID"];
-
-                var accountSid = "US447f1fcd13a775709356959645ec6e28";
-                var authToken = "a5c33e7c7fc77d22f846adb8fa275c07";
-                var serviceSid = "VA508f89f6edfae15b91631f847d797b3b";
+                var accountSid = "Para el commit necesitas que el _configuration este comentado";
+                var authToken = "Para el commit necesitas que el _configuration este comentado";
+                var serviceSid = "Para el commit necesitas que el _configuration este comentado";
 
                 TwilioClient.Init(accountSid, authToken);
 
@@ -76,4 +76,3 @@ namespace GoPass.Application.Services.Classes
         }
     }
 }
-
