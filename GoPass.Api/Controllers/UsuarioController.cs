@@ -102,6 +102,11 @@ namespace GoPass.API.Controllers
 
                 Usuario modifiedCredentials = await _usuarioService.Update(userId, credentialsToModify);
 
+                if(modifiedCredentials.DNI is not null && modifiedCredentials.Nombre is not null && modifiedCredentials.NumeroTelefono is not null)
+                {
+                    modifiedCredentials.Verificado = true;
+                }
+
                 return Ok(modifiedCredentials);
 
             }
