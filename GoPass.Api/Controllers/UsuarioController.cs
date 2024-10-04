@@ -1,5 +1,4 @@
-﻿
-using GoPass.Application.Services.Interfaces;
+﻿using GoPass.Application.Services.Interfaces;
 using GoPass.Application.Utilities.Mappers;
 using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
 using GoPass.Domain.Models;
@@ -14,15 +13,15 @@ namespace GoPass.API.Controllers
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IAesGcmCryptoService _aesGcmCryptoService;
-        private readonly ITwilioSmsService _twilioSmsService;
+        private readonly IVonageSmsService _vonageSmsService;
         private readonly ILogger<UsuarioController> _logger;
 
-        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService, IAesGcmCryptoService aesGcmCryptoService,
-            ITwilioSmsService twilioSmsService)
+        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService, 
+            IAesGcmCryptoService aesGcmCryptoService, IVonageSmsService vonageSmsService)
         {
             _usuarioService = usuarioService;
             _aesGcmCryptoService = aesGcmCryptoService;
-            _twilioSmsService = twilioSmsService;
+            _vonageSmsService = vonageSmsService;
             _logger = logger;
         }
 
@@ -95,10 +94,6 @@ namespace GoPass.API.Controllers
                 int userId = int.Parse(userIdObtainedString);
                 Usuario dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
 
-                //string verificationCode = new Random().Next(1000, 9999).ToString();
-
-                //await _twilioSmsService.SendVerificationCode(modifyUsuarioRequestDto.NumeroTelefono, verificationCode);
-
                 Usuario credentialsToModify = modifyUsuarioRequestDto.FromModifyUsuarioRequestToModel(dbExistingUserCredentials);
 
 
@@ -119,7 +114,7 @@ namespace GoPass.API.Controllers
         [HttpPost("verify-phone")]
         public async Task<IActionResult> VerifyPhoneNumber(string phoneNumber)
         {
-            var result = await _twilioSmsService.SendVerificationCode(phoneNumber);
+            var result = await _vonageSmsService.SendVonageVerificationCode(phoneNumber);
 
             if (result)
             {
@@ -127,6 +122,14 @@ namespace GoPass.API.Controllers
             }
 
             return BadRequest(new { message = "Error al enviar el código de verificación." });
+        }
+
+        [HttpPost("verify-provided-code")]
+        public async Task<IActionResult> VerifyVonageCodeProvided(int vonageCode)
+        {
+            bool code = _vonageSmsService.VerifyCode(vonageCode);
+
+            return Ok("Se verifico su numero de telefono correctamente" + code);
         }
     }
 }

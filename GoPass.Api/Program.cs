@@ -111,7 +111,7 @@ builder.Services.AddScoped<IEntradaService, EntradaService>();
 builder.Services.AddScoped<ITicketMasterService, TicketSimulatorService>();
 builder.Services.AddScoped<IAesGcmCryptoService, AesGcmCryptoService>();
 
-builder.Services.AddSingleton<ITwilioSmsService, TwilioSmsService>();
+builder.Services.AddSingleton<IVonageSmsService, VonageSmsService>();
 
 
 builder.Services.AddScoped<IReventaRepository, ReventaRepository>();
