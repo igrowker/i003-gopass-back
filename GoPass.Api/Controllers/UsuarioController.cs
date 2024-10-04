@@ -104,15 +104,18 @@ namespace GoPass.API.Controllers
             {
                 _logger.LogInformation($"Token recibido para confirmación: {authorization}");
 
+                // Limpiar y decodificar el token
                 string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorization);
-                int userIdParsed = int.Parse(userIdObtainedString);
+                _logger.LogInformation($"UserID obtenido del token: {userIdObtainedString}");
 
-                if (userIdParsed <= 0)
+                // Verificar si el ID es válido
+                if (!int.TryParse(userIdObtainedString, out int userIdParsed) || userIdParsed <= 0)
                 {
+                    _logger.LogWarning("ID de usuario no válido.");
                     return BadRequest("ID de usuario no válido.");
                 }
 
-                _logger.LogInformation($"ID de usuario obtenido: {userIdParsed}");
+                _logger.LogInformation($"ID de usuario obtenido y parseado: {userIdParsed}");
 
                 var user = await _usuarioService.GetByIdAsync(userIdParsed);
                 if (user is null)
@@ -125,12 +128,15 @@ namespace GoPass.API.Controllers
 
                 return Ok("Cuenta confirmada exitosamente.");
             }
-            catch (ArgumentException argEx)
+            catch (Exception ex)
             {
-                _logger.LogWarning(argEx, "Error al confirmar la cuenta: Token inválido.");
-                return BadRequest(argEx.Message);
+                _logger.LogError(ex, "Error inesperado al confirmar la cuenta.");
+                return StatusCode(500, "Error interno del servidor.");
             }
         }
+
+
+
 
         [Authorize]
         [HttpGet("user-credentials")]

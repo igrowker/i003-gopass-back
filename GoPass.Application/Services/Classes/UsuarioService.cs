@@ -40,13 +40,25 @@ namespace GoPass.Application.Services.Classes
 
         public async Task<Usuario> RegisterUserAsync(Usuario usuario)
         {
+            // Primero, hashea la contraseña del usuario.
             usuario.Password = _passwordHasher.HashPassword(usuario, usuario.Password);
 
-            var userToken = _tokenService.CreateToken(usuario);
-            usuario.Token = userToken;
+            // Guarda el usuario en la base de datos. Esto generará el ID.
+            var nuevoUsuario = await _usuarioRepository.Create(usuario);
 
-            return await _usuarioRepository.Create(usuario);
+            // Asegúrate de que el nuevoUsuario ahora tiene un ID válido.
+            if (nuevoUsuario.Id <= 0)
+            {
+                throw new Exception("El ID del usuario no es válido después de la creación.");
+            }
+
+            // Genera el token ahora que tienes un usuario persistido con un ID válido.
+            var userToken = _tokenService.CreateToken(nuevoUsuario);
+            nuevoUsuario.Token = userToken; // Si deseas almacenar el token en el objeto usuario.
+
+            return nuevoUsuario; // Devuelve el usuario con el token si es necesario.
         }
+
 
         public async Task<Usuario> AuthenticateAsync(string email, string password)
         {
@@ -88,14 +100,20 @@ namespace GoPass.Application.Services.Classes
 
         public async Task<string> GetUserIdByTokenAsync(string token)
         {
-            var cleanToken = token.StartsWith("Bearer ") ? token.Substring("Bearer ".Length) : null;
+            // Verifica si el token tiene el prefijo "Bearer "
+            string cleanToken = token.StartsWith("Bearer ") ? token.Substring("Bearer ".Length) : token;
 
-            if (cleanToken is null) throw new Exception("Token nulo");
+            if (string.IsNullOrWhiteSpace(cleanToken))
+            {
+                throw new Exception("Token nulo o vacío.");
+            }
 
+            // Decodifica el token
             string decodedToken = await _tokenService.DecodeToken(cleanToken!);
 
             return decodedToken;
         }
+
 
         public async Task<bool> RestablecerActualizarAsync(int restablecer, string nuevaPassword, string token)
         {

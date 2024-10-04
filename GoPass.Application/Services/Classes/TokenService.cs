@@ -22,11 +22,17 @@ namespace GoPass.Application.Services.Classes
         }
         public string CreateToken(Usuario usuario)
         {
-            List<Claim> claims = new List<Claim>
+            // Verifica si el usuario tiene un ID válido
+            if (usuario.Id <= 0)
             {
-                new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
-            };
+                throw new Exception("El ID del usuario no es válido.");
+            }
+
+            List<Claim> claims = new List<Claim>
+    {
+        new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
+        new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),  // El ID del usuario se almacena aquí
+    };
 
             SigningCredentials credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
@@ -46,15 +52,31 @@ namespace GoPass.Application.Services.Classes
             return tokenHandler.WriteToken(token);
         }
 
+
         public async Task<string> DecodeToken(string token)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
-            JwtSecurityToken decodedToken = tokenHandler.ReadJwtToken(token);
+            try
+            {
+                // Verificamos si el token es legible
+                JwtSecurityToken decodedToken = tokenHandler.ReadJwtToken(token);
 
-            var userId = decodedToken.Claims.First(claim => claim.Type == "sub").Value;
+                // Buscamos el claim "sub" que contiene el ID de usuario
+                var userIdClaim = decodedToken.Claims.FirstOrDefault(claim => claim.Type == "sub");
 
-            return userId;
+                if (userIdClaim == null)
+                {
+                    throw new Exception("El claim 'sub' no se encuentra en el token.");
+                }
+
+                return userIdClaim.Value;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al decodificar el token: {ex.Message}");
+            }
         }
+
     }
 }
