@@ -3,10 +3,11 @@ using MailKit.Security;
 using MimeKit;
 using MimeKit.Text;
 using MailKit.Net.Smtp;
+using GoPass.Application.Services.Interfaces;
 
 namespace GoPass.Application.Services.Classes
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
         private static string _Host = "smtp.gmail.com";
         private static int _Port = 587;
@@ -15,7 +16,7 @@ namespace GoPass.Application.Services.Classes
         private static string _Email = "automatizaciones.sas@gmail.com";
         private static string _Password = "nnkyigaljcvbydhi";
 
-        public static async Task<bool> SendVerificationEmailAsync(EmailValidationRequestDto emailValidationRequestDto)
+        public async Task<bool> SendVerificationEmailAsync(EmailValidationRequestDto emailValidationRequestDto)
         {
             try
             {

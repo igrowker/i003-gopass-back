@@ -24,4 +24,8 @@
     <ProjectReference Include="..\GoPass.Domain\GoPass.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Templates\" />
+  </ItemGroup>
+
 </Project>

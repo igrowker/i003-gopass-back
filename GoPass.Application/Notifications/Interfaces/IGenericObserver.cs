@@ -8,6 +8,6 @@ namespace GoPass.Application.Notifications.Interfaces
 {
     public interface IGenericObserver<T>
     {
-        void Update(T data);
+        //void Update(T data);
     }
 }

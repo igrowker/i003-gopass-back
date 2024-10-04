@@ -9,6 +9,6 @@ namespace GoPass.Application.Services.Interfaces
 {
     public interface IEmailService
     {
-        Task<bool> SendVerificationEmailAsync(EmailValidationRequestDto emailValidationRequestDto);
+       Task<bool> SendVerificationEmailAsync(EmailValidationRequestDto emailValidationRequestDto);
     }
 }
