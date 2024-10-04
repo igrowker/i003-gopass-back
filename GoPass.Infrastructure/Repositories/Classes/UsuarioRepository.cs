@@ -50,16 +50,16 @@ namespace GoPass.Infrastructure.Repositories.Classes
             return userCredentialsExist;
         }
 
-        public async Task<bool> VerifyDniExists(string dni)
+        public async Task<bool> VerifyDniExists(string dni, int userId)
         {
-            var userDniExist = await _dbSet.AnyAsync(u => u.DNI == dni);
+            var userDniExist = await _dbSet.AnyAsync(u => u.DNI == dni && u.Id != userId);
 
             return userDniExist;
         }
 
-        public async Task<bool> VerifyPhoneNumberExists(string phoneNumber)
+        public async Task<bool> VerifyPhoneNumberExists(string phoneNumber, int userId)
         {
-            var userPhoneNumberExist = await _dbSet.AnyAsync(u => u.NumeroTelefono == phoneNumber);
+            var userPhoneNumberExist = await _dbSet.AnyAsync(u => u.NumeroTelefono == phoneNumber && u.Id != userId);
 
             return userPhoneNumberExist;
         }

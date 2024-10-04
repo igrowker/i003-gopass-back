@@ -154,6 +154,12 @@ namespace GoPass.Infrastructure.Migrations
                     b.Property<bool>("Verificado")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("VerificadoEmail")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("VerificadoSms")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios", (string)null);

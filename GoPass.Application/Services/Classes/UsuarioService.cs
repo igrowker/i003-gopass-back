@@ -71,17 +71,17 @@ namespace GoPass.Application.Services.Classes
             return userEmail!;
         }
 
-        public async Task<bool> VerifyDniExistsAsync(string dni)
+        public async Task<bool> VerifyDniExistsAsync(string dni, int userId)
         {
             string encriptedDni = _aesGcmCryptoService.Encrypt(dni);
-            bool userDni = await _usuarioRepository.VerifyDniExists(encriptedDni);
+            bool userDni = await _usuarioRepository.VerifyDniExists(encriptedDni, userId);
 
             return userDni;
         }
-        public async Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber)
+        public async Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber, int userId)
         {
             string encriptedPhoneNumber = _aesGcmCryptoService.Encrypt(phoneNumber);
-            bool userPhoneNumber = await _usuarioRepository.VerifyPhoneNumberExists(encriptedPhoneNumber);
+            bool userPhoneNumber = await _usuarioRepository.VerifyPhoneNumberExists(encriptedPhoneNumber, userId);
 
             return userPhoneNumber;
         }

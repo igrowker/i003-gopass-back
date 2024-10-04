@@ -1,5 +1,6 @@
 ﻿using GoPass.Application.Services.Interfaces;
 using GoPass.Application.Utilities.Mappers;
+using GoPass.Application.Validators.Users;
 using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
 using GoPass.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +15,7 @@ namespace GoPass.API.Controllers
         private readonly IUsuarioService _usuarioService;
         private readonly IAesGcmCryptoService _aesGcmCryptoService;
         private readonly IVonageSmsService _vonageSmsService;
+        private readonly ModifyUserValidator _modifyUserValidator;
         private readonly ILogger<UsuarioController> _logger;
 
         public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService, 
@@ -94,6 +96,20 @@ namespace GoPass.API.Controllers
                 int userId = int.Parse(userIdObtainedString);
                 Usuario dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
 
+                //await _usuarioService.VerifyDniExistsAsync(modifyUsuarioRequestDto.DNI, userId);
+                //await _usuarioService.VerifyPhoneNumberExistsAsync(modifyUsuarioRequestDto.DNI, userId);
+
+                if (await _usuarioService.VerifyDniExistsAsync(modifyUsuarioRequestDto.DNI, userId))
+                {
+                    return BadRequest("El DNI ya se encuentra registrado por otro usuario.");
+                }
+
+                // Verificar duplicado de Número de teléfono
+                if (await _usuarioService.VerifyPhoneNumberExistsAsync(modifyUsuarioRequestDto.NumeroTelefono, userId))
+                {
+                    return BadRequest("El número de teléfono ya se encuentra registrado por otro usuario.");
+                }
+
                 Usuario credentialsToModify = modifyUsuarioRequestDto.FromModifyUsuarioRequestToModel(dbExistingUserCredentials);
 
 
@@ -101,6 +117,11 @@ namespace GoPass.API.Controllers
                 credentialsToModify.NumeroTelefono = _aesGcmCryptoService.Encrypt(credentialsToModify.NumeroTelefono!);
 
                 Usuario modifiedCredentials = await _usuarioService.Update(userId, credentialsToModify);
+
+                if(modifiedCredentials.DNI is not null && modifiedCredentials.Nombre is not null && modifiedCredentials.NumeroTelefono is not null)
+                {
+                    modifiedCredentials.Verificado = true;
+                }
 
                 return Ok(modifiedCredentials);
 
