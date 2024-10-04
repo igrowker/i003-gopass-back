@@ -3,6 +3,7 @@ using GoPass.Domain.Models;
 using GoPass.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
+using Vonage.Users;
 
 namespace GoPass.Application.Services.Classes
 {
@@ -139,6 +140,25 @@ namespace GoPass.Application.Services.Classes
                 //_logger.LogError(ex, "Error al restablecer la contraseña.");
                 return false;
             }
+        }
+
+        public async Task<bool> ValidateUserCredentialsToPublishTicket(int userId)
+        {
+            bool isvalid = true;
+
+            Usuario usuario = await _usuarioRepository.GetById(userId);
+
+
+            if (string.IsNullOrEmpty(usuario.Nombre) ||
+            string.IsNullOrEmpty(usuario.DNI) ||
+            string.IsNullOrEmpty(usuario.NumeroTelefono) ||
+            !usuario.VerificadoEmail ||
+            !usuario.VerificadoSms)
+            {
+                return isvalid = false;
+            }
+
+            return isvalid;
         }
 
     }
