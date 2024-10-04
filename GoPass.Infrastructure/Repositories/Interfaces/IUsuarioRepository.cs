@@ -13,5 +13,6 @@ namespace GoPass.Infrastructure.Repositories.Interfaces
         Task<bool> VerifyPhoneNumberExists(string phoneNumber, int userId);
         Task<bool> VerifyDniExists(string dni, int userId);
         Task<bool> VerifyEmailExists(string email);
+        Task<int> StorageToken(int userId, string token);
     }
 }
