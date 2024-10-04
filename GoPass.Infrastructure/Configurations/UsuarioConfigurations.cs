@@ -19,7 +19,8 @@ namespace GoPass.Infrastructure.Configurations
             builder.Property(u => u.Nombre).HasMaxLength(200).HasColumnType("varchar");
             builder.Property(u => u.NumeroTelefono).HasMaxLength(26).HasColumnType("varchar");
             builder.Property(u => u.DNI).HasMaxLength(26).HasColumnType("varchar");
-            builder.Property(u => u.Verificado).HasColumnType("bit");
+            builder.Property(u => u.VerificadoEmail).HasColumnType("bit");
+            builder.Property(u => u.VerificadoPhone).HasColumnType("bit");
             builder.Property(u => u.Email).IsRequired().HasMaxLength(50);
             builder.Property(u => u.Password).IsRequired();
             builder.Property(u => u.Country).HasMaxLength(30);

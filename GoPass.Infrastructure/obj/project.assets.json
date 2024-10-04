@@ -4124,27 +4124,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ezefe\\.nuget\\packages\\": {},
-    "C:\\Program Files\\DevExpress 24.1\\Components\\Offline Packages": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\gomez\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\GoPass.Infrastructure\\GoPass.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Infrastructure\\GoPass.Infrastructure.csproj",
       "projectName": "GoPass.Infrastructure",
-      "projectPath": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\GoPass.Infrastructure\\GoPass.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\ezefe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\GoPass.Infrastructure\\obj\\",
+      "projectPath": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Infrastructure\\GoPass.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\gomez\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\DevExpress 24.1\\Components\\Offline Packages",
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ezefe\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 24.1.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\gomez\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4152,7 +4144,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\DevExpress 24.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -4160,8 +4151,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\GoPass.Domain\\GoPass.Domain.csproj": {
-              "projectPath": "C:\\Users\\ezefe\\OneDrive\\Desktop\\Contenedor\\Proyectos\\Igrowker\\GoPass\\i003-gopass-back\\GoPass.Domain\\GoPass.Domain.csproj"
+            "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Domain\\GoPass.Domain.csproj": {
+              "projectPath": "C:\\Users\\gomez\\source\\repos\\i003-gopass-back\\GoPass.Domain\\GoPass.Domain.csproj"
             }
           }
         }

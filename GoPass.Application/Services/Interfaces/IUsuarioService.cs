@@ -11,9 +11,13 @@ namespace GoPass.Application.Services.Interfaces
         Task<Usuario> GetUserByEmailAsync(string email);
         Task<Usuario> AuthenticateAsync(string email, string password);
         Task<Usuario> RegisterUserAsync(Usuario usuario);
+        Task<Usuario> UpdateUserAsync(Usuario usuario);
         Task<string> GetUserIdByTokenAsync(string token);
+        Task<string> GenerateResetTokenAsync(string email);
         Task<bool> VerifyEmailExistsAsync(string email);
         Task<bool> VerifyDniExistsAsync(string dni);
         Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber);
+        Task<bool> RestablecerActualizarAsync(int restablecer, string nuevaPassword, string token);
+        Task UpdateUserTokenAsync(int userId, string token);
     }
 }
