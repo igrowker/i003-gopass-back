@@ -11,6 +11,8 @@ using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Text;
 using GoPass.Infrastructure.Data;
 using System.Reflection;
+using GoPass.Application.Validators.Users;
+using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
