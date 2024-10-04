@@ -19,6 +19,7 @@ namespace GoPass.Domain.Models
         public bool Verificado { get; set; } = false;
         public bool VerificadoEmail { get; set; } = false;
         public bool VerificadoSms { get; set; } = false;
+        public bool Restablecer { get; set; } = false;
 
         public string? Token { get; set; }
 

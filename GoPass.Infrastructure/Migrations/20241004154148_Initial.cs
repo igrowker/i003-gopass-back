@@ -28,6 +28,7 @@ namespace GoPass.Infrastructure.Migrations
                     Verificado = table.Column<bool>(type: "bit", nullable: false),
                     VerificadoEmail = table.Column<bool>(type: "bit", nullable: false),
                     VerificadoSms = table.Column<bool>(type: "bit", nullable: false),
+                    Restablecer = table.Column<bool>(type: "bit", nullable: false),
                     Token = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

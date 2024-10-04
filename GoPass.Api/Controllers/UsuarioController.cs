@@ -15,15 +15,19 @@ namespace GoPass.API.Controllers
         private readonly IUsuarioService _usuarioService;
         private readonly IAesGcmCryptoService _aesGcmCryptoService;
         private readonly IVonageSmsService _vonageSmsService;
+        private readonly IEmailService _emailService;
+        private readonly ITemplateService _templateService;
         private readonly ModifyUserValidator _modifyUserValidator;
         private readonly ILogger<UsuarioController> _logger;
 
         public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService, 
-            IAesGcmCryptoService aesGcmCryptoService, IVonageSmsService vonageSmsService)
+            IAesGcmCryptoService aesGcmCryptoService, IVonageSmsService vonageSmsService, IEmailService emailService, ITemplateService templateService)
         {
             _usuarioService = usuarioService;
             _aesGcmCryptoService = aesGcmCryptoService;
             _vonageSmsService = vonageSmsService;
+            _emailService = emailService;
+            _templateService = templateService;
             _logger = logger;
         }
 
@@ -31,13 +35,31 @@ namespace GoPass.API.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-
+ 
             try
             {
                 Usuario userToRegister = registerRequestDto.FromRegisterToModel();
 
-                userToRegister.Verificado = false;
                 Usuario registeredUser = await _usuarioService.RegisterUserAsync(userToRegister);
+
+                if (registeredUser is null) BadRequest("El usuario es nulo " + registeredUser);
+
+                string confirmationUrl = $"{Request.Scheme}://{Request.Host}/Inicio/Confirmar?token={registeredUser.Token}";
+
+                var valoresReemplazo = new Dictionary<string, string>
+                 {
+                     { "Nombre", registeredUser.Nombre },
+                     { "UrlConfirmacion", confirmationUrl }
+                 };
+
+                string contenidoPlantilla = await _templateService.ObtenerContenidoTemplateAsync("VerifyEmail", valoresReemplazo);
+                string emailSubject = "Confirmacion de cuenta";
+
+                EmailValidationRequestDto emailConfig = new();
+
+                EmailValidationRequestDto emailToSend = emailConfig.AssignEmailValues(userToRegister.Email, emailSubject, contenidoPlantilla);
+
+                bool enviado = await _emailService.SendVerificationEmailAsync(emailToSend);
 
                 return Ok(registeredUser);
             }
@@ -59,12 +81,54 @@ namespace GoPass.API.Controllers
 
                 Usuario logUser = await _usuarioService.AuthenticateAsync(userToLogin.Email, userToLogin.Password);
 
+                if (!logUser.VerificadoEmail) return BadRequest("Falta confirmar la cuenta verifiquela en su correo electronico");
+
                 return Ok(logUser.FromModelToLoginResponse());
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error al autenticar el usuario.");
                 return Unauthorized("Las credenciales no son válidas.");
+            }
+        }
+
+        [HttpPost("confirmar-cuenta")]
+        public async Task<IActionResult> ConfirmarCuenta([FromHeader(Name = "Authorization")] string authorization)
+        {
+            if (string.IsNullOrWhiteSpace(authorization))
+            {
+                return BadRequest("Token es nulo o está vacío.");
+            }
+
+            try
+            {
+                _logger.LogInformation($"Token recibido para confirmación: {authorization}");
+
+                string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorization);
+                int userIdParsed = int.Parse(userIdObtainedString);
+
+                if (userIdParsed <= 0)
+                {
+                    return BadRequest("ID de usuario no válido.");
+                }
+
+                _logger.LogInformation($"ID de usuario obtenido: {userIdParsed}");
+
+                var user = await _usuarioService.GetByIdAsync(userIdParsed);
+                if (user is null)
+                {
+                    return NotFound("No se encontró el usuario.");
+                }
+
+                user.VerificadoEmail = true;
+                await _usuarioService.Update(user.Id, user);
+
+                return Ok("Cuenta confirmada exitosamente.");
+            }
+            catch (ArgumentException argEx)
+            {
+                _logger.LogWarning(argEx, "Error al confirmar la cuenta: Token inválido.");
+                return BadRequest(argEx.Message);
             }
         }
 

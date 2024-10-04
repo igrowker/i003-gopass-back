@@ -148,6 +148,9 @@ namespace GoPass.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Restablecer")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
 

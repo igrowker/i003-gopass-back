@@ -26,7 +26,7 @@ namespace GoPass.Application.Notifications.Classes
         {
             foreach (var observer in _observers)
             {
-                observer.Update(data);
+                //observer.Update(data);
             }
         }
     }

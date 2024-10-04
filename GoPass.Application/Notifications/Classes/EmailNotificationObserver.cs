@@ -15,9 +15,9 @@ namespace GoPass.Application.Notifications.Classes
         {
             _emailService = emailservice;
         }
-        public void Update(string message)
-        {
-            _emailService.SendEmail(message);
-        }
+        //public void Update(string message)
+        //{
+        //    //_emailService.SendEmail(message);
+        //}
     }
 }
