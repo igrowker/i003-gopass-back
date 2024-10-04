@@ -15,15 +15,17 @@ namespace GoPass.API.Controllers
         private readonly IUsuarioService _usuarioService;
         private readonly IAesGcmCryptoService _aesGcmCryptoService;
         private readonly IVonageSmsService _vonageSmsService;
+        private readonly IEmailService _emailService;
         private readonly ModifyUserValidator _modifyUserValidator;
         private readonly ILogger<UsuarioController> _logger;
 
         public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService, 
-            IAesGcmCryptoService aesGcmCryptoService, IVonageSmsService vonageSmsService)
+            IAesGcmCryptoService aesGcmCryptoService, IVonageSmsService vonageSmsService, IEmailService emailService)
         {
             _usuarioService = usuarioService;
             _aesGcmCryptoService = aesGcmCryptoService;
             _vonageSmsService = vonageSmsService;
+            _emailService = emailService;
             _logger = logger;
         }
 
