@@ -136,8 +136,6 @@ namespace GoPass.API.Controllers
         }
 
 
-
-
         [Authorize]
         [HttpGet("user-credentials")]
         public async Task<IActionResult> GetUserCredentials()

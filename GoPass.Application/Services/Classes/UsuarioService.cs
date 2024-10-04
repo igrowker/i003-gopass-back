@@ -55,8 +55,9 @@ namespace GoPass.Application.Services.Classes
             // Genera el token ahora que tienes un usuario persistido con un ID válido.
             var userToken = _tokenService.CreateToken(nuevoUsuario);
             nuevoUsuario.Token = userToken; // Si deseas almacenar el token en el objeto usuario.
-
+            await _usuarioRepository.StorageToken(usuario.Id, userToken);
             return nuevoUsuario; // Devuelve el usuario con el token si es necesario.
+
         }
 
 

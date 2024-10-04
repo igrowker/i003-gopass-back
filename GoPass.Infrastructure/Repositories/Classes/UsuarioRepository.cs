@@ -68,18 +68,12 @@ namespace GoPass.Infrastructure.Repositories.Classes
         {
             return await _dbSet.FirstOrDefaultAsync(u => u.Token == token);
         }
-
-        public async Task<Usuario> UpdateAsync(Usuario usuario)
+        
+        public async Task<int> StorageToken(int userId, string token)
         {
-            if (usuario == null)
-            {
-                throw new ArgumentNullException(nameof(usuario));
-            }
+            var storeToken = await _dbSet.Where(u => u.Id == userId).ExecuteUpdateAsync(u => u.SetProperty(u => u.Token, token));
 
-            _dbSet.Update(usuario);
-            await _dbContext.SaveChangesAsync();
-
-            return usuario;
+            return storeToken;
         }
     }
 }
