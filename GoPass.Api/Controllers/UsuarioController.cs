@@ -164,9 +164,6 @@ namespace GoPass.API.Controllers
                 int userId = int.Parse(userIdObtainedString);
                 Usuario dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
 
-                //await _usuarioService.VerifyDniExistsAsync(modifyUsuarioRequestDto.DNI, userId);
-                //await _usuarioService.VerifyPhoneNumberExistsAsync(modifyUsuarioRequestDto.DNI, userId);
-
                 if (await _usuarioService.VerifyDniExistsAsync(modifyUsuarioRequestDto.DNI, userId))
                 {
                     return BadRequest("El DNI ya se encuentra registrado por otro usuario.");
@@ -184,12 +181,13 @@ namespace GoPass.API.Controllers
                 credentialsToModify.DNI = _aesGcmCryptoService.Encrypt(credentialsToModify.DNI!);
                 credentialsToModify.NumeroTelefono = _aesGcmCryptoService.Encrypt(credentialsToModify.NumeroTelefono!);
 
+                if(credentialsToModify.DNI is not null && credentialsToModify.Nombre is not null && credentialsToModify.NumeroTelefono is not null)
+                {
+                    credentialsToModify.Verificado = true;
+                }
+
                 Usuario modifiedCredentials = await _usuarioService.Update(userId, credentialsToModify);
 
-                if(modifiedCredentials.DNI is not null && modifiedCredentials.Nombre is not null && modifiedCredentials.NumeroTelefono is not null)
-                {
-                    modifiedCredentials.Verificado = true;
-                }
 
                 return Ok(modifiedCredentials);
 
@@ -216,7 +214,18 @@ namespace GoPass.API.Controllers
         [HttpPost("verify-provided-code")]
         public async Task<IActionResult> VerifyVonageCodeProvided(int vonageCode)
         {
+            string authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+            string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authHeader);
+            int userId = int.Parse(userIdObtainedString);
+            Usuario dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
+
             bool code = _vonageSmsService.VerifyCode(vonageCode);
+
+            if (code == false) return BadRequest("El codigo ingresado no coincide con el que se le envio por sms.");
+
+            dbExistingUserCredentials.VerificadoSms = true;
+
+            Usuario modifiedCredentials = await _usuarioService.Update(userId, dbExistingUserCredentials);
 
             return Ok("Se verifico su numero de telefono correctamente" + code);
         }
