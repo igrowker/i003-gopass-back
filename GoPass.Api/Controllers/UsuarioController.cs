@@ -92,6 +92,46 @@ namespace GoPass.API.Controllers
             }
         }
 
+        [HttpPost("confirmar-cuenta")]
+        public async Task<IActionResult> ConfirmarCuenta([FromHeader(Name = "Authorization")] string authorization)
+        {
+            if (string.IsNullOrWhiteSpace(authorization))
+            {
+                return BadRequest("Token es nulo o está vacío.");
+            }
+
+            try
+            {
+                _logger.LogInformation($"Token recibido para confirmación: {authorization}");
+
+                string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorization);
+                int userIdParsed = int.Parse(userIdObtainedString);
+
+                if (userIdParsed <= 0)
+                {
+                    return BadRequest("ID de usuario no válido.");
+                }
+
+                _logger.LogInformation($"ID de usuario obtenido: {userIdParsed}");
+
+                var user = await _usuarioService.GetByIdAsync(userIdParsed);
+                if (user is null)
+                {
+                    return NotFound("No se encontró el usuario.");
+                }
+
+                user.VerificadoEmail = true;
+                await _usuarioService.Update(user.Id, user);
+
+                return Ok("Cuenta confirmada exitosamente.");
+            }
+            catch (ArgumentException argEx)
+            {
+                _logger.LogWarning(argEx, "Error al confirmar la cuenta: Token inválido.");
+                return BadRequest(argEx.Message);
+            }
+        }
+
         [Authorize]
         [HttpGet("user-credentials")]
         public async Task<IActionResult> GetUserCredentials()
