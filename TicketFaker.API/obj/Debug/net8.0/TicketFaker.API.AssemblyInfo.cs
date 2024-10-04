@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TicketFaker.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2bf991e4b0575ad93ec0b34f305bafa100a08a6a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23cefffbfd7ea757d6c17189673e9b1236e32ce9")]
 [assembly: System.Reflection.AssemblyProductAttribute("TicketFaker.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TicketFaker.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
