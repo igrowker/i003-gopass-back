@@ -8,5 +8,6 @@ namespace GoPass.Application.Services.Interfaces
     {
         Task<Entrada> PublishTicket(PublishEntradaRequestDto publishEntradaRequestDto, int userId);
         Task<bool> VerifyQrCodeAsync(string qrCode);
+        Task<List<Entrada>> GetTicketsInResaleByUserIdAsync(int userId);
     }
 }

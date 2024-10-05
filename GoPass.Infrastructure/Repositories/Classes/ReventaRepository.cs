@@ -40,5 +40,17 @@ namespace GoPass.Infrastructure.Repositories.Classes
 
             return await recordsQueriable.Paginate(paginationDto).Include(x => x.Entrada).ToListAsync();
         }
+
+        public async Task<List<Reventa>> GetBoughtTicketsByCompradorId(int compradorId)
+        {
+            if (compradorId <= 0)
+            {
+                throw new ArgumentException("El ID del vendedor no es válido.");
+            }
+
+            List<Reventa> ticketsInResale = await _dbSet.Where(x => x.CompradorId == compradorId).Include(x => x.Entrada).AsNoTracking().ToListAsync();
+
+            return ticketsInResale;
+        }
     }
 }

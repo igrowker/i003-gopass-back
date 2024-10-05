@@ -11,16 +11,12 @@ using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Text;
 using GoPass.Infrastructure.Data;
 using System.Reflection;
-using GoPass.Application.Validators.Users;
-using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 #region Services Area
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers()
             .AddJsonOptions(options => {options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;});
@@ -55,7 +51,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-//builder.Services.AddDatabaseContext(connectionString);
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(connectionString)
 );
@@ -101,9 +96,8 @@ builder.Services.AddCors(opciones =>
 
 builder.Services.AddHttpClient<IGopassHttpClientService, GopassHttpClientService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7292/api/"); // Cambia esta URL a la de tu API
-    //client.Timeout = TimeSpan.FromSeconds(30); // Configura un timeout de 30 segundos
-    client.DefaultRequestHeaders.Add("Accept", "application/json"); // Establece los headers necesarios
+    client.BaseAddress = new Uri("https://localhost:7292/api/");
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
 
@@ -127,7 +121,7 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 var app = builder.Build();
 
 #region Middlewares Area
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
   app.UseSwagger();
