@@ -187,7 +187,8 @@ namespace GoPass.API.Controllers
 
                 Usuario modifiedCredentials = await _usuarioService.Update(userId, credentialsToModify);
 
-
+                modifiedCredentials.DNI = _aesGcmCryptoService.Decrypt(credentialsToModify.DNI!);
+                modifiedCredentials.NumeroTelefono = _aesGcmCryptoService.Decrypt(credentialsToModify.NumeroTelefono!);
                 return Ok(modifiedCredentials);
 
             }
