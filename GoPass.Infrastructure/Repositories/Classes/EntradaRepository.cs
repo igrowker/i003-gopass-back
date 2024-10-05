@@ -18,5 +18,17 @@ namespace GoPass.Infrastructure.Repositories.Classes
 
             return qrCodeExist;
         }
+
+        public async Task<List<Entrada>> GetTicketsInResaleByUserId(int userId)
+        {
+            if (userId <= 0)
+            {
+                throw new ArgumentException("El ID del vendedor no es válido.");
+            }
+
+            List<Entrada> ticketsInResale = await _dbSet.Where(x => x.UsuarioId == userId).AsNoTracking().ToListAsync();
+
+            return ticketsInResale;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using GoPass.Application.Services.Interfaces;
+﻿using GoPass.Application.Services.Classes;
+using GoPass.Application.Services.Interfaces;
 using GoPass.Application.Utilities.Mappers;
 using GoPass.Application.Validators.Users;
 using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
@@ -13,17 +14,18 @@ namespace GoPass.API.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
+        private readonly IEntradaService _entradaService;
         private readonly IAesGcmCryptoService _aesGcmCryptoService;
         private readonly IVonageSmsService _vonageSmsService;
         private readonly IEmailService _emailService;
         private readonly ITemplateService _templateService;
-        private readonly ModifyUserValidator _modifyUserValidator;
         private readonly ILogger<UsuarioController> _logger;
 
-        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService, 
+        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService, IEntradaService entradaService,
             IAesGcmCryptoService aesGcmCryptoService, IVonageSmsService vonageSmsService, IEmailService emailService, ITemplateService templateService)
         {
             _usuarioService = usuarioService;
+            _entradaService = entradaService;
             _aesGcmCryptoService = aesGcmCryptoService;
             _vonageSmsService = vonageSmsService;
             _emailService = emailService;
@@ -104,11 +106,9 @@ namespace GoPass.API.Controllers
             {
                 _logger.LogInformation($"Token recibido para confirmación: {token}");
 
-                // Limpiar y decodificar el token
                 string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(token);
                 _logger.LogInformation($"UserID obtenido del token: {userIdObtainedString}");
 
-                // Verificar si el ID es válido
                 if (!int.TryParse(userIdObtainedString, out int userIdParsed) || userIdParsed <= 0)
                 {
                     _logger.LogWarning("ID de usuario no válido.");
@@ -134,7 +134,6 @@ namespace GoPass.API.Controllers
                 return StatusCode(500, "Error interno del servidor.");
             }
         }
-
 
         [Authorize]
         [HttpGet("user-credentials")]
@@ -169,14 +168,12 @@ namespace GoPass.API.Controllers
                     return BadRequest("El DNI ya se encuentra registrado por otro usuario.");
                 }
 
-                // Verificar duplicado de Número de teléfono
                 if (await _usuarioService.VerifyPhoneNumberExistsAsync(modifyUsuarioRequestDto.NumeroTelefono, userId))
                 {
                     return BadRequest("El número de teléfono ya se encuentra registrado por otro usuario.");
                 }
 
                 Usuario credentialsToModify = modifyUsuarioRequestDto.FromModifyUsuarioRequestToModel(dbExistingUserCredentials);
-
 
                 credentialsToModify.DNI = _aesGcmCryptoService.Encrypt(credentialsToModify.DNI!);
                 credentialsToModify.NumeroTelefono = _aesGcmCryptoService.Encrypt(credentialsToModify.NumeroTelefono!);
@@ -228,6 +225,27 @@ namespace GoPass.API.Controllers
             Usuario modifiedCredentials = await _usuarioService.Update(userId, dbExistingUserCredentials);
 
             return Ok("Se verifico su numero de telefono correctamente" + code);
+        }
+
+        [HttpGet("obtener-usuario-reventas")]
+        public async Task<IActionResult> GetUserResales()
+        {
+            try
+            {
+                string authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+                string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authHeader);
+                int userId = int.Parse(userIdObtainedString);
+                //Usuario dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
+
+                List<Entrada> resales = await _entradaService.GetTicketsInResaleByUserIdAsync(userId);
+
+                return Ok(resales);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("No tenes entradas en reventa.");
+            }
         }
     }
 }

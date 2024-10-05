@@ -2,8 +2,6 @@
 using GoPass.Domain.Models;
 using GoPass.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using System.Net;
-using Vonage.Users;
 
 namespace GoPass.Application.Services.Classes
 {
@@ -41,23 +39,19 @@ namespace GoPass.Application.Services.Classes
 
         public async Task<Usuario> RegisterUserAsync(Usuario usuario)
         {
-            // Primero, hashea la contraseña del usuario.
             usuario.Password = _passwordHasher.HashPassword(usuario, usuario.Password);
 
-            // Guarda el usuario en la base de datos. Esto generará el ID.
             var nuevoUsuario = await _usuarioRepository.Create(usuario);
 
-            // Asegúrate de que el nuevoUsuario ahora tiene un ID válido.
             if (nuevoUsuario.Id <= 0)
             {
                 throw new Exception("El ID del usuario no es válido después de la creación.");
             }
 
-            // Genera el token ahora que tienes un usuario persistido con un ID válido.
             var userToken = _tokenService.CreateToken(nuevoUsuario);
-            nuevoUsuario.Token = userToken; // Si deseas almacenar el token en el objeto usuario.
+            nuevoUsuario.Token = userToken; 
             await _usuarioRepository.StorageToken(usuario.Id, userToken);
-            return nuevoUsuario; // Devuelve el usuario con el token si es necesario.
+            return nuevoUsuario; 
 
         }
 
@@ -102,7 +96,6 @@ namespace GoPass.Application.Services.Classes
 
         public async Task<string> GetUserIdByTokenAsync(string token)
         {
-            // Verifica si el token tiene el prefijo "Bearer "
             string cleanToken = token.StartsWith("Bearer ") ? token.Substring("Bearer ".Length) : token;
 
             if (string.IsNullOrWhiteSpace(cleanToken))
@@ -110,7 +103,6 @@ namespace GoPass.Application.Services.Classes
                 throw new Exception("Token nulo o vacío.");
             }
 
-            // Decodifica el token
             string decodedToken = await _tokenService.DecodeToken(cleanToken!);
 
             return decodedToken;
@@ -137,7 +129,7 @@ namespace GoPass.Application.Services.Classes
             }
             catch (Exception ex)
             {
-                //_logger.LogError(ex, "Error al restablecer la contraseña.");
+                //throw new Exception(ex);
                 return false;
             }
         }
@@ -160,6 +152,5 @@ namespace GoPass.Application.Services.Classes
 
             return isvalid;
         }
-
     }
 }
