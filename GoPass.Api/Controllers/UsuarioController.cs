@@ -44,7 +44,7 @@ namespace GoPass.API.Controllers
 
                 if (registeredUser is null) BadRequest("El usuario es nulo " + registeredUser);
 
-                string confirmationUrl = $"{Request.Scheme}://{Request.Host}/Inicio/Confirmar?token={registeredUser.Token}";
+                string confirmationUrl = $"{Request.Scheme}://{Request.Host}/api/Usuario/confirmar-cuenta?token={registeredUser.Token}";
 
                 var valoresReemplazo = new Dictionary<string, string>
                  {
@@ -92,20 +92,20 @@ namespace GoPass.API.Controllers
             }
         }
 
-        [HttpPost("confirmar-cuenta")]
-        public async Task<IActionResult> ConfirmarCuenta([FromHeader(Name = "Authorization")] string authorization)
+        [HttpGet("confirmar-cuenta")]
+        public async Task<IActionResult> ConfirmarCuenta([FromQuery] string token)
         {
-            if (string.IsNullOrWhiteSpace(authorization))
+            if (string.IsNullOrWhiteSpace(token))
             {
                 return BadRequest("Token es nulo o está vacío.");
             }
 
             try
             {
-                _logger.LogInformation($"Token recibido para confirmación: {authorization}");
+                _logger.LogInformation($"Token recibido para confirmación: {token}");
 
                 // Limpiar y decodificar el token
-                string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorization);
+                string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(token);
                 _logger.LogInformation($"UserID obtenido del token: {userIdObtainedString}");
 
                 // Verificar si el ID es válido
