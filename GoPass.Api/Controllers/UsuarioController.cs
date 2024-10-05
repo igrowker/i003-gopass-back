@@ -15,17 +15,19 @@ namespace GoPass.API.Controllers
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IEntradaService _entradaService;
+        private readonly IReventaService _reventaService;
         private readonly IAesGcmCryptoService _aesGcmCryptoService;
         private readonly IVonageSmsService _vonageSmsService;
         private readonly IEmailService _emailService;
         private readonly ITemplateService _templateService;
         private readonly ILogger<UsuarioController> _logger;
 
-        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService, IEntradaService entradaService,
+        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService, IEntradaService entradaService, IReventaService reventaService,
             IAesGcmCryptoService aesGcmCryptoService, IVonageSmsService vonageSmsService, IEmailService emailService, ITemplateService templateService)
         {
             _usuarioService = usuarioService;
             _entradaService = entradaService;
+            _reventaService = reventaService;
             _aesGcmCryptoService = aesGcmCryptoService;
             _vonageSmsService = vonageSmsService;
             _emailService = emailService;
@@ -50,7 +52,7 @@ namespace GoPass.API.Controllers
 
                 var valoresReemplazo = new Dictionary<string, string>
                  {
-                     { "Nombre", registeredUser.Nombre },
+                     { "Nombre", registeredUser.Nombre! },
                      { "UrlConfirmacion", confirmationUrl }
                  };
 
@@ -227,7 +229,7 @@ namespace GoPass.API.Controllers
             return Ok("Se verifico su numero de telefono correctamente" + code);
         }
 
-        [HttpGet("obtener-usuario-reventas")]
+        [HttpGet("obtener-usuario-entradas-reventa")]
         public async Task<IActionResult> GetUserResales()
         {
             try
@@ -235,7 +237,6 @@ namespace GoPass.API.Controllers
                 string authHeader = HttpContext.Request.Headers["Authorization"].ToString();
                 string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authHeader);
                 int userId = int.Parse(userIdObtainedString);
-                //Usuario dbExistingUserCredentials = await _usuarioService.GetByIdAsync(userId);
 
                 List<Entrada> resales = await _entradaService.GetTicketsInResaleByUserIdAsync(userId);
 
@@ -245,6 +246,26 @@ namespace GoPass.API.Controllers
             {
 
                 return BadRequest("No tenes entradas en reventa.");
+            }
+        }
+
+        [HttpGet("obtener-usuario-entradas-compradas")]
+        public async Task<IActionResult> GetUserTicketsBought()
+        {
+            try
+            {
+                string authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+                string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authHeader);
+                int userId = int.Parse(userIdObtainedString);
+
+                List<Reventa> resales = await _reventaService.GetBoughtTicketsByCompradorIdAsync(userId);
+
+                return Ok(resales);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("No tenes entradas compradas.");
             }
         }
     }
