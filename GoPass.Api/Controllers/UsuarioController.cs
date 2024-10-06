@@ -137,6 +137,87 @@ namespace GoPass.API.Controllers
             }
         }
 
+        [HttpPost("solicitar-restablecimiento")]
+        public async Task<IActionResult> SolicitarRestablecimiento([FromBody] PasswordResetRequestDto passwordResetRequestDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+
+                var usuario = await _usuarioService.GetUserByEmailAsync(passwordResetRequestDto.Email);
+                if (usuario == null)
+                {
+                    return NotFound("No se encontró un usuario con ese correo.");
+                }
+                if (usuario.VerificadoEmail is false) 
+                    return BadRequest("No se pudo solicitar el restablecimiento de contraseña sin haber realizado antes la validacion en el correo electronico.");
+
+                usuario.Restablecer = true;
+                await _usuarioService.Update(usuario.Id, usuario);
+
+                string resetUrl = $"{Request.Scheme}://{Request.Host}/api/Usuario/restablecer-actualizar?email={usuario.Email}";
+
+                var valoresReemplazo = new Dictionary<string, string>
+
+                {
+                    { "Nombre", usuario.Nombre },
+                    { "UrlRestablecimiento", resetUrl }
+                };
+
+                string contenidoPlantilla = await _templateService.ObtenerContenidoTemplateAsync("ResetPassword", valoresReemplazo);
+                string emailSubject = "Restablecimiento de contraseña";
+
+                EmailValidationRequestDto emailConfig = new();
+                EmailValidationRequestDto emailToSend = emailConfig.AssignEmailValues(usuario.Email, emailSubject, contenidoPlantilla);
+
+                bool sent = await _emailService.SendVerificationEmailAsync(emailToSend);
+
+                if (!sent)
+                {
+                    return BadRequest("No se pudo enviar el correo para restablecer la contraseña");
+                }
+                return Ok("Se envio el correo para restablecer la contraseña, revise su bandeja de entrada o en la carpeta spam");
+            }
+            catch (ArgumentException argEx)
+            {
+                _logger.LogWarning(argEx, "Error al solicitar el restablecimiento de contraseña: " + argEx.Message);
+                return BadRequest(argEx.Message);
+            }
+        }
+
+        [HttpPost("restablecer-actualizar")]
+        public async Task<IActionResult> RestablecerActualizar([FromBody] ConfirmPasswordResetRequestDto confirmPasswordResetRequestDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var usuario = await _usuarioService.GetUserByEmailAsync(confirmPasswordResetRequestDto.Email);
+                if (usuario.Restablecer is false) 
+                    return BadRequest("Usted no ha solicitado un restablecimiento de contraseña");
+
+                var actualizado = await _usuarioService.ConfirmResetPasswordAsync(false, confirmPasswordResetRequestDto.Password, 
+                    confirmPasswordResetRequestDto.Email);
+
+                if (actualizado)
+                {
+                    return Ok(new { mensaje = "Contraseña actualizada con éxito." });
+                }
+                else
+                {
+                    return BadRequest(new { mensaje = "No se pudo actualizar la contraseña. Verifica el token o el estado de la solicitud." });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al actualizar la contraseña.");
+                return StatusCode(500, new { mensaje = "Error interno del servidor." });
+            }
+        }
+
         [Authorize]
         [HttpGet("user-credentials")]
         public async Task<IActionResult> GetUserCredentials()

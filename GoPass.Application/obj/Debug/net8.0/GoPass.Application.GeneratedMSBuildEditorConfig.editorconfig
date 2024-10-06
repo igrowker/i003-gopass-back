@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GoPass.Application
-build_property.ProjectDir = C:\Users\ezefe\OneDrive\Desktop\Contenedor\Proyectos\Igrowker\GoPass\i003-gopass-back\GoPass.Application\
+build_property.ProjectDir = C:\Users\gomez\source\repos\i003-gopass-back\GoPass.Application\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

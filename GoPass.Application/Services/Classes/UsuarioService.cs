@@ -108,21 +108,19 @@ namespace GoPass.Application.Services.Classes
             return decodedToken;
         }
 
-
-        public async Task<bool> RestablecerActualizarAsync(int restablecer, string nuevaPassword, string token)
+        public async Task<bool> ConfirmResetPasswordAsync(bool reset, string newPassword, string userEmail)
         {
             try
             {
-                var usuario = await _usuarioRepository.GetUserByToken(token);
+                var usuario = await _usuarioRepository.GetUserByEmail(userEmail);
                 
                 if (usuario == null)
                 {
                     return false;
                 }
 
-                usuario.Restablecer = true;
-                usuario.Password = _passwordHasher.HashPassword(usuario, nuevaPassword);
-                usuario.Token = null;
+                usuario.Restablecer = reset;
+                usuario.Password = _passwordHasher.HashPassword(usuario, newPassword);
 
                 await _usuarioRepository.Update(usuario.Id, usuario);
                 return true;
