@@ -99,7 +99,12 @@ namespace GoPass.API.Controllers
                 return BadRequest("Esta intentando comprar su propia entrada, lo cual no tiene sentido");
             }
 
-            resaleDb.CompradorId = userId;
+            if (resaleDb.CompradorId > 0)
+            {
+                return BadRequest("Esta entrada ya fue comprada, por lo cual no esta disponible, compre otra.");
+            }
+
+                resaleDb.CompradorId = userId;
 
             Reventa publishReventaBuyer = await _reventaService.Update(resaleDb.Id, resaleDb);
 

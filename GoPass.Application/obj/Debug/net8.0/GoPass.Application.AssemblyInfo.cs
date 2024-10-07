@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GoPass.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8b574dfb051ee7da4078e5f77b6062c26f25b8d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0c6e3278f452f0684fbde0cc4dfce707b18dc03")]
 [assembly: System.Reflection.AssemblyProductAttribute("GoPass.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GoPass.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
