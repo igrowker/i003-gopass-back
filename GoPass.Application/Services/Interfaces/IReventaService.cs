@@ -11,5 +11,6 @@ namespace GoPass.Application.Services.Interfaces
         Task<Reventa> PublishTicketAsync(Reventa reventa, int sellerId);
         Task<Reventa> GetResaleByEntradaIdAsync(int entradaId);
         Task<List<Reventa>> GetBoughtTicketsByCompradorIdAsync(int compradorId);
+        Task<Reventa> NotifyBought(int id, Reventa reventa);
     }
 }

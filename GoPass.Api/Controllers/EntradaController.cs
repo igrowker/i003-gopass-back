@@ -29,22 +29,5 @@ namespace GoPass.API.Controllers
 
             return Ok(tickets);
         }
-
-        //[Authorize]
-        //[HttpPost("publicar-entrada")]
-        //public async Task<IActionResult> PublishTicket(PublishEntradaRequestDto publishEntradaRequestDto)
-        //{
-        //    string authHeader = HttpContext.Request.Headers["Authorization"].ToString();
-        //    string userId = await _usuarioService.GetUserIdByTokenAsync(authHeader);
-        //    int parsedUserId = int.Parse(userId);
-
-        //    Entrada ticketToPublish = publishEntradaRequestDto.FromPublishEntradaRequestToModel();
-
-        //    ticketToPublish.UsuarioId = parsedUserId;
-
-        //    Entrada publishedTicket = await _entradaService.Create(ticketToPublish);
-
-        //    return Ok(publishedTicket.FromPublishEntradaRequestToResponseDto());
-        //}
     }
 }

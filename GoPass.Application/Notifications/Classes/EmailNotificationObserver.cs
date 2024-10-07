@@ -1,5 +1,6 @@
 ﻿using GoPass.Application.Notifications.Interfaces;
 using GoPass.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,19 @@ using System.Threading.Tasks;
 
 namespace GoPass.Application.Notifications.Classes
 {
-    public class EmailNotificationObserver : IGenericObserver<string>
+    public class EmailNotificationObserver : Interfaces.IObserver<string>
     {
         private readonly IEmailService _emailService;
-        public EmailNotificationObserver(IEmailService emailservice)
+
+        public EmailNotificationObserver(IEmailService emailService)
         {
-            _emailService = emailservice;
+            _emailService = emailService;
         }
-        //public void Update(string message)
-        //{
-        //    //_emailService.SendEmail(message);
-        //}
+
+        public async Task Update(string notification)
+        {
+            var emailMessage = notification!.ToString();
+           await _emailService.SendNotificationEmail(emailMessage);
+        }
     }
 }

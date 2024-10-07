@@ -16,13 +16,15 @@ namespace GoPass.API.Controllers
         private readonly IUsuarioService _usuarioService;
         private readonly IEntradaService _entradaService;
         private readonly IGopassHttpClientService _gopassHttpClientService;
+        private readonly IEmailService _emailService;
 
-        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService, IEntradaService entradaService, IGopassHttpClientService gopassHttpClientService)
+        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService, IEntradaService entradaService, IGopassHttpClientService gopassHttpClientService, IEmailService emailService)
         {
             _reventaService = reventaService;
             _usuarioService = usuarioService;
             _entradaService = entradaService;
             _gopassHttpClientService = gopassHttpClientService;
+            _emailService = emailService;
         }
 
         [Authorize]
@@ -97,6 +99,8 @@ namespace GoPass.API.Controllers
             resaleDb.CompradorId = userId;
 
             Reventa publishReventaBuyer = await _reventaService.Update(resaleDb.Id, resaleDb);
+
+            bool enviado = await _emailService.SendNotificationEmail("Hola estoy funcionando");
 
             return Ok(publishReventaBuyer.FromModelToReventaResponseDto());
         }

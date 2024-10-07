@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoPass.Application.Notifications.Classes
+namespace GoPass.Application.Notifications.Interfaces
 {
-    public class NotificationService
+    public interface IObserver<T>
     {
+        Task Update(T data);
     }
 }

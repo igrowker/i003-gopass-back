@@ -48,7 +48,7 @@ namespace GoPass.API.Controllers
 
                 if (registeredUser is null) BadRequest("El usuario es nulo " + registeredUser);
 
-                string confirmationUrl = $"{Request.Scheme}://{Request.Host}/api/Usuario/confirmar-cuenta?token={registeredUser.Token}";
+                string confirmationUrl = $"{Request.Scheme}://{Request.Host}/api/Usuario/confirmar-cuenta?token={registeredUser!.Token}";
 
                 var valoresReemplazo = new Dictionary<string, string>
                  {

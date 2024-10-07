@@ -1,20 +1,24 @@
 ﻿using Azure.Core;
+using GoPass.Application.Notifications.Interfaces;
 using GoPass.Application.Services.Interfaces;
 using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.Models;
 using GoPass.Infrastructure.Repositories.Classes;
 using GoPass.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 namespace GoPass.Application.Services.Classes
 {
     public class ReventaService : GenericService<Reventa>, IReventaService
     {
         private readonly IReventaRepository _reventaRepository;
+        private readonly ISubject<string> _subject;
 
-        public ReventaService(IReventaRepository reventaRepository) : base(reventaRepository)
+        public ReventaService(IReventaRepository reventaRepository, ISubject<string> subject) : base(reventaRepository)
         {
             _reventaRepository = reventaRepository;
+            _subject = subject;
         }
 
         public async Task<Reventa> PublishTicketAsync(Reventa reventa, int sellerId)        
@@ -32,6 +36,23 @@ namespace GoPass.Application.Services.Classes
             List<Reventa> ticketsInresale = await _reventaRepository.GetBoughtTicketsByCompradorId(compradorId);
 
             return ticketsInresale;
+        }
+
+        //public override async Task<Reventa> Update(int id, Reventa reventa)
+        //{
+        //    Reventa boughtTicket = await _genericRepository.Update(id, reventa);
+
+        //    await _subject.Notify($"Se ha comprado la entrada: {reventa}");
+
+        //    return boughtTicket;
+        //}
+        public async Task<Reventa> NotifyBought(int id, Reventa reventa)
+        {
+            Reventa boughtTicket = await _genericRepository.Update(id, reventa);
+
+            await _subject.Notify($"Se ha comprado la entrada: {reventa}");
+
+            return boughtTicket;
         }
     }
 }

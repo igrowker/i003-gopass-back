@@ -35,7 +35,7 @@ namespace GoPass.Application.Services.Classes
         {
             return await _genericRepository.Create(model);
         }
-        public async Task<T> Update(int id, T model)
+        public virtual async Task<T> Update(int id, T model)
         {
             return await _genericRepository.Update(id, model);
         }
