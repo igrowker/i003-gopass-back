@@ -62,6 +62,10 @@ namespace GoPass.API.Controllers
             string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
             int userId = int.Parse(userIdObtainedString);
 
+            bool validUserCredentials = await _usuarioService.ValidateUserCredentialsToPublishTicket(userId);
+
+            if (validUserCredentials == false) return BadRequest("Debe tener todas sus credenciales en regla para poder publicar una entrada");
+
             Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(publishReventaRequestDto.CodigoQR);
             PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishEntradaRequest();
 

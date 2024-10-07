@@ -26,6 +26,9 @@ namespace GoPass.Infrastructure.Migrations
                     City = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Country = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Verificado = table.Column<bool>(type: "bit", nullable: false),
+                    VerificadoEmail = table.Column<bool>(type: "bit", nullable: false),
+                    VerificadoSms = table.Column<bool>(type: "bit", nullable: false),
+                    Restablecer = table.Column<bool>(type: "bit", nullable: false),
                     Token = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

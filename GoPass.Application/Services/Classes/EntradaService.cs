@@ -2,6 +2,7 @@
 using GoPass.Application.Utilities.Mappers;
 using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.Models;
+using GoPass.Infrastructure.Repositories.Classes;
 using GoPass.Infrastructure.Repositories.Interfaces;
 
 namespace GoPass.Application.Services.Classes
@@ -31,6 +32,12 @@ namespace GoPass.Application.Services.Classes
             bool ticketQrCode = await _entradaRepository.VerifyQrCodeExists(qrCode);
 
             return ticketQrCode!;
+        }
+        public async Task<List<Entrada>> GetTicketsInResaleByUserIdAsync(int userId)
+        {
+            List<Entrada> ticketsInresale = await _entradaRepository.GetTicketsInResaleByUserId(userId);
+
+            return ticketsInresale;
         }
     }
 }

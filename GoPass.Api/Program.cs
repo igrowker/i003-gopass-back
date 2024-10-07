@@ -15,9 +15,8 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 #region Services Area
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers()
             .AddJsonOptions(options => {options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;});
@@ -52,7 +51,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-//builder.Services.AddDatabaseContext(connectionString);
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(connectionString)
 );
@@ -98,9 +96,8 @@ builder.Services.AddCors(opciones =>
 
 builder.Services.AddHttpClient<IGopassHttpClientService, GopassHttpClientService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7292/api/"); // Cambia esta URL a la de tu API
-    //client.Timeout = TimeSpan.FromSeconds(30); // Configura un timeout de 30 segundos
-    client.DefaultRequestHeaders.Add("Accept", "application/json"); // Establece los headers necesarios
+    client.BaseAddress = new Uri("https://localhost:7292/api/");
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
 
@@ -110,9 +107,10 @@ builder.Services.AddScoped<IReventaService, ReventaService>();
 builder.Services.AddScoped<IEntradaService, EntradaService>();
 builder.Services.AddScoped<ITicketMasterService, TicketSimulatorService>();
 builder.Services.AddScoped<IAesGcmCryptoService, AesGcmCryptoService>();
+builder.Services.AddScoped<ITemplateService, TemplateService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
-builder.Services.AddSingleton<ITwilioSmsService, TwilioSmsService>();
-
+builder.Services.AddSingleton<IVonageSmsService, VonageSmsService>();
 
 builder.Services.AddScoped<IReventaRepository, ReventaRepository>();
 builder.Services.AddScoped<IEntradaRepository, EntradaRepository>();
@@ -123,7 +121,7 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 var app = builder.Build();
 
 #region Middlewares Area
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
   app.UseSwagger();

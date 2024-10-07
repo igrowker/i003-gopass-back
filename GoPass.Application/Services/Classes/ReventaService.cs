@@ -2,6 +2,7 @@
 using GoPass.Application.Services.Interfaces;
 using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.Models;
+using GoPass.Infrastructure.Repositories.Classes;
 using GoPass.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,13 @@ namespace GoPass.Application.Services.Classes
         public async Task<Reventa> GetResaleByEntradaIdAsync(int entradaId)
         {
             return await _reventaRepository.GetResaleByEntradaId(entradaId);
+        }
+
+        public async Task<List<Reventa>> GetBoughtTicketsByCompradorIdAsync(int compradorId)
+        {
+            List<Reventa> ticketsInresale = await _reventaRepository.GetBoughtTicketsByCompradorId(compradorId);
+
+            return ticketsInresale;
         }
     }
 }
