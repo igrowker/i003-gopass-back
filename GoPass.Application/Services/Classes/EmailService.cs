@@ -42,17 +42,15 @@ namespace GoPass.Application.Services.Classes
             }
         }
         //public async Task<bool> SendNotificationEmail(NotificationEmailRequestDto notificationEmailRequestDto)
-        public async Task<bool> SendNotificationEmail(string message)
+        public async Task<bool> SendNotificationEmailAsync(NotificationEmailRequestDto notificationEmailRequestDto)
         {
             try
             {
                 var email = new MimeMessage();
                 email.From.Add(new MailboxAddress(_From, _Email));
-                //email.To.Add(MailboxAddress.Parse(notificationEmailRequestDto.To));
-                email.To.Add(MailboxAddress.Parse("ezefeola@gmail.com"));
-                //email.Subject = notificationEmailRequestDto.Message;
-                email.Subject = message;
-                 email.Body = new TextPart(TextFormat.Html) { Text = message};
+                email.To.Add(MailboxAddress.Parse(notificationEmailRequestDto.To));
+                email.Subject = "Notificación de Compra";
+                email.Body = new TextPart(TextFormat.Html) { Text = notificationEmailRequestDto.Message };
 
                 using var smtp = new SmtpClient();
                 await smtp.ConnectAsync(_Host, _Port, SecureSocketOptions.StartTls);
@@ -69,5 +67,14 @@ namespace GoPass.Application.Services.Classes
             }
         }
 
+        //public Task<bool> SendNotificationEmail(string message)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //Task IEmailService.SendNotificationEmail(NotificationEmailRequestDto notification)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

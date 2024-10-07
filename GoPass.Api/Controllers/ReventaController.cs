@@ -5,6 +5,7 @@ using GoPass.Application.Utilities.Mappers;
 using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.DTOs.Request.PaginationDTOs;
 using GoPass.Domain.Models;
+using GoPass.Domain.DTOs.Request.Notification;
 
 namespace GoPass.API.Controllers
 {
@@ -91,7 +92,7 @@ namespace GoPass.API.Controllers
 
             Reventa resaleDb = await _reventaService.GetResaleByEntradaIdAsync(buyEntradaRequestDto.EntradaId);
 
-            if(userId == resaleDb.VendedorId)
+            if (userId == resaleDb.VendedorId)
             {
                 return BadRequest("Esta intentando comprar su propia entrada, lo cual no tiene sentido");
             }
@@ -100,9 +101,20 @@ namespace GoPass.API.Controllers
 
             Reventa publishReventaBuyer = await _reventaService.Update(resaleDb.Id, resaleDb);
 
-            bool enviado = await _emailService.SendNotificationEmail("Hola estoy funcionando");
+            var updatedResale = publishReventaBuyer;
 
-            return Ok(publishReventaBuyer.FromModelToReventaResponseDto());
+            // Crear el objeto NotificationEmailRequestDto para el correo
+            var notificationEmail = new NotificationEmailRequestDto
+            {
+                To = "esperanza96_898@birax.org", // Aquí debes obtener el email del usuario comprador
+                Message = $"El usuario con ID {userId} ha comprado la entrada con ID {resaleDb.EntradaId}."
+            };
+
+            // Notificar la compra vía el observer
+            await _emailService.SendNotificationEmailAsync(notificationEmail); // Llama al método correcto
+
+            return Ok(new { message = "Compra realizada y notificación enviada con éxito.", updatedResale });
         }
+
     }
 }

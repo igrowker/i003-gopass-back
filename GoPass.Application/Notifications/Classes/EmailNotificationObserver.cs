@@ -1,5 +1,6 @@
 ﻿using GoPass.Application.Notifications.Interfaces;
 using GoPass.Application.Services.Interfaces;
+using GoPass.Domain.DTOs.Request.Notification;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,13 @@ namespace GoPass.Application.Notifications.Classes
             _emailService = emailService;
         }
 
-        public async Task Update(string notification)
+        public async Task Update(string data)
         {
-            var emailMessage = notification!.ToString();
-           await _emailService.SendNotificationEmail(emailMessage);
+            NotificationEmailRequestDto notification = new();
+            if (notification != null)
+            {
+                await _emailService.SendNotificationEmailAsync(notification);
+            }
         }
     }
 }
