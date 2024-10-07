@@ -38,15 +38,7 @@ namespace GoPass.Application.Services.Classes
             return ticketsInresale;
         }
 
-        //public override async Task<Reventa> Update(int id, Reventa reventa)
-        //{
-        //    Reventa boughtTicket = await _genericRepository.Update(id, reventa);
-
-        //    await _subject.Notify($"Se ha comprado la entrada: {reventa}");
-
-        //    return boughtTicket;
-        //}
-        public async Task<Reventa> NotifyBought(int id, Reventa reventa)
+        public async Task<Reventa> SellBuyNotifications(int id, Reventa reventa)
         {
             Reventa boughtTicket = await _genericRepository.Update(id, reventa);
 

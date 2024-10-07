@@ -6,6 +6,7 @@ using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.DTOs.Request.PaginationDTOs;
 using GoPass.Domain.Models;
 using GoPass.Domain.DTOs.Request.Notification;
+using GoPass.Application.Notifications.Classes;
 
 namespace GoPass.API.Controllers
 {
@@ -19,7 +20,8 @@ namespace GoPass.API.Controllers
         private readonly IGopassHttpClientService _gopassHttpClientService;
         private readonly IEmailService _emailService;
 
-        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService, IEntradaService entradaService, IGopassHttpClientService gopassHttpClientService, IEmailService emailService)
+        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService, IEntradaService entradaService, 
+            IGopassHttpClientService gopassHttpClientService, IEmailService emailService)
         {
             _reventaService = reventaService;
             _usuarioService = usuarioService;
@@ -101,19 +103,43 @@ namespace GoPass.API.Controllers
 
             Reventa publishReventaBuyer = await _reventaService.Update(resaleDb.Id, resaleDb);
 
-            var updatedResale = publishReventaBuyer;
 
-            // Crear el objeto NotificationEmailRequestDto para el correo
-            var notificationEmail = new NotificationEmailRequestDto
+            //Notifications
+            Usuario buyerData = await _usuarioService.GetByIdAsync(publishReventaBuyer.CompradorId);
+            Usuario sellerData = await _usuarioService.GetByIdAsync(publishReventaBuyer.VendedorId);
+            Entrada ticketDb = await _entradaService.GetByIdAsync(buyEntradaRequestDto.EntradaId);
+
+            Subject<NotificationEmailRequestDto> purchaseNotifier = new();
+            BuyerEmailNotificationObserver compradorObserver = new BuyerEmailNotificationObserver(_emailService);
+
+            purchaseNotifier.Attach(compradorObserver);
+
+            NotificationEmailRequestDto buyerNotificationEmailRequestDto = new NotificationEmailRequestDto
             {
-                To = "esperanza96_898@birax.org", // Aquí debes obtener el email del usuario comprador
-                Message = $"El usuario con ID {userId} ha comprado la entrada con ID {resaleDb.EntradaId}."
+                UserName = buyerData.Nombre!,
+                To = buyerData.Email,
+                TicketQrCode = ticketDb.CodigoQR
+
             };
+            await purchaseNotifier.Notify(buyerNotificationEmailRequestDto); // Comprador
 
-            // Notificar la compra vía el observer
-            await _emailService.SendNotificationEmailAsync(notificationEmail); // Llama al método correcto
+            Subject<NotificationEmailRequestDto> sellerNotifier = new();
+            SellerEmailNotificationObserver sellerObserver = new SellerEmailNotificationObserver(_emailService);
 
-            return Ok(new { message = "Compra realizada y notificación enviada con éxito.", updatedResale });
+            sellerNotifier.Attach(sellerObserver);
+
+            NotificationEmailRequestDto sellerNotificationEmailRequestDto = new NotificationEmailRequestDto
+            {
+                UserName = sellerData.Nombre!,
+                To = sellerData.Email,
+                TicketQrCode = ticketDb.CodigoQR
+
+            };
+            await sellerNotifier.Notify(sellerNotificationEmailRequestDto); // Vendedor
+
+            //Notifications
+
+            return Ok(new { message = "Compra realizada y notificación enviada con éxito.", publishReventaBuyer });
         }
 
     }

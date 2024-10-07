@@ -49,7 +49,7 @@ namespace GoPass.Application.Services.Classes
                 var email = new MimeMessage();
                 email.From.Add(new MailboxAddress(_From, _Email));
                 email.To.Add(MailboxAddress.Parse(notificationEmailRequestDto.To));
-                email.Subject = "Notificación de Compra";
+                email.Subject = notificationEmailRequestDto.Subject;
                 email.Body = new TextPart(TextFormat.Html) { Text = notificationEmailRequestDto.Message };
 
                 using var smtp = new SmtpClient();

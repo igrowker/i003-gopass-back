@@ -1,4 +1,5 @@
 ﻿using GoPass.Application.Notifications.Interfaces;
+using GoPass.Domain.Models;
 
 namespace GoPass.Application.Notifications.Classes
 {
@@ -16,11 +17,11 @@ namespace GoPass.Application.Notifications.Classes
             _observers.Remove(observer);
         }
 
-        public async Task Notify(T notification)
+        public async Task Notify(T data)
         {
             foreach (var observer in _observers) 
             {
-                await observer.Update(notification);
+                await observer.Update(data);
             }
         }
     }
