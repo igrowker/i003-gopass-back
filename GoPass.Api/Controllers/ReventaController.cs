@@ -5,6 +5,7 @@ using GoPass.Application.Utilities.Mappers;
 using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.DTOs.Request.PaginationDTOs;
 using GoPass.Domain.Models;
+using GoPass.Domain.DTOs.Response.AuthResponseDTOs;
 
 namespace GoPass.API.Controllers
 {
@@ -40,7 +41,9 @@ namespace GoPass.API.Controllers
         {
             Usuario sellerInformation = await _usuarioService.GetByIdAsync(vendedorId);
 
-            return Ok(sellerInformation);
+            SellerInformationResponseDto sellerInformationResponseDto = sellerInformation.FromModelToSellerInformationResponseDto();
+
+            return Ok(sellerInformationResponseDto);
         }
 
         [HttpGet("get-ticket-from-faker")]
