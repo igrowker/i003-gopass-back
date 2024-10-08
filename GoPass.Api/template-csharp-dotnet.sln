@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoPass.Infrastructure", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoPass.Application", "..\GoPass.Application\GoPass.Application.csproj", "{7B2A733D-B8EE-4517-98BF-0631B5E6EB2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketFaker.API", "..\TicketFaker.API\TicketFaker.API.csproj", "{967DE5B4-13B8-44C7-99D5-0E9DF1682442}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketFaker.API", "..\TicketFaker.API\TicketFaker.API.csproj", "{967DE5B4-13B8-44C7-99D5-0E9DF1682442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoPass.Test", "..\GoPass.Test\GoPass.Test.csproj", "{F429865D-5668-476C-85CB-A7D2307BB153}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{967DE5B4-13B8-44C7-99D5-0E9DF1682442}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{967DE5B4-13B8-44C7-99D5-0E9DF1682442}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{967DE5B4-13B8-44C7-99D5-0E9DF1682442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F429865D-5668-476C-85CB-A7D2307BB153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F429865D-5668-476C-85CB-A7D2307BB153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F429865D-5668-476C-85CB-A7D2307BB153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F429865D-5668-476C-85CB-A7D2307BB153}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

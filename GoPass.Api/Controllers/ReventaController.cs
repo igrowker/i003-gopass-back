@@ -17,7 +17,11 @@ namespace GoPass.API.Controllers
         private readonly IEntradaService _entradaService;
         private readonly IGopassHttpClientService _gopassHttpClientService;
 
-        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService, IEntradaService entradaService, IGopassHttpClientService gopassHttpClientService)
+        public ReventaController(
+            IReventaService reventaService, 
+            IUsuarioService usuarioService, 
+            IEntradaService entradaService, 
+            IGopassHttpClientService gopassHttpClientService)
         {
             _reventaService = reventaService;
             _usuarioService = usuarioService;
@@ -58,25 +62,32 @@ namespace GoPass.API.Controllers
         [HttpPost("publicar-entrada-reventa")]
         public async Task<IActionResult> PublishResaleTicket(PublishReventaRequestDto publishReventaRequestDto)
         {
-            string authorizationHeader = Request.Headers["Authorization"].ToString();
-            string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
-            int userId = int.Parse(userIdObtainedString);
+            try
+            {
+                string authorizationHeader = Request.Headers["Authorization"].ToString();
+                string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
+                int userId = int.Parse(userIdObtainedString);
 
-            bool validUserCredentials = await _usuarioService.ValidateUserCredentialsToPublishTicket(userId);
+                bool validUserCredentials = await _usuarioService.ValidateUserCredentialsToPublishTicket(userId);
 
-            if (validUserCredentials == false) return BadRequest("Debe tener todas sus credenciales en regla para poder publicar una entrada");
+                if (validUserCredentials == false) return BadRequest("Debe tener todas sus credenciales en regla para poder publicar una entrada");
 
-            Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(publishReventaRequestDto.CodigoQR);
-            PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishEntradaRequest();
+                Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(publishReventaRequestDto.CodigoQR);
+                PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishEntradaRequest();
 
-            Entrada createdTicket = await _entradaService.PublishTicket(existingTicketInFaker, userId);
+                Entrada createdTicket = await _entradaService.PublishTicket(existingTicketInFaker, userId);
 
-            Reventa reventaToPublish = publishReventaRequestDto.FromPublishReventaRequestToModel();
-            reventaToPublish.EntradaId = createdTicket.Id;
+                Reventa reventaToPublish = publishReventaRequestDto.FromPublishReventaRequestToModel();
+                reventaToPublish.EntradaId = createdTicket.Id;
 
-            Reventa publishedReventa = await _reventaService.PublishTicketAsync(reventaToPublish, userId);
+                Reventa publishedReventa = await _reventaService.PublishTicketAsync(reventaToPublish, userId);
 
-            return Ok(publishedReventa.FromModelToPublishReventaResponseDto());
+                return Ok(publishedReventa.FromModelToPublishReventaResponseDto());
+            }
+            catch (Exception ex)
+            {           
+                return BadRequest(ex.Message);
+            }
         }
 
         [Authorize]
