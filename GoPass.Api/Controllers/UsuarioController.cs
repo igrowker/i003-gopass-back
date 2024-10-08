@@ -157,7 +157,7 @@ namespace GoPass.API.Controllers
                 usuario.Restablecer = true;
                 await _usuarioService.Update(usuario.Id, usuario);
 
-                string resetUrl = $"{Request.Scheme}://{Request.Host}/api/Usuario/restablecer-actualizar?email={usuario.Email}";
+                string resetUrl = $"{Request.Scheme}://localhost:5174/reset-password";
 
                 var valoresReemplazo = new Dictionary<string, string>
 
