@@ -34,6 +34,15 @@ namespace GoPass.API.Controllers
             return Ok(resales);
         }
 
+        [Authorize]
+        [HttpGet("get-seller-information")]
+        public async Task<IActionResult> GetTicketResaleSellerInformation(int vendedorId)
+        {
+            Usuario sellerInformation = await _usuarioService.GetByIdAsync(vendedorId);
+
+            return Ok(sellerInformation);
+        }
+
         [HttpGet("get-ticket-from-faker")]
         public async Task<IActionResult> GetTicketFromTicketFaker(string codigoQr)
         {
