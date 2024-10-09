@@ -5,6 +5,7 @@ using GoPass.Application.Utilities.Mappers;
 using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.DTOs.Request.PaginationDTOs;
 using GoPass.Domain.Models;
+using GoPass.Domain.DTOs.Response.AuthResponseDTOs;
 
 namespace GoPass.API.Controllers
 {
@@ -36,6 +37,17 @@ namespace GoPass.API.Controllers
             List<Reventa> resales = await _reventaService.GetAllWithPaginationAsync(paginationDto);
 
             return Ok(resales);
+        }
+
+        [Authorize]
+        [HttpGet("get-seller-information")]
+        public async Task<IActionResult> GetTicketResaleSellerInformation(int vendedorId)
+        {
+            Usuario sellerInformation = await _usuarioService.GetByIdAsync(vendedorId);
+
+            SellerInformationResponseDto sellerInformationResponseDto = sellerInformation.FromModelToSellerInformationResponseDto();
+
+            return Ok(sellerInformationResponseDto);
         }
 
         [HttpGet("get-ticket-from-faker")]
