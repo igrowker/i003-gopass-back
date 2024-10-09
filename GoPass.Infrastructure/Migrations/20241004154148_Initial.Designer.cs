@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoPass.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241002152744_Initial")]
+    [Migration("20241004154148_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -151,10 +151,19 @@ namespace GoPass.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Restablecer")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Verificado")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("VerificadoEmail")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("VerificadoSms")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

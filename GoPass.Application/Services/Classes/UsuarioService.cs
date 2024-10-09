@@ -2,7 +2,6 @@
 using GoPass.Domain.Models;
 using GoPass.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using System.Net;
 
 namespace GoPass.Application.Services.Classes
 {
@@ -42,23 +41,32 @@ namespace GoPass.Application.Services.Classes
         {
             usuario.Password = _passwordHasher.HashPassword(usuario, usuario.Password);
 
-            var userToken = _tokenService.CreateToken(usuario);
-            usuario.Token = userToken;
+            var nuevoUsuario = await _usuarioRepository.Create(usuario);
 
-            return await _usuarioRepository.Create(usuario);
+            if (nuevoUsuario.Id <= 0)
+            {
+                throw new Exception("El ID del usuario no es válido después de la creación.");
+            }
+
+            var userToken = _tokenService.CreateToken(nuevoUsuario);
+            nuevoUsuario.Token = userToken; 
+            await _usuarioRepository.StorageToken(usuario.Id, userToken);
+            return nuevoUsuario; 
+
         }
+
 
         public async Task<Usuario> AuthenticateAsync(string email, string password)
         {
-            var userInDb = await _usuarioRepository.GetUserByEmail(email);
+            Usuario userInDb = await _usuarioRepository.GetUserByEmail(email);
 
-            var passwordVerification = _passwordHasher.VerifyHashedPassword(userInDb, userInDb.Password, password);
+            PasswordVerificationResult passwordVerification = _passwordHasher.VerifyHashedPassword(userInDb, userInDb.Password, password);
 
             if (passwordVerification == PasswordVerificationResult.Failed) throw new Exception("Las credenciales no son correctas");
 
-            var user = await _usuarioRepository.AuthenticateUser(email, password);
+            Usuario user = await _usuarioRepository.AuthenticateUser(email, password);
 
-            var token = _tokenService.CreateToken(user);
+            string token = _tokenService.CreateToken(user);
             user.Token = token;
 
             return user;
@@ -66,35 +74,81 @@ namespace GoPass.Application.Services.Classes
 
         public async Task<bool> VerifyEmailExistsAsync(string email)
         {
-            var userEmail = await _usuarioRepository.VerifyEmailExists(email);
+            bool userEmail = await _usuarioRepository.VerifyEmailExists(email);
 
             return userEmail!;
         }
 
-        public async Task<bool> VerifyDniExistsAsync(string dni)
+        public async Task<bool> VerifyDniExistsAsync(string dni, int userId)
         {
-            var encriptedDni = _aesGcmCryptoService.Encrypt(dni);
-            var userDni = await _usuarioRepository.VerifyDniExists(encriptedDni);
+            string encriptedDni = _aesGcmCryptoService.Encrypt(dni);
+            bool userDni = await _usuarioRepository.VerifyDniExists(encriptedDni, userId);
 
             return userDni;
         }
-        public async Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber)
+        public async Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber, int userId)
         {
-            var encriptedPhoneNumber = _aesGcmCryptoService.Encrypt(phoneNumber);
-            var userPhoneNumber = await _usuarioRepository.VerifyPhoneNumberExists(encriptedPhoneNumber);
+            string encriptedPhoneNumber = _aesGcmCryptoService.Encrypt(phoneNumber);
+            bool userPhoneNumber = await _usuarioRepository.VerifyPhoneNumberExists(encriptedPhoneNumber, userId);
 
             return userPhoneNumber;
         }
 
         public async Task<string> GetUserIdByTokenAsync(string token)
         {
-            var cleanToken = token.StartsWith("Bearer ") ? token.Substring("Bearer ".Length) : null;
+            string cleanToken = token.StartsWith("Bearer ") ? token.Substring("Bearer ".Length) : token;
 
-            if (cleanToken is null) throw new Exception("Token nulo");
+            if (string.IsNullOrWhiteSpace(cleanToken))
+            {
+                throw new Exception("Token nulo o vacío.");
+            }
 
-            var decodedToken = await _tokenService.DecodeToken(cleanToken!);
+            string decodedToken = await _tokenService.DecodeToken(cleanToken!);
 
             return decodedToken;
+        }
+
+        public async Task<bool> ConfirmResetPasswordAsync(bool reset, string newPassword, string userEmail)
+        {
+            try
+            {
+                var usuario = await _usuarioRepository.GetUserByEmail(userEmail);
+                
+                if (usuario == null)
+                {
+                    return false;
+                }
+
+                usuario.Restablecer = reset;
+                usuario.Password = _passwordHasher.HashPassword(usuario, newPassword);
+
+                await _usuarioRepository.Update(usuario.Id, usuario);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //throw new Exception(ex);
+                return false;
+            }
+        }
+
+        public async Task<bool> ValidateUserCredentialsToPublishTicket(int userId)
+        {
+            bool isvalid = true;
+
+            Usuario usuario = await _usuarioRepository.GetById(userId);
+
+
+            if (string.IsNullOrEmpty(usuario.Nombre) ||
+            string.IsNullOrEmpty(usuario.DNI) ||
+            string.IsNullOrEmpty(usuario.NumeroTelefono) ||
+            !usuario.VerificadoEmail ||
+            !usuario.VerificadoSms)
+            {
+                return isvalid = false;
+            }
+
+            return isvalid;
         }
     }
 }

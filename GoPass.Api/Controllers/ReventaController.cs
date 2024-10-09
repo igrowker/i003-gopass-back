@@ -5,6 +5,7 @@ using GoPass.Application.Utilities.Mappers;
 using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.DTOs.Request.PaginationDTOs;
 using GoPass.Domain.Models;
+using GoPass.Domain.DTOs.Response.AuthResponseDTOs;
 
 namespace GoPass.API.Controllers
 {
@@ -34,14 +35,36 @@ namespace GoPass.API.Controllers
             return Ok(resales);
         }
 
+        [Authorize]
+        [HttpGet("get-seller-information")]
+        public async Task<IActionResult> GetTicketResaleSellerInformation(int vendedorId)
+        {
+            Usuario sellerInformation = await _usuarioService.GetByIdAsync(vendedorId);
+
+            SellerInformationResponseDto sellerInformationResponseDto = sellerInformation.FromModelToSellerInformationResponseDto();
+
+            return Ok(sellerInformationResponseDto);
+        }
+
         [HttpGet("get-ticket-from-faker")]
         public async Task<IActionResult> GetTicketFromTicketFaker(string codigoQr)
         {
-            var verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(codigoQr);
+            Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(codigoQr);
 
             return Ok(verifiedTicket);
         }
 
+        [HttpGet("validate-ticket-from-faker")]
+        public async Task<IActionResult> ValidateTicketFromTicketFaker(string codigoQr)
+        {
+            Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(codigoQr);
+
+            if (verifiedTicket is null) return BadRequest("No se encontro la entrada a validar.");
+
+            verifiedTicket.Verificada = true;
+
+            return Ok(verifiedTicket);
+        }
 
         [Authorize]
         [HttpPost("publicar-entrada-reventa")]
@@ -51,8 +74,12 @@ namespace GoPass.API.Controllers
             string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authorizationHeader);
             int userId = int.Parse(userIdObtainedString);
 
+            bool validUserCredentials = await _usuarioService.ValidateUserCredentialsToPublishTicket(userId);
+
+            if (validUserCredentials == false) return BadRequest("Debe tener todas sus credenciales en regla para poder publicar una entrada");
+
             Entrada verifiedTicket = await _gopassHttpClientService.GetTicketByQrAsync(publishReventaRequestDto.CodigoQR);
-            PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishRequest();
+            PublishEntradaRequestDto existingTicketInFaker = verifiedTicket.FromModelToPublishEntradaRequest();
 
             Entrada createdTicket = await _entradaService.PublishTicket(existingTicketInFaker, userId);
 

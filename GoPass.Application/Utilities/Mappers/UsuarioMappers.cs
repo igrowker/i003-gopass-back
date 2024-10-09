@@ -44,5 +44,14 @@ namespace GoPass.Application.Utilities.Mappers
             existingData.Country = modifyUsuarioRequestDto.Country;
             return existingData;
         }
+
+        public static SellerInformationResponseDto FromModelToSellerInformationResponseDto(this Usuario existingData)
+        {
+            return new SellerInformationResponseDto
+            {
+                Nombre = existingData.Nombre!,
+                Image = existingData.Image!,
+            };
+        }
     }
 }

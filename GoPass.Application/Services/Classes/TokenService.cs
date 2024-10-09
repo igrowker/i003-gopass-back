@@ -22,15 +22,21 @@ namespace GoPass.Application.Services.Classes
         }
         public string CreateToken(Usuario usuario)
         {
-            var claims = new List<Claim>
+            // Verifica si el usuario tiene un ID válido
+            if (usuario.Id <= 0)
             {
-                new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-                new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
-            };
+                throw new Exception("El ID del usuario no es válido.");
+            }
 
-            var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+            List<Claim> claims = new List<Claim>
+    {
+        new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
+        new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),  // El ID del usuario se almacena aquí
+    };
 
-            var tokenDescriptor = new SecurityTokenDescriptor
+            SigningCredentials credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(5),
@@ -46,15 +52,31 @@ namespace GoPass.Application.Services.Classes
             return tokenHandler.WriteToken(token);
         }
 
+
         public async Task<string> DecodeToken(string token)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
-            var decodedToken = tokenHandler.ReadJwtToken(token);
+            try
+            {
+                // Verificamos si el token es legible
+                JwtSecurityToken decodedToken = tokenHandler.ReadJwtToken(token);
 
-            var userId = decodedToken.Claims.First(claim => claim.Type == "sub").Value;
+                // Buscamos el claim "sub" que contiene el ID de usuario
+                var userIdClaim = decodedToken.Claims.FirstOrDefault(claim => claim.Type == "sub");
 
-            return userId;
+                if (userIdClaim == null)
+                {
+                    throw new Exception("El claim 'sub' no se encuentra en el token.");
+                }
+
+                return userIdClaim.Value;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al decodificar el token: {ex.Message}");
+            }
         }
+
     }
 }

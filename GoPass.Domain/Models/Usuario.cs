@@ -17,6 +17,9 @@ namespace GoPass.Domain.Models
         public string? City { get; set; } = default!;
         public string? Country { get; set; } = default!;
         public bool Verificado { get; set; } = false;
+        public bool VerificadoEmail { get; set; } = false;
+        public bool VerificadoSms { get; set; } = false;
+        public bool Restablecer { get; set; } = false;
 
         public string? Token { get; set; }
 

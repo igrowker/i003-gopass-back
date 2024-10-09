@@ -148,10 +148,19 @@ namespace GoPass.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Restablecer")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Verificado")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("VerificadoEmail")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("VerificadoSms")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

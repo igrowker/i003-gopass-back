@@ -13,7 +13,9 @@ namespace GoPass.Application.Services.Interfaces
         Task<Usuario> RegisterUserAsync(Usuario usuario);
         Task<string> GetUserIdByTokenAsync(string token);
         Task<bool> VerifyEmailExistsAsync(string email);
-        Task<bool> VerifyDniExistsAsync(string dni);
-        Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber);
+        Task<bool> VerifyDniExistsAsync(string dni, int userId);
+        Task<bool> VerifyPhoneNumberExistsAsync(string phoneNumber, int userId);
+        Task<bool> ConfirmResetPasswordAsync(bool reset, string newPassword, string userEmail);
+        Task<bool> ValidateUserCredentialsToPublishTicket(int userId);
     }
 }

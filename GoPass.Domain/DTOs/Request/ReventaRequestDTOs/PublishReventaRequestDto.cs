@@ -9,7 +9,6 @@ namespace GoPass.Domain.DTOs.Request.ReventaRequestDTOs
         public string Address { get; set; } = default!;
         public string Description { get; set; } = default!;
         public string ResaleDetail { get; set; } = default!;
-        public bool Verificada { get; set; }
         public decimal Precio { get; set; }
     }
 }

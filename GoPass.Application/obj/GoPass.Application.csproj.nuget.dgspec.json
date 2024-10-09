@@ -65,6 +65,10 @@
               "target": "Package",
               "version": "[11.10.0, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.8.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.8, )"
@@ -76,6 +80,10 @@
             "SharpGrip.FluentValidation.AutoValidation.Mvc": {
               "target": "Package",
               "version": "[1.4.0, )"
+            },
+            "Vonage": {
+              "target": "Package",
+              "version": "[7.9.0, )"
             }
           },
           "imports": [
