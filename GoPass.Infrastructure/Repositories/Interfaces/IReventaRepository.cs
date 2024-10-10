@@ -7,7 +7,7 @@ namespace GoPass.Infrastructure.Repositories.Interfaces
     {
         Task<Reventa> Publish(Reventa reventa, int vendedorId);
         Task<Reventa> GetResaleByEntradaId(int entradaId);
-        Task<List<Reventa>> GetBoughtTicketsByCompradorId(int compradorId);
+        //Task<List<Reventa>> GetBoughtTicketsByCompradorId(int compradorId);
         //Task<Reventa> BuyTicket(int resaleId);
     }
 }
