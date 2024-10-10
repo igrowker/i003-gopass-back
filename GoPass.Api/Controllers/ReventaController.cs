@@ -113,11 +113,9 @@ namespace GoPass.API.Controllers
                 return BadRequest("Esta intentando comprar su propia entrada, lo cual no tiene sentido");
             }
 
-            resaleDb.CompradorId = userId;
+            HistorialCompraVenta publishReventaBuyer = await _reventaService.BuyTicketAsync(resaleDb.Id, userId);
 
-            Reventa publishReventaBuyer = await _reventaService.Update(resaleDb.Id, resaleDb);
-
-            return Ok(publishReventaBuyer.FromModelToReventaResponseDto());
+            return Ok(publishReventaBuyer);
         }
     }
 }

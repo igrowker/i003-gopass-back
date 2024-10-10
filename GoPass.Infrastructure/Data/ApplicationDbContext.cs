@@ -15,6 +15,7 @@ namespace GoPass.Infrastructure.Data
         public DbSet<Entrada> Entradas { get; set; }
         public DbSet<Usuario> Usuarios{ get; set; }
         public DbSet<Reventa> Reventas { get; set; }
+        public DbSet<HistorialCompraVenta> HistorialComprasVentas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
