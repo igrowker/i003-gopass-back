@@ -10,7 +10,7 @@ namespace GoPass.Application.Services.Interfaces
     {
         Task<Reventa> PublishTicketAsync(Reventa reventa, int sellerId);
         Task<Reventa> GetResaleByEntradaIdAsync(int entradaId);
-        Task<List<Reventa>> GetBoughtTicketsByCompradorIdAsync(int compradorId);
         Task<HistorialCompraVenta> BuyTicketAsync(int reventaId, int compradorId);
+        Task<List<HistorialCompraVenta>> GetBoughtTicketsByCompradorIdAsync(int compradorId);
     }
 }

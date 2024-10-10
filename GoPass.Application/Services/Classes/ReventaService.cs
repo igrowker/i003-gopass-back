@@ -32,9 +32,9 @@ namespace GoPass.Application.Services.Classes
             return await _reventaRepository.GetResaleByEntradaId(entradaId);
         }
 
-        public async Task<List<Reventa>> GetBoughtTicketsByCompradorIdAsync(int compradorId)
+        public async Task<List<HistorialCompraVenta>> GetBoughtTicketsByCompradorIdAsync(int compradorId)
         {
-            List<Reventa> ticketsInresale = await _reventaRepository.GetBoughtTicketsByCompradorId(compradorId);
+            List<HistorialCompraVenta> ticketsInresale = await _historialCompraVentaRepository.GetBoughtTicketsByCompradorId(compradorId);
 
             return ticketsInresale;
         }
