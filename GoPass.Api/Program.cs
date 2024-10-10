@@ -115,6 +115,7 @@ builder.Services.AddSingleton<IVonageSmsService, VonageSmsService>();
 builder.Services.AddScoped<IReventaRepository, ReventaRepository>();
 builder.Services.AddScoped<IEntradaRepository, EntradaRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IHistorialCompraVentaRepository, HistorialCompraVentaRepository>();
 
 #endregion Services Area
 
