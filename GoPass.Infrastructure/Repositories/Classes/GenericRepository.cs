@@ -43,7 +43,7 @@ namespace GoPass.Infrastructure.Repositories.Classes
             await _dbContext.SaveChangesAsync();
             return model;
         }
-        public async Task<T> Update(int id, T model)
+        public virtual async Task<T> Update(int id, T model)
         {
             model.Id = id;
 

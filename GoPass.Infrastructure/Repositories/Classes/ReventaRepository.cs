@@ -4,6 +4,7 @@ using GoPass.Infrastructure.Data;
 using GoPass.Infrastructure.Repositories.Interfaces;
 using GoPass.Domain.DTOs.Request.PaginationDTOs;
 using GoPass.Domain.IQueryableExtensions;
+using System.Runtime.CompilerServices;
 
 namespace GoPass.Infrastructure.Repositories.Classes
 
@@ -41,16 +42,37 @@ namespace GoPass.Infrastructure.Repositories.Classes
             return await recordsQueriable.Paginate(paginationDto).Include(x => x.Entrada).ToListAsync();
         }
 
-        public async Task<List<Reventa>> GetBoughtTicketsByCompradorId(int compradorId)
-        {
-            if (compradorId <= 0)
-            {
-                throw new ArgumentException("El ID del vendedor no es válido.");
-            }
+        //public async Task<Reventa> BuyTicket(int resaleId)
+        //{
+        //    Reventa resale = await _dbSet.FindAsync(resaleId);
 
-            List<Reventa> ticketsInResale = await _dbSet.Where(x => x.CompradorId == compradorId).Include(x => x.Entrada).AsNoTracking().ToListAsync();
 
-            return ticketsInResale;
-        }
+        //    if(resale is null) throw new Exception("La reventa no existe.");
+
+        //    var historialCompraVenta = new HistorialCompraVenta
+        //    {
+        //        GameName = resale.GameName, // Asigna el nombre del juego desde la reventa
+        //        Description = resale.Description, // Asigna la descripción desde la reventa
+        //        Image = resale.Image, // Asigna la imagen, si está disponible
+        //        Address = resale.Address, // Asigna la dirección, si está disponible
+        //        EventDate = resale.EventDate, // Asigna la fecha del evento
+        //        CodigoQR = resale.CodigoQR, // Asigna el código QR
+        //        Verificada = false, // Por defecto, puede ser falsa
+        //        EntradaId = resale.EntradaId, // ID de la entrada asociada
+        //        VendedorId = resale.VendedorId, // ID del vendedor
+        //        CompradorId = resale.CompradorId, // ID del comprador
+        //        FechaReventa = DateTime.Now, // La fecha en que se compró la entrada
+        //        Precio = resale.Precio, // Precio de la reventa
+        //        ResaleDetail = resale.ResaleDetail // Detalles de la reventa
+        //    };
+
+        //    _dbContext.Remove(resale);
+
+
+
+        //    await _dbContext.SaveChangesAsync();
+
+        //    return reventa;
+        //}
     }
 }

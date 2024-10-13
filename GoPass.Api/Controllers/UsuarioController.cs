@@ -340,7 +340,7 @@ namespace GoPass.API.Controllers
                 string userIdObtainedString = await _usuarioService.GetUserIdByTokenAsync(authHeader);
                 int userId = int.Parse(userIdObtainedString);
 
-                List<Reventa> resales = await _reventaService.GetBoughtTicketsByCompradorIdAsync(userId);
+                List < HistorialCompraVenta> resales = await _reventaService.GetBoughtTicketsByCompradorIdAsync(userId);
 
                 return Ok(resales);
             }

@@ -49,6 +49,7 @@ namespace GoPass.Application.Utilities.Mappers
         {
             return new SellerInformationResponseDto
             {
+                Id = existingData.Id,
                 Nombre = existingData.Nombre!,
                 Image = existingData.Image!,
             };
