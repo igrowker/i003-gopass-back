@@ -96,7 +96,8 @@ builder.Services.AddCors(opciones =>
 
 builder.Services.AddHttpClient<IGopassHttpClientService, GopassHttpClientService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7292/api/");
+    //client.BaseAddress = new Uri("https://localhost:7292/api/");
+    client.BaseAddress = new Uri("https://localhost:5149/api/");
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
