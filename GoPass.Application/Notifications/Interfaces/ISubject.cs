@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace GoPass.Application.Notifications.Interfaces
 {
-    public interface IGenericObserver<T>
+    public interface ISubject<T>
     {
-        //void Update(T data);
+        void Attach(IObserver<T> observer);
+        void Detach(IObserver<T> observer);
+        Task Notify(T data);
     }
 }

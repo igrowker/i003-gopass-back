@@ -11,6 +11,8 @@ using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Text;
 using GoPass.Infrastructure.Data;
 using System.Reflection;
+using GoPass.Application.Notifications.Classes;
+using GoPass.Domain.DTOs.Request.NotificationDTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -111,7 +113,11 @@ builder.Services.AddScoped<IAesGcmCryptoService, AesGcmCryptoService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+builder.Services.AddSingleton<GoPass.Application.Notifications.Interfaces.ISubject<string>, Subject<string>>();
 builder.Services.AddSingleton<IVonageSmsService, VonageSmsService>();
+
+builder.Services.AddTransient<GoPass.Application.Notifications.Interfaces.IObserver<NotificationEmailRequestDto>, BuyerEmailNotificationObserver>();
+builder.Services.AddTransient<GoPass.Application.Notifications.Interfaces.IObserver<NotificationEmailRequestDto>, SellerEmailNotificationObserver>();
 
 builder.Services.AddScoped<IReventaRepository, ReventaRepository>();
 builder.Services.AddScoped<IEntradaRepository, EntradaRepository>();

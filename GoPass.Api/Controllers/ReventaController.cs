@@ -6,6 +6,8 @@ using GoPass.Domain.DTOs.Request.ReventaRequestDTOs;
 using GoPass.Domain.DTOs.Request.PaginationDTOs;
 using GoPass.Domain.Models;
 using GoPass.Domain.DTOs.Response.AuthResponseDTOs;
+using GoPass.Domain.DTOs.Request.NotificationDTOs;
+using GoPass.Application.Notifications.Classes;
 
 namespace GoPass.API.Controllers
 {
@@ -17,13 +19,16 @@ namespace GoPass.API.Controllers
         private readonly IUsuarioService _usuarioService;
         private readonly IEntradaService _entradaService;
         private readonly IGopassHttpClientService _gopassHttpClientService;
+        private readonly IEmailService _emailService;
 
-        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService, IEntradaService entradaService, IGopassHttpClientService gopassHttpClientService)
+        public ReventaController(IReventaService reventaService, IUsuarioService usuarioService, IEntradaService entradaService,
+            IGopassHttpClientService gopassHttpClientService, IEmailService emailService)
         {
             _reventaService = reventaService;
             _usuarioService = usuarioService;
             _entradaService = entradaService;
             _gopassHttpClientService = gopassHttpClientService;
+            _emailService = emailService;
         }
 
         [Authorize]
@@ -113,7 +118,40 @@ namespace GoPass.API.Controllers
                 return BadRequest("Esta intentando comprar su propia entrada, lo cual no tiene sentido");
             }
 
+            Entrada ticketDb = await _entradaService.GetByIdAsync(buyEntradaRequestDto.EntradaId);
             HistorialCompraVenta publishReventaBuyer = await _reventaService.BuyTicketAsync(resaleDb.Id, userId);
+
+            Usuario buyerData = await _usuarioService.GetByIdAsync(publishReventaBuyer.CompradorId);
+            Usuario sellerData = await _usuarioService.GetByIdAsync(publishReventaBuyer.VendedorId);
+           
+
+            Subject<NotificationEmailRequestDto> purchaseNotifier = new();
+            BuyerEmailNotificationObserver compradorObserver = new BuyerEmailNotificationObserver(_emailService);
+
+            purchaseNotifier.Attach(compradorObserver);
+
+            NotificationEmailRequestDto buyerNotificationEmailRequestDto = new NotificationEmailRequestDto
+            {
+                UserName = buyerData.Nombre!,
+                To = buyerData.Email,
+                TicketQrCode = ticketDb.CodigoQR
+
+            };
+            await purchaseNotifier.Notify(buyerNotificationEmailRequestDto); // Comprador
+
+            Subject<NotificationEmailRequestDto> sellerNotifier = new();
+            SellerEmailNotificationObserver sellerObserver = new SellerEmailNotificationObserver(_emailService);
+
+            sellerNotifier.Attach(sellerObserver);
+
+            NotificationEmailRequestDto sellerNotificationEmailRequestDto = new NotificationEmailRequestDto
+            {
+                UserName = sellerData.Nombre!,
+                To = sellerData.Email,
+                TicketQrCode = ticketDb.CodigoQR
+
+            };
+            await sellerNotifier.Notify(sellerNotificationEmailRequestDto); // Vendedor
 
             return Ok(publishReventaBuyer);
         }

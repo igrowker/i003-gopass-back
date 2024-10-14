@@ -1,4 +1,5 @@
 ﻿using GoPass.Domain.DTOs.Request.AuthRequestDTOs;
+using GoPass.Domain.DTOs.Request.NotificationDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace GoPass.Application.Services.Interfaces
     public interface IEmailService
     {
        Task<bool> SendVerificationEmailAsync(EmailValidationRequestDto emailValidationRequestDto);
+       Task<bool> SendNotificationEmailAsync(NotificationEmailRequestDto notificationEmailRequestDto);
     }
 }

@@ -4,6 +4,7 @@ using MimeKit;
 using MimeKit.Text;
 using MailKit.Net.Smtp;
 using GoPass.Application.Services.Interfaces;
+using GoPass.Domain.DTOs.Request.NotificationDTOs;
 
 namespace GoPass.Application.Services.Classes
 {
@@ -40,5 +41,30 @@ namespace GoPass.Application.Services.Classes
                 return false;
             }
         }
+        public async Task<bool> SendNotificationEmailAsync(NotificationEmailRequestDto notificationEmailRequestDto)
+        {
+            try
+            {
+                var email = new MimeMessage();
+                email.From.Add(new MailboxAddress(_From, _Email));
+                email.To.Add(MailboxAddress.Parse(notificationEmailRequestDto.To));
+                email.Subject = notificationEmailRequestDto.Subject;
+                email.Body = new TextPart(TextFormat.Html) { Text = notificationEmailRequestDto.Message };
+
+                using var smtp = new SmtpClient();
+                await smtp.ConnectAsync(_Host, _Port, SecureSocketOptions.StartTls);
+                await smtp.AuthenticateAsync(_Email, _Password);
+                await smtp.SendAsync(email);
+                await smtp.DisconnectAsync(true);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al enviar el correo: {ex.Message}");
+                return false;
+            }
+        }
     }
+
 }
