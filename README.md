@@ -13,34 +13,37 @@
 - Visual Studio o Visual Studio Code o tambien desde CMD, a eleccion.
 
 ## Practicas aplicadas
-- Clean Architecture
-- Design Patterns
-- ### Repositories
-- ### Observer
-- ### Singleton
-- Design Principles
-- Clean Code
-- SOLID
+ ### Clean Architecture
+ ### Design Patterns
+  #### Repositories
+  #### Observer
+  #### Singleton
+ ### Design Principles
+  #### DRY (Dont Repeat Yourself)
+  #### KISS (Keep It Simple Stupid)
+  #### YAGNI (You Are Not Gonna Need It)
+ ### Clean Code
+ ### SOLID
 
-  ## Herramientas
-  - C#
-  - .NET 8
-  - Entity Framework Core
-  - LINQ
-  - EmailKit
-  - Vonage
-  - JWT
+## Herramientas
+ ### C#
+ ### .NET 8 
+ ### Entity Framework Core 
+ ### LINQ
+ ### EmailKit
+ ### Vonage
+ ### JWT
  
 ## Autores
 ### Jorge Gomez
-- Backend Developer
+ #### Backend Developer
 ### Daniel Nina
-- Backend Developer
+ #### Backend Developer
 ### Ezequiel Feola
-- Backend Development Leader
-- DevOps
+ #### Backend Development Leader
+ #### DevOps
 ### Carlos Daniel Jimenez
-- Quality Assurance
-### - Gonzalo Rosofsky 
-- Project Manager
-- Backend Developer
+ #### Quality Assurance
+### Gonzalo Rosofsky 
+ #### Project Manager
+ #### Backend Developer
